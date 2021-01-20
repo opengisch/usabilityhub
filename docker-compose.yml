@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  web:
+    image: caddy/caddy:alpine
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./conf/Caddyfile:/etc/caddy/Caddyfile
+      - ./www/:/io/www/
+    environment:
+      ACME_AGREE: "true"
+    networks:
+      - net
+
+networks:
+  net:
