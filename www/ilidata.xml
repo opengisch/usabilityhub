@@ -24,7 +24,7 @@
           	<value>http://codes.interlis.ch/model/KbS_LV95_V1_4</value>
           </DatasetIdx16.Code_>
           <DatasetIdx16.Code_>
-          	<value>http://codes.interlis.ch/tool/metaconfig</value>
+          	<value>http://codes.interlis.ch/type/metaconfig</value>
           </DatasetIdx16.Code_>
           <DatasetIdx16.Code_>
           	<value>http://codes.opengis.ch/modelbaker</value>
@@ -43,9 +43,14 @@
       </DatasetIdx16.DataIndex.DatasetMetadata>
 
       <DatasetIdx16.DataIndex.DatasetMetadata TID="4b3f3d62-6092-446e-b037-57b4885f12e1">
-        <id>ch.opengis.config.KbS_LV95_V1_4_style_001</id>
+        <id>ch.opengis.topping.KbS_LV95_V1_4_001</id>
         <version>2021-01-20</version>
         <owner>mailto:david@opengis.ch</owner>
+        <categories>
+          <DatasetIdx16.Code_>
+            <value>http://codes.interlis.ch/type/qml</value>
+          </DatasetIdx16.Code_>
+        </categories>
         <files>
           <DatasetIdx16.DataFile>
             <fileFormat>text/plain;version=2.3</fileFormat>
@@ -59,9 +64,14 @@
       </DatasetIdx16.DataIndex.DatasetMetadata>
 
       <DatasetIdx16.DataIndex.DatasetMetadata TID="4d81d373-2592-4b43-9863-a8dc6112684f">
-        <id>ch.opengis.config.KbS_LV95_V1_4_style_002</id>
+        <id>ch.opengis.topping.KbS_LV95_V1_4_004</id>
         <version>2021-01-20</version>
         <owner>mailto:david@opengis.ch</owner>
+        <categories>
+          <DatasetIdx16.Code_>
+            <value>http://codes.interlis.ch/type/qml</value>
+          </DatasetIdx16.Code_>
+        </categories>
         <files>
           <DatasetIdx16.DataFile>
             <fileFormat>text/plain;version=2.3</fileFormat>
@@ -93,7 +103,7 @@
           	<value>http://codes.interlis.ch/model/KbS_LV95_V1_4</value>
           </DatasetIdx16.Code_>
           <DatasetIdx16.Code_>
-          	<value>http://codes.interlis.ch/tool/metaconfig</value>
+          	<value>http://codes.interlis.ch/type/metaconfig</value>
           </DatasetIdx16.Code_>
           <DatasetIdx16.Code_>
           	<value>http://codes.opengis.ch/modelbaker</value>
@@ -130,7 +140,7 @@
             <value>http://codes.interlis.ch/model/KbS_LV95_V1_4</value>
           </DatasetIdx16.Code_>
           <DatasetIdx16.Code_>
-            <value>http://codes.interlis.ch/tool/metaconfig</value>
+            <value>http://codes.interlis.ch/type/metaconfig</value>
           </DatasetIdx16.Code_>
           <DatasetIdx16.Code_>
             <value>http://codes.opengis.ch/modelbaker</value>
@@ -167,7 +177,7 @@
           	<value>http://codes.interlis.ch/model/KbS_LV95_V1_4</value>
           </DatasetIdx16.Code_>
           <DatasetIdx16.Code_>
-          	<value>http://codes.interlis.ch/tool/metaconfig</value>
+          	<value>http://codes.interlis.ch/type/metaconfig</value>
           </DatasetIdx16.Code_>
           <DatasetIdx16.Code_>
           	<value>http://codes.opengis.ch/modelbaker</value>
