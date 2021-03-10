@@ -100,7 +100,7 @@
             <fileFormat>text/plain;version=2.3</fileFormat>
             <file>
               <DatasetIdx16.File>
-                <path>qml/opengisch_KbS_LV95_V1_4_001_polygonstructure.qml</path>
+                <path>qml/opengisch_KbS_LV95_V1_4_001_belasteterstandort_polygon.qml</path>
               </DatasetIdx16.File>
             </file>
           </DatasetIdx16.DataFile>
@@ -121,13 +121,33 @@
             <fileFormat>text/plain;version=2.3</fileFormat>
             <file>
               <DatasetIdx16.File>
-                <path>qml/opengisch_KbS_LV95_V1_4_001_belasteterstandort.qml</path>
+                <path>qml/opengisch_KbS_LV95_V1_4_004_belasteterstandort_punkt.qml</path>
               </DatasetIdx16.File>
             </file>
           </DatasetIdx16.DataFile>
         </files>
       </DatasetIdx16.DataIndex.DatasetMetadata>
 
+      <DatasetIdx16.DataIndex.DatasetMetadata TID="1d88c706-225a-498c-9509-297475e5ece9">
+        <id>ch.opengis.topping.opengisch_KbS_LV95_V1_4_005</id>
+        <version>2021-01-20</version>
+        <owner>mailto:david@opengis.ch</owner>
+        <categories>
+          <DatasetIdx16.Code_>
+            <value>http://codes.interlis.ch/type/qml</value>
+          </DatasetIdx16.Code_>
+        </categories>
+        <files>
+          <DatasetIdx16.DataFile>
+            <fileFormat>text/plain;version=2.3</fileFormat>
+            <file>
+              <DatasetIdx16.File>
+                <path>qml/opengisch_KbS_LV95_V1_4_005_parzellenidentifikation.qml</path>
+              </DatasetIdx16.File>
+            </file>
+          </DatasetIdx16.DataFile>
+        </files>
+      </DatasetIdx16.DataIndex.DatasetMetadata>
 
       <DatasetIdx16.DataIndex.DatasetMetadata TID="bc96e499-f7a9-4126-8155-fc8d6b9d3d1b">
         <id>ch.opengis.topping.tech_KbS_LV95_V1_4_001</id>
