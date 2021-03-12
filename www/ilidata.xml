@@ -609,36 +609,64 @@
           </DatasetIdx16.DataFile>
         </files>
       </DatasetIdx16.DataIndex.DatasetMetadata>
-    </DatasetIdx16.DataIndex>
 
-    <DatasetIdx16.DataIndex.DatasetMetadata TID="be6623c1-aa64-4a07-931e-fc4f0745f025">
-        <id>ch.opengis.ili.config.PlanerischerGewaesserschutz_config</id>
-        <version>2021-01-06</version>
-        <owner>mailto:david@opengis.ch</owner>
-        <categories>
-          <DatasetIdx16.Code_>
-          <value>http://codes.interlis.ch/model/PlanerischerGewaesserschutz_V1</value>
-          </DatasetIdx16.Code_>
-          <DatasetIdx16.Code_>
-          <value>http://codes.interlis.ch/tool/metaconfig</value>
-          </DatasetIdx16.Code_>
-          <DatasetIdx16.Code_>
-          <value>http://codes.opengis.ch/modelbaker</value>
-          </DatasetIdx16.Code_>
-        </categories>
-        <files>
-          <DatasetIdx16.DataFile>
-            <fileFormat>text/plain;version=2.3</fileFormat>
-            <file>
-              <DatasetIdx16.File>
-                <path>metaconfig/opengisch_PlanerischerGewaesserschutz.ini</path>
-              </DatasetIdx16.File>
-            </file>
-          </DatasetIdx16.DataFile>
-        </files>
-    </DatasetIdx16.DataIndex.DatasetMetadata>
+      <DatasetIdx16.DataIndex.DatasetMetadata TID="a33b2f5-38bd-4d1a-8af0-c2463dcb5111">
+        <id>ch.opengis.ili.config.PlanerischerGewaesserschutz_config</id>
+        <version>2021-03-12</version>
+        <owner>mailto:david@opengis.ch</owner>
+        <categories>
+          <DatasetIdx16.Code_>
+          	<value>http://codes.interlis.ch/model/LegendeEintrag_PlanGewaesserschutz_V1_1</value>
+          </DatasetIdx16.Code_>
+          <DatasetIdx16.Code_>
+          	<value>http://codes.interlis.ch/type/metaconfig</value>
+          </DatasetIdx16.Code_>
+          <DatasetIdx16.Code_>
+          	<value>http://codes.opengis.ch/modelbaker</value>
+          </DatasetIdx16.Code_>
+        </categories>
+        <files>
+          <DatasetIdx16.DataFile>
+            <fileFormat>text/plain;version=2.3</fileFormat>
+            <file>
+              <DatasetIdx16.File>
+                <path>metaconfig/opengisch_PlanerischerGewaesserschutz.ini</path>
+              </DatasetIdx16.File>
+            </file>
+          </DatasetIdx16.DataFile>
+        </files>
+      </DatasetIdx16.DataIndex.DatasetMetadata>
+
+
+      <DatasetIdx16.DataIndex.DatasetMetadata TID="a211b2f5-38bd-4d1a-8af0-c2463dcb5b23">
+        <id>ch.opengis.ili.config.PlanerischerGewaesserschutz_config_localfile</id>
+        <version>2021-03-12</version>
+        <owner>mailto:david@opengis.ch</owner>
+        <categories>
+          <DatasetIdx16.Code_>
+          	<value>http://codes.interlis.ch/model/LegendeEintrag_PlanGewaesserschutz_V1_1</value>
+          </DatasetIdx16.Code_>
+          <DatasetIdx16.Code_>
+          	<value>http://codes.interlis.ch/type/metaconfig</value>
+          </DatasetIdx16.Code_>
+          <DatasetIdx16.Code_>
+          	<value>http://codes.opengis.ch/modelbaker</value>
+          </DatasetIdx16.Code_>
+        </categories>
+        <files>
+          <DatasetIdx16.DataFile>
+            <fileFormat>text/plain;version=2.3</fileFormat>
+            <file>
+              <DatasetIdx16.File>
+                <path>metaconfig/opengisch_PlanerischerGewaesserschutz_localfile.ini</path>
+              </DatasetIdx16.File>
+            </file>
+          </DatasetIdx16.DataFile>
+        </files>
+      </DatasetIdx16.DataIndex.DatasetMetadata>
+
      
-    <DatasetIdx16.DataIndex.DatasetMetadata TID="be6623c1-aa64-4a07-931e-fc4f0745f025">
+    <DatasetIdx16.DataIndex.DatasetMetadata TID="116623c1-aa64-4a07-931e-fc4f0745f02b">
         <id>ch.opengis.ili.catalogue.PlanerischerGewaesserschutz_Codetexte_V1_1</id>
         <version>2021-01-06</version>
         <owner>mailto:david@opengis.ch</owner>
@@ -658,5 +686,7 @@
             </DatasetIdx16.ModelLink>
         </model>
     </DatasetIdx16.DataIndex.DatasetMetadata>
+
+   </DatasetIdx16.DataIndex>
   </DATASECTION>
 </TRANSFER>
