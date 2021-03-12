@@ -610,5 +610,53 @@
         </files>
       </DatasetIdx16.DataIndex.DatasetMetadata>
     </DatasetIdx16.DataIndex>
+
+    <DatasetIdx16.DataIndex.DatasetMetadata TID="be6623c1-aa64-4a07-931e-fc4f0745f025">
+        <id>ch.opengis.ili.config.PlanerischerGewaesserschutz_config</id>
+        <version>2021-01-06</version>
+        <owner>mailto:david@opengis.ch</owner>
+        <categories>
+          <DatasetIdx16.Code_>
+          <value>http://codes.interlis.ch/model/PlanerischerGewaesserschutz_V1</value>
+          </DatasetIdx16.Code_>
+          <DatasetIdx16.Code_>
+          <value>http://codes.interlis.ch/tool/metaconfig</value>
+          </DatasetIdx16.Code_>
+          <DatasetIdx16.Code_>
+          <value>http://codes.opengis.ch/modelbaker</value>
+          </DatasetIdx16.Code_>
+        </categories>
+        <files>
+          <DatasetIdx16.DataFile>
+            <fileFormat>text/plain;version=2.3</fileFormat>
+            <file>
+              <DatasetIdx16.File>
+                <path>metaconfig/opengisch_PlanerischerGewaesserschutz.ini</path>
+              </DatasetIdx16.File>
+            </file>
+          </DatasetIdx16.DataFile>
+        </files>
+    </DatasetIdx16.DataIndex.DatasetMetadata>
+     
+    <DatasetIdx16.DataIndex.DatasetMetadata TID="be6623c1-aa64-4a07-931e-fc4f0745f025">
+        <id>ch.opengis.ili.catalogue.PlanerischerGewaesserschutz_Codetexte_V1_1</id>
+        <version>2021-01-06</version>
+        <owner>mailto:david@opengis.ch</owner>
+        <files>
+          <DatasetIdx16.DataFile>
+            <fileFormat>text/plain;version=2.3</fileFormat>
+            <file>
+              <DatasetIdx16.File>
+                <path>catalogue/opengisch_PlanerischerGewaesserschutz_Codetexte_V1_1.xml</path>
+              </DatasetIdx16.File>
+            </file>
+          </DatasetIdx16.DataFile>
+        </files>
+        <model>
+            <DatasetIdx16.ModelLink>
+                <name>LegendeEintrag_PlanGewaesserschutz_V1_1</name>
+            </DatasetIdx16.ModelLink>
+        </model>
+    </DatasetIdx16.DataIndex.DatasetMetadata>
   </DATASECTION>
 </TRANSFER>
