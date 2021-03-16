@@ -298,24 +298,24 @@
         <version>2021-01-06</version>
         <owner>mailto:romedi@sh.ch</owner>
         <shortDescription>
-        	<DatasetIdx16.MultilingualMText>
-        		<LocalisedText>
-        			<DatasetIdx16.LocalisedMText>
-        				<Language>de</Language>
-        				<Text>KbS_LV95_V1_4 im Style des Kanton Schaffhausen</Text>
-        			</DatasetIdx16.LocalisedMText>
-        		</LocalisedText>
-        	</DatasetIdx16.MultilingualMText>
+          <DatasetIdx16.MultilingualMText>
+            <LocalisedText>
+              <DatasetIdx16.LocalisedMText>
+                <Language>de</Language>
+                <Text>KbS_LV95_V1_4 im Style des Kanton Schaffhausen</Text>
+              </DatasetIdx16.LocalisedMText>
+            </LocalisedText>
+          </DatasetIdx16.MultilingualMText>
         </shortDescription>
         <categories>
           <DatasetIdx16.Code_>
-          	<value>http://codes.interlis.ch/model/KbS_LV95_V1_4</value>
+            <value>http://codes.interlis.ch/model/KbS_LV95_V1_4</value>
           </DatasetIdx16.Code_>
           <DatasetIdx16.Code_>
-          	<value>http://codes.interlis.ch/type/metaconfig</value>
+            <value>http://codes.interlis.ch/type/metaconfig</value>
           </DatasetIdx16.Code_>
           <DatasetIdx16.Code_>
-          	<value>http://codes.opengis.ch/modelbaker</value>
+            <value>http://codes.opengis.ch/modelbaker</value>
           </DatasetIdx16.Code_>
         </categories>
         <files>
@@ -324,6 +324,42 @@
             <file>
               <DatasetIdx16.File>
                 <path>metaconfig/sh_KbS_LV95_V1_4.ini</path>
+              </DatasetIdx16.File>
+            </file>
+          </DatasetIdx16.DataFile>
+        </files>
+      </DatasetIdx16.DataIndex.DatasetMetadata>
+      <DatasetIdx16.DataIndex.DatasetMetadata TID="ba7f8553-7eba-4592-aa5f-c3e585aa76fa">
+        <id>ch.sh.ili.configs.layertree.KbS_LV95_V1_4</id>
+        <version>2021-01-06</version>
+        <owner>mailto:romedi@sh.ch</owner>
+        <shortDescription>
+          <DatasetIdx16.MultilingualMText>
+            <LocalisedText>
+              <DatasetIdx16.LocalisedMText>
+                <Language>de</Language>
+                <Text>KbS_LV95_V1_4 Layertree für den Kanton Schaffhausen</Text>
+              </DatasetIdx16.LocalisedMText>
+            </LocalisedText>
+          </DatasetIdx16.MultilingualMText>
+        </shortDescription>
+        <categories>
+          <DatasetIdx16.Code_>
+            <value>http://codes.interlis.ch/model/KbS_LV95_V1_4</value>
+          </DatasetIdx16.Code_>
+          <DatasetIdx16.Code_>
+            <value>http://codes.interlis.ch/type/layertree</value>
+          </DatasetIdx16.Code_>
+          <DatasetIdx16.Code_>
+            <value>http://codes.opengis.ch/modelbaker</value>
+          </DatasetIdx16.Code_>
+        </categories>
+        <files>
+          <DatasetIdx16.DataFile>
+            <fileFormat>text/plain;version=2.3</fileFormat>
+            <file>
+              <DatasetIdx16.File>
+                <path>layertree/sh_layertree_KbS_LV95_V1_4.yaml.ini</path>
               </DatasetIdx16.File>
             </file>
           </DatasetIdx16.DataFile>
