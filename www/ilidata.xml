@@ -359,7 +359,7 @@
             <fileFormat>text/plain;version=2.3</fileFormat>
             <file>
               <DatasetIdx16.File>
-                <path>layertree/sh_layertree_KbS_LV95_V1_4.yaml.ini</path>
+                <path>layertree/sh_layertree_KbS_LV95_V1_4.yaml</path>
               </DatasetIdx16.File>
             </file>
           </DatasetIdx16.DataFile>
