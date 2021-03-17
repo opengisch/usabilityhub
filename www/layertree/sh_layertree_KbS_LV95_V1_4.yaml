@@ -8,6 +8,8 @@ legend:
         checked: false
         expanded: false
         featurecount: true
+      "ZustaendigkeitKataster":
+        featurecount: true
       "Belasteter_Standort (Geo_Lage_Polygon)":
         checked: true
         expanded: true
@@ -18,8 +20,6 @@ legend:
     child-nodes:
       "EGRID_":
       "Deponietyp_":
-      "ZustaendigkeitKataster":
-        featurecount: true
       "Untersuchungsmassnahmen_Definition":
       "StatusAltlV_Definition":
       "Standorttyp_Definition":
