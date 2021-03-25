@@ -20,6 +20,16 @@
         <id>ch.opengis.ili.config.KbS_LV95_V1_4_config_V1_0</id>
         <version>2021-01-06</version>
         <owner>mailto:david@opengis.ch</owner>
+        <title>
+          <DatasetIdx16.MultilingualMText>
+            <LocalisedText>
+              <DatasetIdx16.LocalisedMText>
+                <Language>de</Language>
+                <Text>Einfaches Styling und Tree (OPENGIS.ch)</Text>
+              </DatasetIdx16.LocalisedMText>
+            </LocalisedText>
+          </DatasetIdx16.MultilingualMText>
+        </title>
         <categories>
           <DatasetIdx16.Code_>
           	<value>http://codes.interlis.ch/model/KbS_LV95_V1_4</value>
@@ -47,6 +57,16 @@
         <id>ch.opengis.ili.config.KbS_LV95_V1_4_config_V1_0_localfiletest</id>
         <version>2021-03-12</version>
         <owner>mailto:david@opengis.ch</owner>
+        <title>
+          <DatasetIdx16.MultilingualMText>
+            <LocalisedText>
+              <DatasetIdx16.LocalisedMText>
+                <Language>de</Language>
+                <Text>Einfaches Styling und Tree mit lokalem File (OPENGIS.ch)</Text>
+              </DatasetIdx16.LocalisedMText>
+            </LocalisedText>
+          </DatasetIdx16.MultilingualMText>
+        </title>
         <categories>
           <DatasetIdx16.Code_>
           	<value>http://codes.interlis.ch/model/KbS_LV95_V1_4</value>
@@ -69,7 +89,68 @@
           </DatasetIdx16.DataFile>
         </files>
       </DatasetIdx16.DataIndex.DatasetMetadata>
-
+      <DatasetIdx16.DataIndex.DatasetMetadata TID="2fbde6ff-5867-4472-bdca-9da9e9525b20">
+        <id>ch.opengis.ili.config.KbS_LV95_V1_4_config_V1_0-fast</id>
+        <version>2021-01-06</version>
+        <owner>mailto:david@opengis.ch</owner>
+        <title>
+          <DatasetIdx16.MultilingualMText>
+            <LocalisedText>
+              <DatasetIdx16.LocalisedMText>
+                <Language>de</Language>
+                <Text>Styling für polygonStructure und falscher Layertree ID (OPENGIS.ch)</Text>
+              </DatasetIdx16.LocalisedMText>
+            </LocalisedText>
+          </DatasetIdx16.MultilingualMText>
+        </title>
+        <categories>
+          <DatasetIdx16.Code_>
+            <value>http://codes.interlis.ch/model/KbS_LV95_V1_4</value>
+          </DatasetIdx16.Code_>
+          <DatasetIdx16.Code_>
+            <value>http://codes.interlis.ch/type/metaconfig</value>
+          </DatasetIdx16.Code_>
+          <DatasetIdx16.Code_>
+            <value>http://codes.opengis.ch/modelbaker</value>
+          </DatasetIdx16.Code_>
+        </categories>
+        <files>
+          <DatasetIdx16.DataFile>
+            <fileFormat>text/plain;version=2.3</fileFormat>
+            <file>
+              <DatasetIdx16.File>
+                <path>metaconfig/opengisch_KbS_LV95_V1_4-fast.ini</path> 
+              </DatasetIdx16.File>
+            </file>
+          </DatasetIdx16.DataFile>
+        </files>
+      </DatasetIdx16.DataIndex.DatasetMetadata>
+      <DatasetIdx16.DataIndex.DatasetMetadata TID="274a7e57-7b18-40ca-ac7c-c473bc837071">
+        <id>ch.opengis.ili.config.KbS_LV95_V1_4_config_V1_0-technical</id>
+        <version>2021-01-06</version>
+        <owner>mailto:david@opengis.ch</owner>
+        <categories>
+          <DatasetIdx16.Code_>
+            <value>http://codes.interlis.ch/model/KbS_LV95_V1_4</value>
+          </DatasetIdx16.Code_>
+          <DatasetIdx16.Code_>
+            <value>http://codes.interlis.ch/type/metaconfig</value>
+          </DatasetIdx16.Code_>
+          <DatasetIdx16.Code_>
+            <value>http://codes.opengis.ch/modelbaker</value>
+          </DatasetIdx16.Code_>
+        </categories>
+        <files>
+          <DatasetIdx16.DataFile>
+            <fileFormat>text/plain;version=2.3</fileFormat>
+            <file>
+              <DatasetIdx16.File>
+                <path>metaconfig/opengisch_KbS_LV95_V1_4-technical.ini</path>
+              </DatasetIdx16.File>
+            </file>
+          </DatasetIdx16.DataFile>
+        </files>
+      </DatasetIdx16.DataIndex.DatasetMetadata>
 
       <DatasetIdx16.DataIndex.DatasetMetadata TID="4b3f3d62-6092-446e-b037-57b4885f12e1">
         <id>ch.opengis.topping.KbS_LV95_V1_4_001</id>
@@ -217,80 +298,6 @@
           </DatasetIdx16.DataFile>
         </files>
       </DatasetIdx16.DataIndex.DatasetMetadata>
-
-      <DatasetIdx16.DataIndex.DatasetMetadata TID="2fbde6ff-5867-4472-bdca-9da9e9525b20">
-        <id>ch.opengis.ili.config.KbS_LV95_V1_4_config_V1_0-fast</id>
-        <version>2021-01-06</version>
-		<owner>mailto:david@opengis.ch</owner>
-        <shortDescription>
-        	<DatasetIdx16.MultilingualMText>
-        		<LocalisedText>
-        			<DatasetIdx16.LocalisedMText>
-        				<Language>de</Language>
-        				<Text>KbS_LV95_V1_4 (schnelle Variante); weniger Validierungen</Text>
-        			</DatasetIdx16.LocalisedMText>
-        		</LocalisedText>
-        	</DatasetIdx16.MultilingualMText>
-        </shortDescription>
-        <categories>
-          <DatasetIdx16.Code_>
-          	<value>http://codes.interlis.ch/model/KbS_LV95_V1_4</value>
-          </DatasetIdx16.Code_>
-          <DatasetIdx16.Code_>
-          	<value>http://codes.interlis.ch/type/metaconfig</value>
-          </DatasetIdx16.Code_>
-          <DatasetIdx16.Code_>
-          	<value>http://codes.opengis.ch/modelbaker</value>
-          </DatasetIdx16.Code_>
-        </categories>
-        <files>
-          <DatasetIdx16.DataFile>
-            <fileFormat>text/plain;version=2.3</fileFormat>
-            <file>
-              <DatasetIdx16.File>
-                <path>metaconfig/opengisch_KbS_LV95_V1_4-fast.ini</path> 
-              </DatasetIdx16.File>
-            </file>
-          </DatasetIdx16.DataFile>
-        </files>
-      </DatasetIdx16.DataIndex.DatasetMetadata>
-
-      <DatasetIdx16.DataIndex.DatasetMetadata TID="274a7e57-7b18-40ca-ac7c-c473bc837071">
-        <id>ch.opengis.ili.config.KbS_LV95_V1_4_config_V1_0-technical</id>
-        <version>2021-01-06</version>
-        <owner>mailto:david@opengis.ch</owner>
-        <shortDescription>
-          <DatasetIdx16.MultilingualMText>
-            <LocalisedText>
-              <DatasetIdx16.LocalisedMText>
-                <Language>de</Language>
-                <Text>KbS_LV95_V1_4 im technischen Style</Text>
-              </DatasetIdx16.LocalisedMText>
-            </LocalisedText>
-          </DatasetIdx16.MultilingualMText>
-        </shortDescription>
-        <categories>
-          <DatasetIdx16.Code_>
-            <value>http://codes.interlis.ch/model/KbS_LV95_V1_4</value>
-          </DatasetIdx16.Code_>
-          <DatasetIdx16.Code_>
-            <value>http://codes.interlis.ch/type/metaconfig</value>
-          </DatasetIdx16.Code_>
-          <DatasetIdx16.Code_>
-            <value>http://codes.opengis.ch/modelbaker</value>
-          </DatasetIdx16.Code_>
-        </categories>
-        <files>
-          <DatasetIdx16.DataFile>
-            <fileFormat>text/plain;version=2.3</fileFormat>
-            <file>
-              <DatasetIdx16.File>
-                <path>metaconfig/opengisch_KbS_LV95_V1_4-technical.ini</path>
-              </DatasetIdx16.File>
-            </file>
-          </DatasetIdx16.DataFile>
-        </files>
-      </DatasetIdx16.DataIndex.DatasetMetadata>
       <DatasetIdx16.DataIndex.DatasetMetadata TID="333a9e68-268e-4ed2-8f8a-eeeeaab43432">
         <id>ch.opengis.config.KbS_LV95_V1_4_layertree</id>
         <version>2021-01-06</version>
@@ -327,21 +334,22 @@
           </DatasetIdx16.DataFile>
         </files>
       </DatasetIdx16.DataIndex.DatasetMetadata>
+
 <!-- ili2db config tests -->
       <DatasetIdx16.DataIndex.DatasetMetadata TID="7c650cef-66d0-4933-b81f-390a8f7778a2">
         <id>ch.opengis.ili.config.KbS_LV95_V1_4_ili2db</id>
         <version>2021-01-06</version>
         <owner>mailto:david@opengis.ch</owner>
-        <shortDescription>
+        <title>
           <DatasetIdx16.MultilingualMText>
             <LocalisedText>
               <DatasetIdx16.LocalisedMText>
                 <Language>de</Language>
-                <Text>KbS_LV95_V1_4 mit ili2db params</Text>
+                <Text>Metaconfig mit ili2db Params (OPENGIS.ch)</Text>
               </DatasetIdx16.LocalisedMText>
             </LocalisedText>
           </DatasetIdx16.MultilingualMText>
-        </shortDescription>
+        </title>
         <categories>
           <DatasetIdx16.Code_>
             <value>http://codes.interlis.ch/model/KbS_LV95_V1_4</value>
@@ -429,16 +437,16 @@
         <id>ch.sh.ili.config.KbS_LV95_V1_4_config_V1_0</id>
         <version>2021-01-06</version>
         <owner>mailto:romedi@sh.ch</owner>
-        <shortDescription>
+        <title>
           <DatasetIdx16.MultilingualMText>
             <LocalisedText>
               <DatasetIdx16.LocalisedMText>
                 <Language>de</Language>
-                <Text>KbS_LV95_V1_4 im Style des Kanton Schaffhausen</Text>
+                <Text>Style und Tree des Kanton Schaffhausen (mit Katalog) (sh.ch)</Text>
               </DatasetIdx16.LocalisedMText>
             </LocalisedText>
           </DatasetIdx16.MultilingualMText>
-        </shortDescription>
+        </title>
         <categories>
           <DatasetIdx16.Code_>
             <value>http://codes.interlis.ch/model/KbS_LV95_V1_4</value>
@@ -803,6 +811,16 @@
         <id>ch.opengis.ili.config.PlanerischerGewaesserschutz_config</id>
         <version>2021-03-12</version>
         <owner>mailto:david@opengis.ch</owner>
+        <title>
+          <DatasetIdx16.MultilingualMText>
+            <LocalisedText>
+              <DatasetIdx16.LocalisedMText>
+                <Language>de</Language>
+                <Text>Mit Legendenkatalog auf usabilityhub</Text>
+              </DatasetIdx16.LocalisedMText>
+            </LocalisedText>
+          </DatasetIdx16.MultilingualMText>
+        </title>
         <categories>
           <DatasetIdx16.Code_>
           	<value>http://codes.interlis.ch/model/LegendeEintrag_PlanGewaesserschutz_V1_1</value>
@@ -829,6 +847,16 @@
         <id>ch.opengis.ili.config.PlanerischerGewaesserschutz_config_localfile</id>
         <version>2021-03-12</version>
         <owner>mailto:david@opengis.ch</owner>
+        <title>
+          <DatasetIdx16.MultilingualMText>
+            <LocalisedText>
+              <DatasetIdx16.LocalisedMText>
+                <Language>de</Language>
+                <Text>Mit lokalem Legendenkatalog auf usabilityhub</Text>
+              </DatasetIdx16.LocalisedMText>
+            </LocalisedText>
+          </DatasetIdx16.MultilingualMText>
+        </title>
         <categories>
           <DatasetIdx16.Code_>
           	<value>http://codes.interlis.ch/model/LegendeEintrag_PlanGewaesserschutz_V1_1</value>
@@ -871,7 +899,6 @@
             </DatasetIdx16.ModelLink>
         </model>
     </DatasetIdx16.DataIndex.DatasetMetadata>
-
    </DatasetIdx16.DataIndex>
   </DATASECTION>
 </TRANSFER>
