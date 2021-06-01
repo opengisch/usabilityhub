@@ -1,7 +1,9 @@
 # UsabILIty Hub: Informationen zu Files und Serverstruktur
 
-## Abstract
+## Über dieses Dokument
+Dieses Dokument enthält die technische Informationen über die Files und die Serverstruktur des UsabILIty Hubs. Es ist soweit wie möglich unabhängig von Tools und Programmen. Als Beispielsnippets wird allerdings häufig QGIS bzw. QGIS Model Baker oder ili2db verwendet.
 
+## Abstract
 Die Idee des UsabILIty Hub ist es Metainformation automatisch übers Web zu empfangen.
 So wie wir jetzt Modelle durch die Anbindung der ilimodels.xml von [http://models.interlis.ch](http://models.interlis.ch) und mit ihrer ilisite.xml viele andere Repositories erhalten können, können wir diese Metadaten mit der Datei ilidata.xml auf dem UsabILIty Hub (derzeit [models.opengis.ch](models.opengis.ch)) erhalten.
 
@@ -86,7 +88,7 @@ Im Zusammenhang mit der UsabILIty Hub Implementierung werden folgende Typen verw
 - `sql`, um zu beschreiben, dass es ein SQL Queryfile ist, das verwendet werden kann bei der Erstellung der Datenbank
 - `layertree`, um zu beschreiben, dass es sich um ein *Toppingfile* handelt, das die Legendendarstellung definiert
 - `qml`, um zu beschreiben, dass es sich um ein *Toppingfile* handelt, das für einen QGIS Layer Styling und Formularkonfigurationen enthalten kann
-- `catalogue`, um zu beschreiben, dass es sich um ein Katalog-Datenfile handelt
+- `referenceData`, um zu beschreiben, dass es sich um ein Datenfile (zBs. einen Katalog) handelt
 
 #### Generic
 Allerdings ist der Inhalt des `Code_` Elements nicht definiert. Solange es sich um eine URL handelt, ist dem Toolentwickler überlassen, wie er es verwenden möchte.
@@ -158,10 +160,13 @@ Beispielsweise die Id `ch.opengis.configs.KbS_LV95_V1_4_layertree` referenziert 
 Es können auch ganze Sections definiert werden. Die Section `qgis.modelbaker.qml` enthält neben der Verlinkung auch die Zuweisung von Layername zu QML-Files.
 
 ### Tool Prefix
-Im *Metakonfigurationsfile* können Einträge mit einem Tool-Prefix markiert werden. *ili2db* zum Beispiel verwendet den Prefix `ch.ehi.ili2db` und *QGIS Model Baker* den Prefix `qgis.modelbaker`. Dennoch ist dem Tool überlassen, welche Konfigurationen es verwended. Den Prefix `ch.interlis` der mit `ch.interlis.referenceData` zum Beispiel für die Referenz auf *Kataloge* verwendet wird, lesen zBs. *ili2db* wie auch *QGIS Model Baker*.
+Im *Metakonfigurationsfile* können Einträge mit einem Tool-Prefix markiert werden. *ili2db* zum Beispiel verwendet den Prefix `ch.ehi.ili2db` und *QGIS Model Baker* den Prefix `qgis.modelbaker`. Dennoch ist dem Tool überlassen, welche Konfigurationen es verwended. Den Prefix `ch.interlis` der mit `ch.interlis.referenceData` zum Beispiel für die Referenz auf *Kataloge* oder andere *Datenfiles* verwendet wird, lesen zBs. *ili2db* wie auch *QGIS Model Baker*.
+
+### Referenzen auf andere Metakonfigurationsfiles
+Es ist konzeptionell auch möglich (wenn auch von Tools wie *QGIS Model Baker* noch nicht umgesetzt), dass man vom einen *Metakonfigurationsfile* mittels dem Eintrag `baseConfig` auf andere *Metakonfigurationsfiles* linken kann. Somit würde eine Art "Vererbung" der Konfiguration möglich sein. 
 
 ## Toppingfiles
-Toppingfiles sind Files, auf welche von der Metakonfiguration referenziert wurde und die Konfigurationsinformation des GIS Projektes enthalten. Es können also Formularkonfigurationen, Style-Attribute, Legendendarstellung und Reihenfolge, sowie auch Kataloge sein. Für jedes Tool können individuelle Toppingfiles verwendet werden. Von einem einfachen Zip-File, welches das gesamte Projekt enthält, bis zu einem sorgfältigen Mapping von Layernamen zu QML-Style-Files.
+Toppingfiles sind Files, auf welche von der Metakonfiguration referenziert wurde und die Konfigurationsinformation des GIS Projektes enthalten. Es können also Formularkonfigurationen, Style-Attribute, Legendendarstellung und Reihenfolge, sowie auch Kataloge und andere Datenfiles sein. Für jedes Tool können individuelle Toppingfiles verwendet werden. Von einem einfachen Zip-File, welches das gesamte Projekt enthält, bis zu einem sorgfältigen Mapping von Layernamen zu QML-Style-Files.
 
 ### Beispiel eines YAML Files für die Layerstruktur in QGIS
 ```
