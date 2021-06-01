@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{
+    padding: 10px;
+    margin: 10px;
+    font-size: .8rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: lightgray;
+}
+.items{
+    display: grid;
+    grid-row-gap: 10px;
+    grid-column-gap: 10px;
+}
+.item{
+    padding: 10px;
+    position: relative;
+    background-color: white;
+}
+.category{
+    float: right;
+    border: solid 1px;
+    border-radius: 4px;
+    font-size: 80%;
+    padding: 2px;
+    font-weight: bold;
+    color: white;
+    background-color: gray;
+}
+h2{
+    font-size: 1rem;
+    margin-top: 0;
+}
+i{
+  font-style: italic;
+  color: gray;
+}
+</style>
+</head>
+<body>
+
+<h1>Usability Hub</h1>
+
+<div class="items">
+{% for item in items %}
+    <!-- {{item.id}} -->
+    <div class="item">
+
+        {% for category in item.categories %}
+        <div class="category">
+            {{category.name}}
+            <!--category.value-->
+        </div>
+        {% endfor %}
+
+        <h2>
+        {% if item.titles %}
+            {% for lang, title in item.titles.items() %}
+                {{title}} [{{lang}}]{% if not loop.last %} / {% endif %}
+            {% endfor %}
+        {% else %}
+            {{item.id}}
+        {% endif %}
+        </h2>
+
+        <p class="description">
+        {% if item.descs %}
+            {% for lang, desc in item.descs.items() %}
+                {{desc}} [{{lang}}]{% if not loop.last %}</p><p class="description">{% endif %}
+            {% endfor %}
+        {% else %}
+            <i>No description</i>
+        {% endif %}
+        </p>
+
+        {% for file in item.files %}
+        <div class="file">Download : <a href="{{file.url}}">{{file.path}}</a><!--[{{file.format}}]--></div>
+        {% endfor %}
+
+        <div class="owner">Owner : <a href="{{item.owner_url}}">{{item.owner_name}}</a></div>
+    </div>
+{% endfor %}
+</div>
+
+</body>
+</html>
