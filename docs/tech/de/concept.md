@@ -5,7 +5,7 @@ Dieses Dokument enthält die technische Informationen über die Files und die Se
 
 ## Abstract
 Die Idee des UsabILIty Hub ist es Metainformation automatisch übers Web zu empfangen.
-So wie wir jetzt Modelle durch die Anbindung der ilimodels.xml von [http://models.interlis.ch](http://models.interlis.ch) und mit ihrer ilisite.xml viele andere Repositories erhalten können, können wir diese Metadaten mit der Datei ilidata.xml auf dem UsabILIty Hub (derzeit [models.opengis.ch](models.opengis.ch)) erhalten.
+So wie wir jetzt Modelle durch die Anbindung der ilimodels.xml von [http://models.interlis.ch](http://models.interlis.ch) und mit ihrer ilisite.xml viele andere Repositories erhalten können, können wir diese Metadaten mit der Datei ilidata.xml auf dem UsabILIty Hub (derzeit [https://models.opengis.ch](https://models.opengis.ch)) erhalten.
 
 Einstellungen für Tools werden in einer Metakonfigurationsfiles (INI-Datei) konfiguriert, ebenso wie Links (Ids oder Pfade) zu Toppingfiles, die Informationen zu GIS Projektes enthalten.
 
@@ -14,7 +14,7 @@ Ein *ilidata.xml* dient als Index für alle benötigten Metainformationen. Das F
 
 Es enthält die Klasse bzw. das Element `DatasetMetadata`. Darin wird auf Files referenziert, die auf demselben Server/Repository liegen, wie das *ilidata.xml*. 
 
-Weitere Server/Repositories können über das `ilisites.xml` verbunden werden. Die `DatasetMetadata` werden anhand einer systemübergreifenden *DatasetMetadata-Id* identifiziert. Es ist dem Benutzer überlassen, wie diese Id lautet.
+Weitere Server/Repositories können über das `ilisite.xml` verbunden werden. Die `DatasetMetadata` werden anhand einer systemübergreifenden *DatasetMetadata-Id* identifiziert. Es ist dem Benutzer überlassen, wie diese Id lautet.
 
 ### Beispiel `DatasetMetadata`
 ```
@@ -96,8 +96,8 @@ Allerdings ist der Inhalt des `Code_` Elements nicht definiert. Solange es sich 
 > Im moment verwendet der *QGIS Model Baker* keine generischen Kategorien
 
 
-## Das ilisites.xml
-Das *ilisites.xml* basiert auf dem Modell `IliSite09`. Es enthält die Klasse `SiteMetadata` wo URLs zu anderen Repositories definiert sind, die wiederum ein *ilimodel.xml*  oder - ebenso - ein *ilidata.xml* enthalten.
+## Das ilisite.xml
+Das *ilisite.xml* basiert auf dem Modell `IliSite09`. Es enthält die Klasse `SiteMetadata` wo URLs zu anderen Repositories definiert sind, die wiederum ein *ilimodel.xml*  oder - ebenso - ein *ilidata.xml* enthalten.
 
 Somit können Modelle über mehrere Repositories gefunden werden und genauso auch *Metakonfigurations*- oder *Toppingfiles*.
 
