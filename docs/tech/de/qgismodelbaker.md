@@ -70,7 +70,11 @@ Vom *QGIS Model Baker* unterstützte *Toppingfiles*:
 - XTF/ITF Files für Datenimport
 
 ### QML
-Für Layereigenschaften wie Formularkonfigurationen, Symbologie etc. werden QML Files als *Toppingfiles* geladen. Diese werden im *Metakonfigurationsfile* den Layern zugewiesen.
+Für Layereigenschaften wie Formularkonfigurationen, Symbologie etc. werden QML Files als *Toppingfiles* geladen. 
+
+![style](../images/style.png)
+
+Die *QML Toppingfiles* werden im *Metakonfigurationsfile* den Layern zugewiesen.
 
 ```
 [qgis.modelbaker.ch]
