@@ -165,7 +165,7 @@ Die Kataloge (oder anderen Datenfiles) werden anschliessend des Schemaimports mi
 
 ## Import mehrerer Models und ihre Toppings
 Momentan werden bei einer Liste von "KbS_LV95_V1_4;KbS_Basis_V1_4" die *Metakonfigurationsfiles* für all diese Modelle aufgelistet. 
-![multimodels](images/multimodels.png)
+![multimodels](../images/multimodels.png)
 Es kann dann aber nur eines ausgewählt werden. Möchte man mehrere *Metakonfigurationsfiles* auswählen, muss man die Models nacheinander importieren.
 
 ### Best Practice
@@ -181,4 +181,4 @@ Somit wird das *Metakonfigurationen* anhand beider Modellnamen gefunden und beim
 
 ## Lokales Repo verwenden
 Es kann für Testzwecken nützlich sein, wenn man ein lokales Repository verwenden kann. Dies wird genauso wie immer konfiguriert. `ilidata.xml` und `ilimodels.xml` werden darin gesucht und geparst.
-![localrepo](images/localrepo.png)
+![localrepo](../images/localrepo.png)

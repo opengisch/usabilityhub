@@ -97,7 +97,7 @@ Allerdings ist der Inhalt des `Code_` Elements nicht definiert. Solange es sich 
 
 
 ## Das ilisites.xml
-Das *ilisites.xml* basiert auf dem Modell `IliSite09`. Es enthält die Klasse `SiteMetadata` wo URLs zu anderen Repositories definiert sind, die wiederum ein *ilimodel.xml*  oder - ebenso - ein *ilidata.xml*enthalten.
+Das *ilisites.xml* basiert auf dem Modell `IliSite09`. Es enthält die Klasse `SiteMetadata` wo URLs zu anderen Repositories definiert sind, die wiederum ein *ilimodel.xml*  oder - ebenso - ein *ilidata.xml* enthalten.
 
 Somit können Modelle über mehrere Repositories gefunden werden und genauso auch *Metakonfigurations*- oder *Toppingfiles*.
 
