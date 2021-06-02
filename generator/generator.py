@@ -77,5 +77,5 @@ template = jinja_env.get_template('index.template.html')
 output = template.render(items=items)
 
 os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
-with open(OUTPUT_PATH, 'w') as f:
+with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
     f.write(output)
