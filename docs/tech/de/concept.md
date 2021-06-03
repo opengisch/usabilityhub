@@ -1,13 +1,16 @@
 # UsabILIty Hub: Informationen zu Files und Serverstruktur
 
 ## Über dieses Dokument
-Dieses Dokument enthält die technische Informationen über die Files und die Serverstruktur des UsabILIty Hubs. Es ist soweit wie möglich unabhängig von Tools und Programmen. Als Beispielsnippets wird allerdings häufig QGIS bzw. QGIS Model Baker oder ili2db verwendet.
+Dieses Dokument liefert Informationen über die Files und die Serverstruktur des UsabILIty Hubs. Es ist soweit wie möglich unabhängig von Tools und Programmen. Für die Beispiele wird allerdings häufig aufQGIS bzw. QGIS Model Baker oder ili2db zurückgegriffen.
 
 ## Abstract
 Die Idee des UsabILIty Hub ist es Metainformation automatisch übers Web zu empfangen.
 So wie wir jetzt Modelle durch die Anbindung der ilimodels.xml von [http://models.interlis.ch](http://models.interlis.ch) und mit ihrer ilisite.xml viele andere Repositories erhalten können, können wir diese Metadaten mit der Datei ilidata.xml auf dem UsabILIty Hub (derzeit [https://models.opengis.ch](https://models.opengis.ch)) erhalten.
 
 Einstellungen für Tools werden in einer Metakonfigurationsfiles (INI-Datei) konfiguriert, ebenso wie Links (Ids oder Pfade) zu Toppingfiles, die Informationen zu GIS Projektes enthalten.
+
+![uml](../images/uml_usabilityhub.png)
+
 
 ## Das ilidata.xml
 Ein *ilidata.xml* dient als Index für alle benötigten Metainformationen. Das File basiert auf dem Model [`DatasetIdx16`](http://models.interlis.ch/core/DatasetIdx16.ili). 
@@ -107,7 +110,7 @@ Somit können Modelle über mehrere Repositories gefunden werden und genauso auc
   <Name>usability.opengis.ch</Name>
   <Title>Allgemeine metadaten für ili-modelle</Title>
   <shortDescription>Weitere Sites des UsabILItyHubs</shortDescription>
-  <Owner>http://usabilityhub.opengis.ch</Owner>
+  <Owner>http://models.opengis.ch</Owner>
   <technicalContact>mailto:david@opengis.ch</technicalContact>
   <subsidiarySite>
     <IliSite09.RepositoryLocation_>
@@ -160,7 +163,7 @@ Beispielsweise die Id `ch.opengis.configs.KbS_LV95_V1_4_layertree` referenziert 
 Es können auch ganze Sections definiert werden. Die Section `qgis.modelbaker.qml` enthält neben der Verlinkung auch die Zuweisung von Layername zu QML-Files.
 
 ### Tool Prefix
-Im *Metakonfigurationsfile* können Einträge mit einem Tool-Prefix markiert werden. *ili2db* zum Beispiel verwendet den Prefix `ch.ehi.ili2db` und *QGIS Model Baker* den Prefix `qgis.modelbaker`. Dennoch ist dem Tool überlassen, welche Konfigurationen es verwended. Den Prefix `ch.interlis` der mit `ch.interlis.referenceData` zum Beispiel für die Referenz auf *Kataloge* oder andere *Datenfiles* verwendet wird, lesen zBs. *ili2db* wie auch *QGIS Model Baker*.
+Im *Metakonfigurationsfile* können Einträge mit einem Tool-Prefix markiert werden. *ili2db* zum Beispiel verwendet den Prefix `ch.ehi.ili2db` und *QGIS Model Baker* den Prefix `qgis.modelbaker`. Dennoch ist dem Tool überlassen, welche Konfigurationen es verwended. Den Prefix `ch.interlis`, der mit `ch.interlis.referenceData` zum Beispiel für die Referenz auf *Datenfiles* wie Kataloge oder Transferdatenfiles verwendet wird, lesen zBs. *ili2db* wie auch *QGIS Model Baker*.
 
 ### Referenzen auf andere Metakonfigurationsfiles
 Es ist konzeptionell auch möglich (wenn auch von Tools wie *QGIS Model Baker* noch nicht umgesetzt), dass man vom einen *Metakonfigurationsfile* mittels dem Eintrag `baseConfig` auf andere *Metakonfigurationsfiles* linken kann. Somit würde eine Art "Vererbung" der Konfiguration möglich sein. 

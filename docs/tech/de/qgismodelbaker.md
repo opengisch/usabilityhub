@@ -8,6 +8,8 @@ Anhand eines Modelnamens werden im *ilidata.xml* Pfade zu Metakonfigurationsfile
 
 > Andere Tools verwenden einen anderen Workflow. So wird beispielsweise dem *ili2db* das *Metakonfigurationsfile* übergeben. Dort ist in der *Metakonfiguration* dann auch das Modell definert. 
 
+![uml](../images/uml_modelbaker.png)
+
 ### Ablauf
 1. User gibt Modellname in der Maske ein
 2. Das *ilidata.xml* wird anhand des Modellnamens nach Links zu *Metakonfigurationsfiles* geparst
