@@ -1,10 +1,10 @@
-# UsabILIty Hub: QGIS Model Baker spezifische Settings
+# UsabILIty Hub: Umsetzung im QGIS Model Baker
 
 ## Über dieses Dokument
-Ergänzend zum Dokument "UsabILIty Hub: Informationen zu Files und Serverstruktur" enthält dieses Dokument die technische Information über die Umsetzung des UsabILIty Hubs in *QGIS Model Baker* und Informationen betreffend den - ebenfalls vom *QGIS Model Baker* berücksichtigten Konfigurationen des *ili2db*. Auf Begriffe wie *Metakonfigurationsfile*, *ilidata.xml* wird nicht explizit eingegangen.
+Ergänzend zum Dokument "UsabILIty Hub: Files und Serverstruktur" enthält dieses Dokument die technische Information über die Umsetzung des UsabILIty Hubs in *QGIS Model Baker* und Informationen betreffend den - ebenfalls vom *QGIS Model Baker* berücksichtigten - Konfigurationen des *ili2db*. Auf Begriffe wie *Metakonfigurationsfile*, *ilidata.xml* wird nicht explizit eingegangen.
 
 ## Workflows:
-Anhand eines Modelnamens werden im *ilidata.xml* Pfade zu Metakonfigurationsfiles gefunden. Diese Metakonfigurationsfiles enthalten, neben Konfigurationsparameter, *DatasetMetadata-Ids*. Anhand dieser *DatasetMetadata-Ids* werden im *ilidata.xml* die Pfade zu den *Toppingfiles* gefunden.
+Anhand eines Modelnamens werden im *ilidata.xml* Pfade zu *Metakonfigurationsfiles* gefunden. Diese *Metakonfigurationsfiles* enthalten, neben Konfigurationsparameter, *DatasetMetadata-Ids*. Anhand dieser *DatasetMetadata-Ids* werden im *ilidata.xml* die Pfade zu den *Toppingfiles* gefunden.
 
 > Andere Tools verwenden einen anderen Workflow. So wird beispielsweise dem *ili2db* das *Metakonfigurationsfile* übergeben. Dort ist in der *Metakonfiguration* dann auch das Modell definert. 
 
@@ -16,8 +16,8 @@ Anhand eines Modelnamens werden im *ilidata.xml* Pfade zu Metakonfigurationsfile
 3. Der Benutzer wählt ein *Metakonfigurationsfile* aus, dieses wird heruntergeladen
 4. Die Konfigurationen werden aus dem *Metakonfigurationsfile* gelesen
 5. Die Konfigurationen werden in der Datenstrukturerstellung berücksichtigt
-6. Die *DatasetMetadata-Ids* zu den *Toppingfiles* werden aus dem *Metakonfigurationsfile* gelesen
-7. Das *ilidata.xml* wird anhand der *DatasetMetadata-Ids* nach Links zu *Toppingfiles* geparst
+6. Die DatasetMetadata-Ids zu den *Toppingfiles* werden aus dem *Metakonfigurationsfile* gelesen
+7. Das *ilidata.xml* wird anhand der DatasetMetadata-Ids nach Links zu *Toppingfiles* geparst
 8. Die *Toppingfiles* werden heruntergeladen
 9. Die Informationen werden aus den *Toppingfiles* gelesen und in die Projekt-Generierung miteinbezogen
 
@@ -48,27 +48,27 @@ ili2db --metaConfig localfile.ini --import --db....  data.xtf
 
 ### Umsetzung im QGIS Model Baker
 
-> Die Funktionalität, dass die Parameter in die Eingabemaske geladen werden ist soweit implementiert (v6.5.0). Ansonsten beschreibt dieser Absatz den SOLL-Zustand. Denn die Übergabe der Metakonfiguration sowie das übergeben von false-Parametern ist von Seite *ili2db* noch nicht verfügbar.
+> Die Funktionalität, dass die Parameter in die Eingabemaske geladen werden ist soweit implementiert (v6.5.0). Ansonsten beschreibt dieser Absatz den SOLL-Zustand. Denn die Übergabe der Metakonfiguration sowie das übergeben von false-Parametern ist von Seite *ili2db* noch nicht unterstützt.
 
-Einserseits werden beim Aufruf von *ili2db* durch den *QGIS Model Baker* Parameter automatisch im Hintergrund gesetzt und andererseits können in der Eingabemaske des *QGIS Model Baker* Parameter gesetzt werden. Zusätzlich soll nun die betreffende *Metakonfigurationsdatei* dem *ili2db* übergeben werden. Doch Parameter, die dem *ili2db* direkt übergeben werden, übersteuern die Konfigurationen des übergebenen *Metakonfigurationsfile*.
+Einserseits werden beim Aufruf von *ili2db* durch den *QGIS Model Baker* Parameter automatisch im Hintergrund gesetzt und andererseits können in der Eingabemaske des *QGIS Model Baker* Parameter vom Benutzer konfiguriert werden. Zusätzlich soll nun die betreffende *Metakonfigurationsdatei* dem *ili2db* übergeben werden. Doch Parameter, die dem *ili2db* direkt übergeben werden, übersteuern die Konfigurationen des übergebenen *Metakonfigurationsfile*.
 
 *QGIS Model Baker* liest die *ili2db* Parameter aus dem *Metakonfigurationsfile*. Die Parameter, die über die Eingabemaske des *QGIS Model Baker* gesetzt werden können (wie zBs. `--strokeArcs`, `--iliMetaAttrs` (für TOML) oder auch `--models`), werden vom *Metakonfigurationsfile* in die Eingabemaske geladen. Die Benutzerin kann diese nun anpassen. Der *QGIS Model Baker* übergibt dem *ili2db* Aufruf nun die *Metakonfigurationsdatei* und die Parameter aus der Eingabemaske (ob angepasst oder nicht). Falls also die Parameter in der *Metakonfigurationsdatei* aufgeführt waren, dann aber in der Eingabemaske deaktiviert wurden, werden sie dem *ili2db* als "false" übergeben.
 
 Die Parameter, die der *QGIS Model Baker* im Hintergrund setzt (wie zBs. `--createFkIdx`, `--coalesceMultiPoint`), werden weiterhin gesetzt. Doch können sie vom *Metakonfigurationsfile* übersteuert werden. Wenn aber zBs. im *Metakonfigurationsfile* solche Parameter nicht erwähnt sind (weil sie möglicherweise nicht gesetzt werden sollen), dann werden sie auch nicht mit "false" übersteuert.
 
-Ausnahme bietet im *Metakonfigurationsfile* `onlyUseMetaConfigParams`. Wenn dieser gesetzt ist, dann sollen nur die im *Metakonfigurationsfile* konfigurierten Parameter gesetzt werden und keine anderen.
+Ausnahme bietet im *Metakonfigurationsfile* ein Setting wie `onlyUseMetaConfigParams`. Wenn dies gesetzt ist, dann sollen nur die im *Metakonfigurationsfile* konfigurierten Parameter gesetzt werden und keine anderen.
 
 ### Referenzen auf andere Modelle
 
-Anhand der *ili2db* kann von einem *Metakonfigurationsfile* auf andere Modelle referenziert werden. Wenn die *Metakonfigurationsfile* der Wert `models=KbS_LV95_v1_4;KbS_Basis` steht, dann wird dies auch in der *QGIS Model Baker* Eingabemaske so angepasst. Natürlich wird daraufhin wieder eine Suche nach möglichen *Metakonfigurationsfiles* gestartet gemäss den aktuell konfigurierten Modelle. Siehe dazu auch "Import mehrerer Models und ihre Toppings"
+Anhand der *ili2db* kann von einem *Metakonfigurationsfile* auf andere Modelle referenziert werden. Wenn die *Metakonfigurationsfile* der Wert `models=KbS_LV95_v1_4;KbS_Basis` enthält, dann wird dies auch in der *QGIS Model Baker* Eingabemaske so angepasst. Natürlich wird daraufhin wieder eine Suche nach möglichen *Metakonfigurationsfiles* auf UsabILIty Hub gestartet, gemäss den aktuell gesetzten Modelle. Siehe dazu auch "Import mehrerer Models und ihre Toppings"
 
 ## Toppings und ihre Konfiguration
 
-Toppingfiles sind Files, auf welche von der Metakonfiguration referenziert wurde und die Konfigurationsinformation des GIS Projektes enthalten. Es können also Formularkonfigurationen, Style-Attribute, Legendendarstellung sowie Datenfiles sein. Für jedes Tool können individuelle Toppingfiles verwendet werden.
+*Toppingfiles* sind Files, auf die in der *Metakonfiguration* referenziert wurde und die Konfigurationsinformation des GIS Projektes enthalten. Es können also Formularkonfigurationen, Style-Attribute, Legendendarstellung sowie Datenfiles sein. Für jedes Tool können individuelle Toppingfiles verwendet werden.
 
 Vom *QGIS Model Baker* unterstützte *Toppingfiles*:
+- QML Files für Layerkonfigurationen<>
 - YAML Files für Legendendarstellung und Layerreihenfolge
-- QML Files für Layerkonfigurationen
 - XTF/ITF Files für Datenimport
 
 ### QML
@@ -92,52 +92,60 @@ Das File ist in `YAML` geschrieben:
 
 ```
 legend:
-  - 'top-group':
+  - "Belasteter Standort":
       group: true
       checked: true
       expanded: true
       mutually-exclusive: true
-      mutually-exclusive-child: -1
+      mutually-exclusive-child: 1
       child-nodes:
-        - 'geom punkt':
-            group: false
-            checked: true
+        - "Belasteter_Standort (Geo_Lage_Punkt)":
             featurecount: true
-        - 'geom polygon':
-            group: false
-            checked: true
-        - 'subgroup':
-            group: true
-            checked: true
-            expanded: false
-            mutually-exclusive-child: false
-            child-nodes:
-              - 'subsubgroup':
-                  group: true
-                  checked: true
-                  child-nodes:
-                    - 'baum':
-                        group: false
-                        checked: true
-                    - 'subsubsubgroup':
-                        group: true
-                        checked: true
-                        child-nodes:
-                          - 'another layer':
-                              group: false
-                              visbile: false
-                    - 'layer in the subgroup':
-                        group: false
-                        checked: false
-  - 'empty bottom group':
+        - "Belasteter_Standort (Geo_Lage_Polygon)":
+            expanded: true
+  - "Informationen":
       group: true
       checked: true
       expanded: true
-      mutually-exclusive-child: false
+      child-nodes:
+        - "EGRID_":
+        - "Deponietyp_":
+        - "ZustaendigkeitKataster":
+            featurecount: true
+        - "Untersuchungsmassnahmen_Definition":
+            featurecount: false
+        - "StatusAltlV_Definition":
+        - "Standorttyp_Definition":
+        - "Deponietyp_Definition":
+        - "Parzellenidentifikation":
+        - "UntersMassn_":
+        - "Text Infos":
+            group: true
+            checked: false
+            expanded: true
+            child-nodes:
+              - "MultilingualMText":
+              - "LocalisedMText":
+              - "MultilingualText":
+              - "LocalisedText":
+        - "Other Infos":
+            group: true
+            checked: true
+            expanded: false
+            child-nodes:
+              - "StatusAltlV":
+              - "Standorttyp":
+              - "UntersMassn":
+              - "Deponietyp":
+              - "LanguageCode_ISO639_1":
+
+layer-order:
+  - "Belasteter_Standort (Geo_Lage_Polygon)"
+  - "Belasteter_Standort (Geo_Lage_Punkt)"
 ```
 
 #### Legende
-Die Legende wird anhand einer Baumstruktur im YAML Format beschrieben.
+Die Legende wird anhand einer Baumstruktur im `YAML` Format beschrieben.
 
 Top-Level Eintrag ist `legend`. Dieser Eintrag wird nicht in der Legende angezeigt.
 
@@ -152,38 +160,40 @@ Zusätzlich haben die Gruppen noch die "Mutually-Exclusive" Eigenschaft. Dies be
 - `mutually-exclusive: true` wenn nur ein Kindelement auf einmal angezeigt werden soll.
 - `mutually-exclusive-child: 0` das Kindelement, das angezeigt werden soll.
 
+Das oben abgebildete `YAML` File resultiert in eine Legendenstruktur in *QGIS*
+
+![uml](../images/qgis_legend.png)
+
 #### Darstellungsreihenfolge
 Die Darstellungsreihenfolge wird als einfache Liste definiert.
 ```
 layer-order:
-  - 'geom punkt'
-  - 'geom polygon'
+  - "Belasteter_Standort (Geo_Lage_Polygon)"
+  - "Belasteter_Standort (Geo_Lage_Punkt)"
 ```
 
 #### Laden mehrerer Models mit mehreren Legendenstrukturen
-Layer mit der gleichen Datenquelle werden bei erneutem generieren des Projektes nicht doppelt hinzugefügt. Neue Layer und Untergruppen werden - sofern möglich - in bereits existierende Gruppen geladen. Ansonsten werden Geometrielayer oberhalb und die Gruppen "tables" und "domains" unterhalb hinzugefügt. Legendenstrukturen aus mehreren *Toppingfiles* werden zusammengefügt.
+Layer mit der gleichen Datenquelle werden bei erneutem generieren des Projektes nicht doppelt hinzugefügt. Neue Layer und Untergruppen werden - sofern möglich - in bereits existierende Gruppen geladen. Ansonsten werden Geometrielayer oberhalb und die Gruppen "tables" und "domains" unterhalb hinzugefügt. Legendenstrukturen aus mehreren *Toppingfiles* werden also zusammengefügt.
 
-### Kataloge und Datenfiles
-Kataloge (und andere Datenfiles) können ebenfalls als *Toppingfiles* geladen werden. Die `DatasetMetadata-Ids` werden im *Metakonfigurationsfile* über den globalen Parameter `ch.interlis.referenceData` definiert. Es können mehrere Ids und Filepfade angegeben werden (separiert durch `;`). 
+### Kataloge und Transferfiles
+Kataloge und Transferfiles (und andere ITF/XTF) können ebenfalls als *Toppingfiles* geladen werden. Die `DatasetMetadata-Ids` werden im *Metakonfigurationsfile* über den globalen Parameter `ch.interlis.referenceData` definiert. Es können mehrere Ids und Filepfade angegeben werden (separiert durch `;`). 
 
-Die Kataloge (oder anderen Datenfiles) werden anschliessend des Schemaimports mittels einzelner `ili2db` Kommandos importiert. 
-> Aufgrund der Einhaltung der Best Practice werden die Datenfiles nicht mit einem `import` und dem Parameter `--doschemaimport` geladen, sondern eines nach dem andern.
+Diese Datenfiles werden anschliessend an den Schemaimport mittels einzelner `ili2db` Kommandos importiert. 
+> Aufgrund der Einhaltung der Best Practice werden die Datenfiles *nicht* mit einem `import` und dem Parameter `--doschemaimport` geladen, sondern eines nach dem andern.
 
 ## Import mehrerer Models und ihre Toppings
-Momentan werden bei einer Liste von "KbS_LV95_V1_4;KbS_Basis_V1_4" die *Metakonfigurationsfiles* für all diese Modelle aufgelistet. 
+Momentan werden bei einer Liste von "LegendeEintrag_PlanGewaesserschutz_V1_1;KbS_LV95_V1_4;KbS_Basis_V1_4" die *Metakonfigurationsfiles* für all diese Modelle aufgelistet. 
 ![multimodels](../images/multimodels.png)
 Es kann dann aber nur eines ausgewählt werden. Möchte man mehrere *Metakonfigurationsfiles* auswählen, muss man die Models nacheinander importieren.
 
 ### Best Practice
-Am besten macht man ein *Metakonfigurationsfile*, das für den Import beider Modelle gilt. 
-Um das ganze noch angenehmer zu gestalten, kann man auch das zusätzliche Model im *Metakonfigurationsfile* konfigurieren.
+Am besten macht man ein *Metakonfigurationsfile*, das für den Import aller Modelle gilt. Und um das ganze noch angenehmer zu gestalten, kann man auch das zusätzliche Model im *Metakonfigurationsfile* konfigurieren.
 Gilt ein *Metakonfigurationsfile* für den Import beider Modelle "KbS_LV95_V1_4;KbS_Basis_V1_4", kann man auch beide Modelle in darin konfigurieren:
 ```
 [ch.ehi.ili2db]
-models = KbS_Basis_V1_4
-KbS_Basis_V1_4
+models = KbS_Basis_V1_4;KbS_Basis_V1_4
 ```
-Somit wird das *Metakonfigurationen* anhand beider Modellnamen gefunden und beim einlesen wird "KbS_LV95_V1_4;KbS_Basis_V1_4" in die Eingabemaske geladen.
+Somit wird das *Metakonfigurationen* anhand beider Modellnamen gefunden und beim einlesen wird "KbS_LV95_V1_4;KbS_Basis_V1_4" in die Eingabemaske von *QGIS Model Baker* geladen.
 
 ## Lokales Repo verwenden
 Es kann für Testzwecken nützlich sein, wenn man ein lokales Repository verwenden kann. Dies wird genauso wie immer konfiguriert. `ilidata.xml` und `ilimodels.xml` werden darin gesucht und geparst.

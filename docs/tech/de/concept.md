@@ -1,23 +1,22 @@
-# UsabILIty Hub: Informationen zu Files und Serverstruktur
+# UsabILIty Hub: Files und Serverstruktur
 
 ## Über dieses Dokument
-Dieses Dokument liefert Informationen über die Files und die Serverstruktur des UsabILIty Hubs. Es ist soweit wie möglich unabhängig von Tools und Programmen. Für die Beispiele wird allerdings häufig aufQGIS bzw. QGIS Model Baker oder ili2db zurückgegriffen.
+Dieses Dokument liefert Informationen über die Files und die Serverstruktur des UsabILIty Hubs. Es ist soweit wie möglich unabhängig von Tools und Programmen. Für die Beispiele wird häufig auf *QGIS* bzw. *QGIS Model Baker* oder *ili2db* zurückgegriffen. Es soll aber zur generellen Information dienen.
 
 ## Abstract
-Die Idee des UsabILIty Hub ist es Metainformation automatisch übers Web zu empfangen.
-So wie wir jetzt Modelle durch die Anbindung der ilimodels.xml von [http://models.interlis.ch](http://models.interlis.ch) und mit ihrer ilisite.xml viele andere Repositories erhalten können, können wir diese Metadaten mit der Datei ilidata.xml auf dem UsabILIty Hub (derzeit [https://models.opengis.ch](https://models.opengis.ch)) erhalten.
+Die Idee des UsabILIty Hub ist es, für Implementierte INTERLIS Modelle Zusatzinformationen automatisch übers Web zu empfangen.
+So wie wir jetzt Modelle durch die Anbindung der Datei *ilimodels.xml* von [http://models.interlis.ch](http://models.interlis.ch) - und mit der Datei *ilisite.xml* die Modelle vieler anderen Repositories - erhalten können, können wir die Zusatzinformationen mit der Datei *ilidata.xml* auf dem UsabILIty Hub (derzeit [https://models.opengis.ch](https://models.opengis.ch))  - und mit der Datei *ilisite.xml* die Modelle vieler anderen Repositories - erhalten.
 
-Einstellungen für Tools werden in einer Metakonfigurationsfiles (INI-Datei) konfiguriert, ebenso wie Links (Ids oder Pfade) zu Toppingfiles, die Informationen zu GIS Projektes enthalten.
+Einstellungen für Tools werden in einer *Metakonfigurationsfiles (INI-Datei)* konfiguriert, ebenso wie Links (Ids oder Pfade) zu *Toppingfiles*, die Informationen zu GIS Projektes enthalten (wie zBs. Symbologien oder Legendensturkturen). Somit bestehen *Zusatzinformationen* meistens aus einer *Metakonfiguration* und beliebig vielen *Toppings*.
 
 ![uml](../images/uml_usabilityhub.png)
 
-
 ## Das ilidata.xml
-Ein *ilidata.xml* dient als Index für alle benötigten Metainformationen. Das File basiert auf dem Model [`DatasetIdx16`](http://models.interlis.ch/core/DatasetIdx16.ili). 
+Ein *ilidata.xml* dient als Index für alle benötigten Zusatzinformationen. Das File basiert auf dem Model [`DatasetIdx16`](http://models.interlis.ch/core/DatasetIdx16.ili). 
 
-Es enthält die Klasse bzw. das Element `DatasetMetadata`. Darin wird auf Files referenziert, die auf demselben Server/Repository liegen, wie das *ilidata.xml*. 
+Es enthält die Klasse bzw. die Elemente `DatasetMetadata`. Darin wird auf Files referenziert, die auf demselben Server/Repository liegen, wie das *ilidata.xml*. 
 
-Weitere Server/Repositories können über das `ilisite.xml` verbunden werden. Die `DatasetMetadata` werden anhand einer systemübergreifenden *DatasetMetadata-Id* identifiziert. Es ist dem Benutzer überlassen, wie diese Id lautet.
+Weitere Server/Repositories können über das `ilisite.xml` verbunden werden. Die `DatasetMetadata` werden anhand einer systemübergreifenden (repositorienübergreifenden) *DatasetMetadata-Id* identifiziert. Es ist dem Benutzer überlassen, wie diese Id lautet.
 
 ### Beispiel `DatasetMetadata`
 ```
@@ -42,7 +41,7 @@ Weitere Server/Repositories können über das `ilisite.xml` verbunden werden. Di
       <!--  Konvention: http://codes.interlis.ch/model/{MODELNAME}  -->
     </DatasetIdx16.Code_>
     <DatasetIdx16.Code_>
-      <!--  dieser Eintrag betrifft eine Meta-Config  -->
+      <!--  dieser Eintrag betrifft eine Metakonfigurationsdatei -->
     	<value>http://codes.interlis.ch/type/metaconfig</value>
       <!--  fix Wert fuer Metaconfigs  -->
     </DatasetIdx16.Code_>
@@ -85,13 +84,13 @@ Die Kategorie für den File-Typ wird mit dem Prefix http://codes.interlis.ch/typ
 </DatasetIdx16.Code_>
 ```
 
-Im Zusammenhang mit der UsabILIty Hub Implementierung werden folgende Typen verwendet:
+Im Zusammenhang mit der UsabILIty Hub Implementierung des QGIS Model Baker werden folgende Typen verwendet:
 - `metaconfig`, um zu beschreiben, dass es sich um ein *Metakonfigurationsfile* handelt
 - `toml`, um zu beschreiben, dass es ein Metaattributfile ist, das in TOML geschrieben ist
 - `sql`, um zu beschreiben, dass es ein SQL Queryfile ist, das verwendet werden kann bei der Erstellung der Datenbank
 - `layertree`, um zu beschreiben, dass es sich um ein *Toppingfile* handelt, das die Legendendarstellung definiert
 - `qml`, um zu beschreiben, dass es sich um ein *Toppingfile* handelt, das für einen QGIS Layer Styling und Formularkonfigurationen enthalten kann
-- `referenceData`, um zu beschreiben, dass es sich um ein Datenfile (zBs. einen Katalog) handelt
+- `referenceData`, um zu beschreiben, dass es sich um ein Datenfile (zBs. ein Transferfile oder ein Katalog) handelt
 
 #### Generic
 Allerdings ist der Inhalt des `Code_` Elements nicht definiert. Solange es sich um eine URL handelt, ist dem Toolentwickler überlassen, wie er es verwenden möchte.
@@ -100,9 +99,9 @@ Allerdings ist der Inhalt des `Code_` Elements nicht definiert. Solange es sich 
 
 
 ## Das ilisite.xml
-Das *ilisite.xml* basiert auf dem Modell `IliSite09`. Es enthält die Klasse `SiteMetadata` wo URLs zu anderen Repositories definiert sind, die wiederum ein *ilimodel.xml*  oder - ebenso - ein *ilidata.xml* enthalten.
+Das *ilisite.xml* basiert auf dem Modell `IliSite09`. Es enthält die Klasse `SiteMetadata` wo URLs zu anderen Repositories definiert sind, Diese Repositorien bewirtschaften wiederum ein *ilimodel.xml*  oder - ebenso - ein *ilidata.xml*.
 
-Somit können Modelle über mehrere Repositories gefunden werden und genauso auch *Metakonfigurations*- oder *Toppingfiles*.
+Somit können Modelle über mehrere Repositories gefunden werden und genauso auch *Metakonfigurationsfiles* und/oder *Toppingfiles*.
 
 ### Beispiel eines `IliSite09` elements
 ```
@@ -120,18 +119,20 @@ Somit können Modelle über mehrere Repositories gefunden werden und genauso auc
 </IliSite09.SiteMetadata.Site>
 ```
 
-## The Metaconfigurationfile (INI)
+## Das Metaconfigurationfile (INI)
 
-Ein *Metakonfigurationsfile* ist eine INI-Datei, die Konfigurationen für ein oder mehrere Tools enthält. Dort kann auf Files (*Toppingfiles*, *Kataloge* und andere) referenziert werden.
+Ein *Metakonfigurationsfile* ist eine INI-Datei, die Konfigurationen für ein oder mehrere Tools enthält. Ebenso kann im *Metakonfigurationsfile* auf *Toppingfiles* und andere zur Konfiguration gehörenden Files referenziert werden.
 
-### File references
-Die Files (*Toppingfiles*, *Kataloge*, etc.) werden entweder anhand der systemübergreifenden *DatasetMetadata-Id* referenziert oder sie können einen statischen Filepfad enthalten.
+### Filereferenzen
+Die Files werden entweder anhand der systemübergreifenden *DatasetMetadata-Id* referenziert oder sie können einen statischen Filepfad enthalten.
 
 #### DatasetMetadata-Id
-Wenn ein File über eine *DatasetMetadata-Id* referenziert wird, heisst das dass die `ilidata.xml` systemübergreifend geparst werden, um das verlinkte File zu finden. Das bedeuted, dass die *Metakonfiguration* nicht nur auf Files auf demselben Repository/Server referenzieren kann. Prefix für *DatasetMetadata-Ids* ist `ilidata:` Es wird grunsätzlich Empfohlen, die *DatasetMetadata-Id* für eine Referenz auf ein File zu verwenden (anstelle vom statischen Filepfad). 
+Wenn ein File über eine *DatasetMetadata-Id* referenziert wird, heisst das, dass die `ilidata.xml` repositoryübergreifend geparst werden, um das verlinkte File zu finden. Das bedeuted, dass die *Metakonfiguration* nicht nur auf Files auf demselben Repository/Server referenzieren kann. Prefix für *DatasetMetadata-Ids* ist `ilidata:` 
+
+Es wird grunsätzlich Empfohlen, die *DatasetMetadata-Id* für eine Referenz auf ein File zu verwenden (anstelle vom statischen Filepfad). 
 
 #### Filepfad
-Statische Filepfad-Links die mit `file:` referenziert werden, können sowol absolut sein, wie auch relativ. Es kann aber vom verwendeten Tool abhängig sein, zu was der Pfad relativ ist. Deshalb sollte das nur zu Testzwecke verwendet werden.
+Statische Filepfad-Links die mit `file:` referenziert werden, können sowol absolut sein, wie auch relativ. Es kann aber vom verwendeten Tool abhängig sein, zu was der Pfad relativ ist. Deshalb sollte das nur zu Testzwecken verwendet werden.
 
 > Der *QGIS Model Baker* behandelt relative Pfade relativ zu sich selbst. *ili2db* hingegen relativ zum Verzeichnis wo *ili2db* gestartet wird.
 
@@ -163,13 +164,13 @@ Beispielsweise die Id `ch.opengis.configs.KbS_LV95_V1_4_layertree` referenziert 
 Es können auch ganze Sections definiert werden. Die Section `qgis.modelbaker.qml` enthält neben der Verlinkung auch die Zuweisung von Layername zu QML-Files.
 
 ### Tool Prefix
-Im *Metakonfigurationsfile* können Einträge mit einem Tool-Prefix markiert werden. *ili2db* zum Beispiel verwendet den Prefix `ch.ehi.ili2db` und *QGIS Model Baker* den Prefix `qgis.modelbaker`. Dennoch ist dem Tool überlassen, welche Konfigurationen es verwended. Den Prefix `ch.interlis`, der mit `ch.interlis.referenceData` zum Beispiel für die Referenz auf *Datenfiles* wie Kataloge oder Transferdatenfiles verwendet wird, lesen zBs. *ili2db* wie auch *QGIS Model Baker*.
+Im *Metakonfigurationsfile* können Einträge mit einem Tool-Prefix markiert werden. *ili2db* zum Beispiel verwendet den Prefix `ch.ehi.ili2db` und *QGIS Model Baker* den Prefix `qgis.modelbaker`. Allerdings ist dem Tool überlassen, welche Konfigurationen es verwended. Den Prefix `ch.interlis`, der mit `ch.interlis.referenceData` zum Beispiel für die Referenz auf *Datenfiles* wie Kataloge oder Transferdatenfiles verwendet wird, verwenden zBs. *ili2db* wie auch *QGIS Model Baker*.
 
 ### Referenzen auf andere Metakonfigurationsfiles
 Es ist konzeptionell auch möglich (wenn auch von Tools wie *QGIS Model Baker* noch nicht umgesetzt), dass man vom einen *Metakonfigurationsfile* mittels dem Eintrag `baseConfig` auf andere *Metakonfigurationsfiles* linken kann. Somit würde eine Art "Vererbung" der Konfiguration möglich sein. 
 
 ## Toppingfiles
-Toppingfiles sind Files, auf welche von der Metakonfiguration referenziert wurde und die Konfigurationsinformation des GIS Projektes enthalten. Es können also Formularkonfigurationen, Style-Attribute, Legendendarstellung und Reihenfolge, sowie auch Kataloge und andere Datenfiles sein. Für jedes Tool können individuelle Toppingfiles verwendet werden. Von einem einfachen Zip-File, welches das gesamte Projekt enthält, bis zu einem sorgfältigen Mapping von Layernamen zu QML-Style-Files.
+*Toppingfiles* sind Files, auf welche von der *Metakonfiguration* referenziert wurde und die Konfigurationsinformation des GIS Projektes enthalten. Es können also Formularkonfigurationen, Style-Attribute, Legendendarstellung und Reihenfolge, sowie auch Kataloge, Transferfiles und andere Datenfiles sein. Für jedes Tool können individuelle Toppingfiles verwendet werden. Von einem einfachen Zip-File, welches das gesamte Projekt enthält, bis zu einem sorgfältigen Mapping von Layernamen zu QML-Style-Files.
 
 ### Beispiel eines YAML Files für die Layerstruktur in QGIS
 ```
