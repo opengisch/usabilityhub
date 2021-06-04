@@ -13,7 +13,7 @@ Anhand eines Modellnamens werden im *ilidata.xml* Pfade zu *Metakonfigurationsfi
 ### Ablauf
 1. User gibt Modellname in der Maske ein
 2. Das *ilidata.xml* wird anhand des Modellnamens nach Links zu *Metakonfigurationsfiles* geparst
-3. Der Benutzer wählt ein *Metakonfigurationsfile* aus, dieses wird heruntergeladen
+3. Die Benutzerin wählt ein *Metakonfigurationsfile* aus, dieses wird heruntergeladen
 4. Die Konfigurationen werden aus dem *Metakonfigurationsfile* gelesen
 5. Die Konfigurationen werden in der Datenstrukturerstellung berücksichtigt
 6. Die DatasetMetadata-Ids zu den *Toppingfiles* werden aus dem *Metakonfigurationsfile* gelesen
@@ -52,7 +52,7 @@ ili2db --metaConfig localfile.ini --import --db....  data.xtf
 
 Einerseits werden beim Aufruf von *ili2db* durch den *QGIS Model Baker* Parameter automatisch im Hintergrund gesetzt und andererseits können in der Eingabemaske des *QGIS Model Baker* Parameter vom Benutzer konfiguriert werden. Zusätzlich soll nun die betreffende *Metakonfigurationsdatei* dem *ili2db* übergeben werden. Doch Parameter, die dem *ili2db* direkt übergeben werden, übersteuern die Konfigurationen des übergebenen *Metakonfigurationsfile*.
 
-*QGIS Model Baker* liest die *ili2db* Parameter aus dem *Metakonfigurationsfile*. Die Parameter, die über die Eingabemaske des *QGIS Model Baker* gesetzt werden können (wie zBs. `--strokeArcs`, `--iliMetaAttrs` (für TOML) oder auch `--models`), werden vom *Metakonfigurationsfile* in die Eingabemaske geladen. Die Benutzerin kann diese nun anpassen. Der *QGIS Model Baker* übergibt dem *ili2db* Aufruf nun die *Metakonfigurationsdatei* und die Parameter aus der Eingabemaske (ob angepasst oder nicht). Falls also die Parameter in der *Metakonfigurationsdatei* aufgeführt waren, dann aber in der Eingabemaske deaktiviert wurden, werden sie dem *ili2db* als "false" übergeben.
+*QGIS Model Baker* liest die *ili2db* Parameter aus dem *Metakonfigurationsfile*. Die Parameter, die über die Eingabemaske des *QGIS Model Baker* gesetzt werden können (wie zBs. `--strokeArcs`, `--iliMetaAttrs` (für TOML) oder auch `--models`), werden vom *Metakonfigurationsfile* in die Eingabemaske geladen. Der Benutzer kann diese nun anpassen. Der *QGIS Model Baker* übergibt dem *ili2db* Aufruf nun die *Metakonfigurationsdatei* und die Parameter aus der Eingabemaske (ob angepasst oder nicht). Falls also die Parameter in der *Metakonfigurationsdatei* aufgeführt waren, dann aber in der Eingabemaske deaktiviert wurden, werden sie dem *ili2db* als "false" übergeben.
 
 Die Parameter, die der *QGIS Model Baker* im Hintergrund setzt (wie zBs. `--createFkIdx`, `--coalesceMultiPoint`), werden weiterhin gesetzt. Doch können sie vom *Metakonfigurationsfile* übersteuert werden. Wenn aber zum Beispiel im *Metakonfigurationsfile* solche Parameter nicht erwähnt sind (weil sie möglicherweise nicht gesetzt werden sollen), dann werden sie auch nicht mit "false" übersteuert.
 
