@@ -93,7 +93,7 @@ Im Zusammenhang mit der UsabILIty Hub Implementierung des QGIS Model Baker werde
 - `referenceData`, um zu beschreiben, dass es sich um ein Datenfile (zBs. ein Transferfile oder ein Katalog) handelt
 
 #### Generic
-Allerdings ist der Inhalt des `Code_` Elements nicht definiert. Solange es sich um eine URL handelt, ist dem Toolentwickler überlassen, wie er es verwenden möchte.
+Allerdings ist der Inhalt des `Code_` Elements nicht definiert. Solange es sich um eine URL handelt, ist der Toolentwicklerin überlassen, wie sie es verwenden möchte.
 
 > Im moment verwendet der *QGIS Model Baker* keine generischen Kategorien
 
