@@ -4,7 +4,7 @@
 Ergänzend zum Dokument "UsabILIty Hub: Files und Serverstruktur" enthält dieses Dokument die technische Information über die Umsetzung des UsabILIty Hubs in *QGIS Model Baker* und Informationen betreffend den - ebenfalls vom *QGIS Model Baker* berücksichtigten - Konfigurationen des *ili2db*. Auf Begriffe wie *Metakonfigurationsfile*, *ilidata.xml* wird nicht explizit eingegangen.
 
 ## Workflows:
-Anhand eines Modelnamens werden im *ilidata.xml* Pfade zu *Metakonfigurationsfiles* gefunden. Diese *Metakonfigurationsfiles* enthalten, neben Konfigurationsparameter, *DatasetMetadata-Ids*. Anhand dieser *DatasetMetadata-Ids* werden im *ilidata.xml* die Pfade zu den *Toppingfiles* gefunden.
+Anhand eines Modellnamens werden im *ilidata.xml* Pfade zu *Metakonfigurationsfiles* gefunden. Diese *Metakonfigurationsfiles* enthalten, neben Konfigurationsparameter, *DatasetMetadata-Ids*. Anhand dieser *DatasetMetadata-Ids* werden im *ilidata.xml* die Pfade zu den *Toppingfiles* gefunden.
 
 > Andere Tools verwenden einen anderen Workflow. So wird beispielsweise dem *ili2db* das *Metakonfigurationsfile* übergeben. Dort ist in der *Metakonfiguration* dann auch das Modell definert. 
 
@@ -48,13 +48,13 @@ ili2db --metaConfig localfile.ini --import --db....  data.xtf
 
 ### Umsetzung im QGIS Model Baker
 
-> Die Funktionalität, dass die Parameter in die Eingabemaske geladen werden ist soweit implementiert (v6.5.0). Ansonsten beschreibt dieser Absatz den SOLL-Zustand. Denn die Übergabe der Metakonfiguration sowie das übergeben von false-Parametern ist von Seite *ili2db* noch nicht unterstützt.
+> Die Funktionalität, dass die Parameter in die Eingabemaske geladen werden, ist soweit implementiert (v6.5.0). Ansonsten beschreibt dieser Absatz den SOLL-Zustand. Denn die Übergabe der Metakonfiguration sowie das übergeben von false-Parametern ist von Seite *ili2db* noch nicht unterstützt.
 
-Einserseits werden beim Aufruf von *ili2db* durch den *QGIS Model Baker* Parameter automatisch im Hintergrund gesetzt und andererseits können in der Eingabemaske des *QGIS Model Baker* Parameter vom Benutzer konfiguriert werden. Zusätzlich soll nun die betreffende *Metakonfigurationsdatei* dem *ili2db* übergeben werden. Doch Parameter, die dem *ili2db* direkt übergeben werden, übersteuern die Konfigurationen des übergebenen *Metakonfigurationsfile*.
+Einerseits werden beim Aufruf von *ili2db* durch den *QGIS Model Baker* Parameter automatisch im Hintergrund gesetzt und andererseits können in der Eingabemaske des *QGIS Model Baker* Parameter vom Benutzer konfiguriert werden. Zusätzlich soll nun die betreffende *Metakonfigurationsdatei* dem *ili2db* übergeben werden. Doch Parameter, die dem *ili2db* direkt übergeben werden, übersteuern die Konfigurationen des übergebenen *Metakonfigurationsfile*.
 
 *QGIS Model Baker* liest die *ili2db* Parameter aus dem *Metakonfigurationsfile*. Die Parameter, die über die Eingabemaske des *QGIS Model Baker* gesetzt werden können (wie zBs. `--strokeArcs`, `--iliMetaAttrs` (für TOML) oder auch `--models`), werden vom *Metakonfigurationsfile* in die Eingabemaske geladen. Die Benutzerin kann diese nun anpassen. Der *QGIS Model Baker* übergibt dem *ili2db* Aufruf nun die *Metakonfigurationsdatei* und die Parameter aus der Eingabemaske (ob angepasst oder nicht). Falls also die Parameter in der *Metakonfigurationsdatei* aufgeführt waren, dann aber in der Eingabemaske deaktiviert wurden, werden sie dem *ili2db* als "false" übergeben.
 
-Die Parameter, die der *QGIS Model Baker* im Hintergrund setzt (wie zBs. `--createFkIdx`, `--coalesceMultiPoint`), werden weiterhin gesetzt. Doch können sie vom *Metakonfigurationsfile* übersteuert werden. Wenn aber zBs. im *Metakonfigurationsfile* solche Parameter nicht erwähnt sind (weil sie möglicherweise nicht gesetzt werden sollen), dann werden sie auch nicht mit "false" übersteuert.
+Die Parameter, die der *QGIS Model Baker* im Hintergrund setzt (wie zBs. `--createFkIdx`, `--coalesceMultiPoint`), werden weiterhin gesetzt. Doch können sie vom *Metakonfigurationsfile* übersteuert werden. Wenn aber zum Beispiel im *Metakonfigurationsfile* solche Parameter nicht erwähnt sind (weil sie möglicherweise nicht gesetzt werden sollen), dann werden sie auch nicht mit "false" übersteuert.
 
 Ausnahme bietet im *Metakonfigurationsfile* ein Setting wie `onlyUseMetaConfigParams`. Wenn dies gesetzt ist, dann sollen nur die im *Metakonfigurationsfile* konfigurierten Parameter gesetzt werden und keine anderen.
 
@@ -173,7 +173,7 @@ layer-order:
 ```
 
 #### Laden mehrerer Models mit mehreren Legendenstrukturen
-Layer mit der gleichen Datenquelle werden bei erneutem generieren des Projektes nicht doppelt hinzugefügt. Neue Layer und Untergruppen werden - sofern möglich - in bereits existierende Gruppen geladen. Ansonsten werden Geometrielayer oberhalb und die Gruppen "tables" und "domains" unterhalb hinzugefügt. Legendenstrukturen aus mehreren *Toppingfiles* werden also zusammengefügt.
+Layer mit der gleichen Datenquelle werden bei erneutem Generieren des Projektes nicht doppelt hinzugefügt. Neue Layer und Untergruppen werden - sofern möglich - in bereits existierende Gruppen geladen. Ansonsten werden Geometrielayer oberhalb und die Gruppen "tables" und "domains" unterhalb hinzugefügt. Legendenstrukturen aus mehreren *Toppingfiles* werden also zusammengefügt.
 
 ### Kataloge und Transferfiles
 Kataloge und Transferfiles (und andere ITF/XTF) können ebenfalls als *Toppingfiles* geladen werden. Die `DatasetMetadata-Ids` werden im *Metakonfigurationsfile* über den globalen Parameter `ch.interlis.referenceData` definiert. Es können mehrere Ids und Filepfade angegeben werden (separiert durch `;`). 
@@ -188,7 +188,7 @@ Es kann dann aber nur eines ausgewählt werden. Möchte man mehrere *Metakonfigu
 
 ### Best Practice
 Am besten macht man ein *Metakonfigurationsfile*, das für den Import aller Modelle gilt. Und um das ganze noch angenehmer zu gestalten, kann man auch das zusätzliche Model im *Metakonfigurationsfile* konfigurieren.
-Gilt ein *Metakonfigurationsfile* für den Import beider Modelle "KbS_LV95_V1_4;KbS_Basis_V1_4", kann man auch beide Modelle in darin konfigurieren:
+Gilt ein *Metakonfigurationsfile* für den Import beider Modelle "KbS_LV95_V1_4;KbS_Basis_V1_4", kann man auch beide Modelle darin konfigurieren:
 ```
 [ch.ehi.ili2db]
 models = KbS_Basis_V1_4;KbS_Basis_V1_4
