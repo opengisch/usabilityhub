@@ -28,6 +28,17 @@ for xmlitem in document.findall(METADATA_XML_PATH, namespaces=namespaces):
     if id_xmlitem is not None:
         item['id'] = id_xmlitem.text
 
+    # Categories
+    item['categories'] = []
+    categories_xmlitems = xmlitem.findall('./ili:categories/ili:DatasetIdx16.Code_', namespaces=namespaces)
+    for category_xmlitem in categories_xmlitems:
+        value = category_xmlitem.find('./ili:value', namespaces=namespaces).text
+        name = value.split('/')[-1]
+        code_type = value.split('/')[-2]
+        item['categories'].append({'name':name,'value':value, 'code_type':code_type})
+    if 'metaconfig' not in [ categories['name'] if categories['code_type']=='type' else None for categories in item['categories']]:
+        continue
+
     # Title (multilingual)
     item['titles'] = {}
     titles_xmlitems = xmlitem.findall('./ili:title/ili:DatasetIdx16.MultilingualMText/ili:LocalisedText/ili:DatasetIdx16.LocalisedMText', namespaces=namespaces)
@@ -52,15 +63,6 @@ for xmlitem in document.findall(METADATA_XML_PATH, namespaces=namespaces):
         path = file_xmlitem.find('./ili:file/ili:DatasetIdx16.File/ili:path', namespaces=namespaces).text
         url = f'https://models.opengis.ch/{path}'
         item['files'].append({"format":format,"path":path,"url":url})
-
-    # Categories
-    item['categories'] = []
-    categories_xmlitems = xmlitem.findall('./ili:categories/ili:DatasetIdx16.Code_', namespaces=namespaces)
-    for category_xmlitem in categories_xmlitems:
-        value = category_xmlitem.find('./ili:value', namespaces=namespaces).text
-        name = value.split('/')[-1]
-        code_type = value.split('/')[-2]
-        item['categories'].append({'name':name,'value':value, 'code_type':code_type})
 
     # Owner
     owner_xmlitem = xmlitem.find('./ili:owner', namespaces=namespaces)
