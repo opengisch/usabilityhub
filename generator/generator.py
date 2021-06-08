@@ -59,7 +59,8 @@ for xmlitem in document.findall(METADATA_XML_PATH, namespaces=namespaces):
     for category_xmlitem in categories_xmlitems:
         value = category_xmlitem.find('./ili:value', namespaces=namespaces).text
         name = value.split('/')[-1]
-        item['categories'].append({'name':name,'value':value})
+        code_type = value.split('/')[-2]
+        item['categories'].append({'name':name,'value':value, 'code_type':code_type})
 
     # Owner
     owner_xmlitem = xmlitem.find('./ili:owner', namespaces=namespaces)
