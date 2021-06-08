@@ -36,7 +36,7 @@ for xmlitem in document.findall(METADATA_XML_PATH, namespaces=namespaces):
         name = value.split('/')[-1]
         code_type = value.split('/')[-2]
         item['categories'].append({'name':name,'value':value, 'code_type':code_type})
-    if 'metaconfig' not in [ categories['name'] if categories['code_type']=='type' else None for categories in item['categories']]:
+    if 'metaconfig' not in [ categories['name'] for categories in item['categories'] if categories['code_type'] == 'type']:
         continue
 
     # Title (multilingual)
