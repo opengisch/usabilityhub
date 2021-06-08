@@ -98,10 +98,12 @@
       <!-- {{item.id}} -->
       <div class="item">
         {% for category in item.categories %}
+        {% if category.code_type == 'model' %}
         <div class="category">
           {{category.name}}
           <!--category.value-->
         </div>
+        {% endif %}
         {% endfor %}
 
         <h2>
