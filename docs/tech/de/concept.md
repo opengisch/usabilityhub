@@ -3,6 +3,8 @@
 ## Über dieses Dokument
 Dieses Dokument liefert Informationen über die Files und die Serverstruktur des UsabILIty Hubs. Es ist soweit wie möglich unabhängig von Tools und Programmen. Für die Beispiele wird häufig auf *QGIS* bzw. *QGIS Model Baker* oder *ili2db* zurückgegriffen. Es soll aber zur generellen Information dienen.
 
+Im Rahmen der zweckgebundenen NGDI-Mittel wurde ein [Konzept](basis_concept.pdf) erarbeitet, der als Basis für die Umsetzung des UsabILIty Hub dient.
+
 ## Abstract
 Die Idee des UsabILIty Hub ist es, für Implementierte INTERLIS Modelle Zusatzinformationen automatisch übers Web zu empfangen.
 So wie wir jetzt Modelle durch die Anbindung der Datei *ilimodels.xml* von [http://models.interlis.ch](http://models.interlis.ch) - und mit der Datei *ilisite.xml* die Modelle vieler anderen Repositories - erhalten können, können wir die Zusatzinformationen mit der Datei *ilidata.xml* auf dem UsabILIty Hub (derzeit [https://models.opengis.ch](https://models.opengis.ch))  - und mit der Datei *ilisite.xml* die Modelle vieler anderen Repositories - erhalten.
