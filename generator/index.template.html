@@ -1,4 +1,3 @@
-
 <style>
   #ilidata_index .items {
     display: grid;
@@ -8,11 +7,10 @@
   #ilidata_index .item {
     padding: 10px;
     position: relative;
-    background-color: white;
+    background-color: lightgray;
   }
   #ilidata_index .category {
     float: right;
-    border: solid 1px;
     border-radius: 4px;
     font-size: 80%;
     padding: 2px;
@@ -21,7 +19,7 @@
     background-color: gray;
   }
   #ilidata_index .filter-form {
-    float: right;
+    text-align: right;
   }
   #ilidata_index i {
     font-style: italic;
@@ -29,7 +27,6 @@
   }
   #ilidata_index input{
     padding: 8px;
-    border: none;
   }
 </style>
 <script>
@@ -67,15 +64,17 @@
 </script>
 
 <section id="ilidata_index">
-  <div class="filter-form">
-    <input
-      id="filter"
-      placeholder="Filter elements"
-      onkeyup="filterItems(this)"
-    />
-  </div>
 
   <div class="items">
+
+    <div class="filter-form">
+      <input
+        id="filter"
+        placeholder="Filter elements"
+        onkeyup="filterItems(this)"
+      />
+    </div>
+
     {% for item in items %}
     <!-- {{item.id}} -->
     <div class="item">
