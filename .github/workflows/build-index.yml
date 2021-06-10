@@ -13,24 +13,18 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
+      - name: Build Jekyll
+        uses: helaili/jekyll-action@v2
+        with:
+          build_only: true
+          jekyll_src: website
+          target_path: build
+
       - name: Install requirements
         run: pip install -r ./generator/requirements.txt
 
       - name: Build index
         run: python ./generator/generator.py
-
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 2.6
-
-      - name: Install Jekyll
-        run: gem install jekyll
-
-      - name: Build website
-        run: bundle exec jekyll build
-
-      - name: Copy website
-        run: cp -r _site/* build/
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.3
