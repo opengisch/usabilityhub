@@ -19,11 +19,11 @@ jobs:
           build_only: true
           jekyll_src: website
 
-      - name: Install requirements
-        run: pip install -r ./generator/requirements.txt
+      # - name: Install requirements
+      #   run: pip install -r ./generator/requirements.txt
 
-      - name: Build index
-        run: python ./generator/generator.py
+      # - name: Build index
+      #   run: python ./generator/generator.py
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.3
