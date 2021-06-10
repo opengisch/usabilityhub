@@ -84,7 +84,461 @@
   <div class="container">
     <div class="row justify-content-start">
       <div class="col-12 col-md-7 col-lg-6 order-2 order-md-1">
-        <iframe src="/ilidata_index.html" title="ilidata.xml index"></iframe>
+        <style>
+  #ilidata_index .items {
+    display: grid;
+    grid-row-gap: 10px;
+    grid-column-gap: 10px;
+  }
+  #ilidata_index .item {
+    padding: 10px;
+    position: relative;
+    background-color: white;
+  }
+  #ilidata_index .category {
+    float: right;
+    border: solid 1px;
+    border-radius: 4px;
+    font-size: 80%;
+    padding: 2px;
+    font-weight: bold;
+    color: white;
+    background-color: gray;
+  }
+  #ilidata_index .filter-form {
+    float: right;
+  }
+  #ilidata_index i {
+    font-style: italic;
+    color: gray;
+  }
+  #ilidata_index input{
+    padding: 8px;
+    border: none;
+  }
+</style>
+
+<script>
+  function filterItems(sender) {
+    const search = sender.value.toLowerCase();
+
+    const allElems = document.querySelectorAll(".item");
+
+    if (search === "") {
+      // Show everything
+
+      allElems.forEach((elem) => {
+        elem.style.display = "block";
+      });
+    } else {
+      // Hide everything then show filtered items
+
+      const words = search.split(" ");
+
+      allElems.forEach((elem) => {
+        elem.style.display = "none";
+      });
+
+      const visible = [...allElems].filter((elem) =>
+        [...elem.querySelectorAll("h2, .description, .file")].some(
+          (child) => words.every(word => child.innerHTML.toLowerCase().indexOf(word) !== -1)
+        )
+      );
+
+      visible.forEach((elem) => {
+        elem.style.display = "block";
+      });
+    }
+  }
+</script>
+
+<section id="ilidata_index">
+  <div class="filter-form">
+    <input id="filter" placeholder="Filter elements" onkeyup="filterItems(this)" />
+  </div>
+
+  <div class="items">
+    
+    <!-- ch.opengis.ili.config.KbS_LV95_V1_4_config_V1_0 -->
+    <div class="item">
+      
+      
+      <div class="category">
+        KbS_LV95_V1_4
+        <!--category.value-->
+      </div>
+      
+      
+      
+      
+      
+      
+
+      <h2>
+         
+        Einfaches Styling und Tree und TOML und SH Cat (OPENGIS.ch) [de] 
+        
+      </h2>
+
+      <p class="description">
+        
+        <i>No description</i>
+        
+      </p>
+
+      
+      <div class="file">
+        Download : <a href="https://models.opengis.ch/metaconfig/opengisch_KbS_LV95_V1_4.ini">metaconfig/opengisch_KbS_LV95_V1_4.ini</a><!--[text/plain;version=2.3]-->
+      </div>
+      
+
+      <div class="owner">
+        Owner : <a href="mailto:david@opengis.ch">david@opengis.ch</a>
+      </div>
+    </div>
+    
+    <!-- ch.opengis.ili.config.KbS_LV95_V1_4_config_V1_0_gpkg -->
+    <div class="item">
+      
+      
+      <div class="category">
+        KbS_LV95_V1_4
+        <!--category.value-->
+      </div>
+      
+      
+      
+      
+      
+      
+
+      <h2>
+         
+        Einfaches GPKG Styling und Tree und TOML und SH Cat (OPENGIS.ch) [de] 
+        
+      </h2>
+
+      <p class="description">
+        
+        <i>No description</i>
+        
+      </p>
+
+      
+      <div class="file">
+        Download : <a href="https://models.opengis.ch/metaconfig/opengisch_KbS_LV95_V1_4_GPKG.ini">metaconfig/opengisch_KbS_LV95_V1_4_GPKG.ini</a><!--[text/plain;version=2.3]-->
+      </div>
+      
+
+      <div class="owner">
+        Owner : <a href="mailto:david@opengis.ch">david@opengis.ch</a>
+      </div>
+    </div>
+    
+    <!-- ch.opengis.ili.config.KbS_LV95_V1_4_config_V1_0_localfiletest -->
+    <div class="item">
+      
+      
+      <div class="category">
+        KbS_LV95_V1_4
+        <!--category.value-->
+      </div>
+      
+      
+      
+      
+      
+      
+
+      <h2>
+         
+        Einfaches Styling (lokal) und Tree (lokal) und TOML (lokal) und SH Cat (OPENGIS.ch) [de] 
+        
+      </h2>
+
+      <p class="description">
+        
+        <i>No description</i>
+        
+      </p>
+
+      
+      <div class="file">
+        Download : <a href="https://models.opengis.ch/metaconfig/opengisch_KbS_LV95_V1_4_localfiletest.ini">metaconfig/opengisch_KbS_LV95_V1_4_localfiletest.ini</a><!--[text/plain;version=2.3]-->
+      </div>
+      
+
+      <div class="owner">
+        Owner : <a href="mailto:david@opengis.ch">david@opengis.ch</a>
+      </div>
+    </div>
+    
+    <!-- ch.opengis.ili.config.KbS_LV95_V1_4_config_V1_0_gpkg_localfiletest -->
+    <div class="item">
+      
+      
+      <div class="category">
+        KbS_LV95_V1_4
+        <!--category.value-->
+      </div>
+      
+      
+      
+      
+      
+      
+
+      <h2>
+         
+        Einfaches GPKG Styling und Tree (lokal) und TOML und SH Cat (OPENGIS.ch) [de] 
+        
+      </h2>
+
+      <p class="description">
+        
+        <i>No description</i>
+        
+      </p>
+
+      
+      <div class="file">
+        Download : <a href="https://models.opengis.ch/metaconfig/opengisch_KbS_LV95_V1_4_GPKG_localfiletest.ini">metaconfig/opengisch_KbS_LV95_V1_4_GPKG_localfiletest.ini</a><!--[text/plain;version=2.3]-->
+      </div>
+      
+
+      <div class="owner">
+        Owner : <a href="mailto:david@opengis.ch">david@opengis.ch</a>
+      </div>
+    </div>
+    
+    <!-- ch.opengis.ili.config.KbS_LV95_V1_4_config_V1_0-wrong -->
+    <div class="item">
+      
+      
+      <div class="category">
+        KbS_LV95_V1_4
+        <!--category.value-->
+      </div>
+      
+      
+      
+      
+      
+      
+
+      <h2>
+         
+        Styling für polygonStructure und falscher Layertree ID (OPENGIS.ch) [de] 
+        
+      </h2>
+
+      <p class="description">
+        
+        <i>No description</i>
+        
+      </p>
+
+      
+      <div class="file">
+        Download : <a href="https://models.opengis.ch/metaconfig/opengisch_KbS_LV95_V1_4-wrong.ini">metaconfig/opengisch_KbS_LV95_V1_4-wrong.ini</a><!--[text/plain;version=2.3]-->
+      </div>
+      
+
+      <div class="owner">
+        Owner : <a href="mailto:david@opengis.ch">david@opengis.ch</a>
+      </div>
+    </div>
+    
+    <!-- ch.opengis.ili.config.KbS_LV95_V1_4_config_V1_0-technical -->
+    <div class="item">
+      
+      
+      <div class="category">
+        KbS_LV95_V1_4
+        <!--category.value-->
+      </div>
+      
+      
+      
+      
+      
+      
+
+      <h2>
+         ch.opengis.ili.config.KbS_LV95_V1_4_config_V1_0-technical 
+      </h2>
+
+      <p class="description">
+        
+        <i>No description</i>
+        
+      </p>
+
+      
+      <div class="file">
+        Download : <a href="https://models.opengis.ch/metaconfig/opengisch_KbS_LV95_V1_4-technical.ini">metaconfig/opengisch_KbS_LV95_V1_4-technical.ini</a><!--[text/plain;version=2.3]-->
+      </div>
+      
+
+      <div class="owner">
+        Owner : <a href="mailto:david@opengis.ch">david@opengis.ch</a>
+      </div>
+    </div>
+    
+    <!-- ch.opengis.ili.config.KbS_LV95_V1_4_ili2db -->
+    <div class="item">
+      
+      
+      <div class="category">
+        KbS_LV95_V1_4
+        <!--category.value-->
+      </div>
+      
+      
+      
+      
+      
+      
+
+      <h2>
+         
+        Metaconfig mit ili2db Params (OPENGIS.ch) [de] 
+        
+      </h2>
+
+      <p class="description">
+        
+        <i>No description</i>
+        
+      </p>
+
+      
+      <div class="file">
+        Download : <a href="https://models.opengis.ch/metaconfig/opengisch_KbS_LV95_V1_4_ili2db_params.ini">metaconfig/opengisch_KbS_LV95_V1_4_ili2db_params.ini</a><!--[text/plain;version=2.3]-->
+      </div>
+      
+
+      <div class="owner">
+        Owner : <a href="mailto:david@opengis.ch">david@opengis.ch</a>
+      </div>
+    </div>
+    
+    <!-- ch.sh.ili.config.KbS_LV95_V1_4_config_V1_0 -->
+    <div class="item">
+      
+      
+      <div class="category">
+        KbS_LV95_V1_4
+        <!--category.value-->
+      </div>
+      
+      
+      
+      
+      
+      
+
+      <h2>
+         
+        Style und Tree des Kanton Schaffhausen (mit Katalog) (sh.ch) [de] 
+        
+      </h2>
+
+      <p class="description">
+        
+        <i>No description</i>
+        
+      </p>
+
+      
+      <div class="file">
+        Download : <a href="https://models.opengis.ch/metaconfig/sh_KbS_LV95_V1_4.ini">metaconfig/sh_KbS_LV95_V1_4.ini</a><!--[text/plain;version=2.3]-->
+      </div>
+      
+
+      <div class="owner">
+        Owner : <a href="mailto:romedi@sh.ch">romedi@sh.ch</a>
+      </div>
+    </div>
+    
+    <!-- ch.opengis.ili.config.PlanerischerGewaesserschutz_config -->
+    <div class="item">
+      
+      
+      <div class="category">
+        PlanerischerGewaesserschutz_V1
+        <!--category.value-->
+      </div>
+      
+      
+      
+      
+      
+      
+
+      <h2>
+         
+        Mit Cat-Model und Legendenkatalog [de] 
+        
+      </h2>
+
+      <p class="description">
+        
+        <i>No description</i>
+        
+      </p>
+
+      
+      <div class="file">
+        Download : <a href="https://models.opengis.ch/metaconfig/opengisch_PlanerischerGewaesserschutz.ini">metaconfig/opengisch_PlanerischerGewaesserschutz.ini</a><!--[text/plain;version=2.3]-->
+      </div>
+      
+
+      <div class="owner">
+        Owner : <a href="mailto:david@opengis.ch">david@opengis.ch</a>
+      </div>
+    </div>
+    
+    <!-- ch.opengis.ili.config.PlanerischerGewaesserschutz_config_localfile -->
+    <div class="item">
+      
+      
+      <div class="category">
+        LegendeEintrag_PlanGewaesserschutz_V1_1
+        <!--category.value-->
+      </div>
+      
+      
+      
+      
+      
+      
+
+      <h2>
+         
+        Mit lokalem Legendenkatalog [de] 
+        
+      </h2>
+
+      <p class="description">
+        
+        <i>No description</i>
+        
+      </p>
+
+      
+      <div class="file">
+        Download : <a href="https://models.opengis.ch/metaconfig/opengisch_PlanerischerGewaesserschutz_localfile.ini">metaconfig/opengisch_PlanerischerGewaesserschutz_localfile.ini</a><!--[text/plain;version=2.3]-->
+      </div>
+      
+
+      <div class="owner">
+        Owner : <a href="mailto:david@opengis.ch">david@opengis.ch</a>
+      </div>
+    </div>
+    
+  </div>
+</section>
 
       </div>
       
