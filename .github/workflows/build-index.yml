@@ -13,12 +13,14 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Build Jekyll
+      - name: Build website
         uses: helaili/jekyll-action@v2
         with:
           build_only: true
           jekyll_src: website
-          target_path: build
+
+      - name: Copy website
+        run: cp  website/_site build
 
       - name: Install requirements
         run: pip install -r ./generator/requirements.txt
