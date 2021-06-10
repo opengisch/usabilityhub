@@ -19,9 +19,6 @@ jobs:
           build_only: true
           jekyll_src: website
 
-      - name: Copy website
-        run: mv website/build build
-
       - name: Install requirements
         run: pip install -r ./generator/requirements.txt
 
@@ -32,4 +29,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.3
         with:
           branch: gh-pages
-          folder: build
+          folder: website/build

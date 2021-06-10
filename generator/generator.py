@@ -8,7 +8,7 @@ from jinja2 import Environment, FileSystemLoader
 # CONFIG
 ILIDATA_XML_URL = 'https://models.opengis.ch/ilidata.xml'
 METADATA_XML_PATH = './ili:DATASECTION/ili:DatasetIdx16.DataIndex/ili:DatasetIdx16.DataIndex.DatasetMetadata'
-OUTPUT_PATH = 'build/ilidata_index.html'
+OUTPUT_PATH = 'website/build/ilidata_index.html'
 
 # Interlis namespaces
 namespaces = {'ili': "http://www.interlis.ch/INTERLIS2.3"}
