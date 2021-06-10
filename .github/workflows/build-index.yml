@@ -19,6 +19,9 @@ jobs:
       - name: Build index
         run: python ./generator/generator.py
 
+      - name: Install Jekyll Bundle
+        run: bundle install
+        
       - name: Build website
         run: bundle exec jekyll build
 
