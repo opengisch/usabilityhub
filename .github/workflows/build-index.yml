@@ -19,8 +19,11 @@ jobs:
       - name: Build index
         run: python ./generator/generator.py
 
+      - name: Build website
+        run: bundle exec jekyll build
+
       - name: Copy website
-        run: cp -r website build/
+        run: cp -r _site/* build/
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.3
