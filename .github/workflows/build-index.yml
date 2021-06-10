@@ -20,7 +20,7 @@ jobs:
         run: python ./generator/generator.py
 
       - name: Install Jekyll Bundle
-        run: gem install jekyll bundler
+        run: bundle config set --local path '~home/bundle' && gem install jekyll bundler
 
       - name: Build website
         run: bundle exec jekyll build
