@@ -19,8 +19,12 @@ jobs:
       - name: Build index
         run: python ./generator/generator.py
 
-      - name: Install Jekyll Bundle
-        run: bundle config set --local path '~home/bundle' && gem install jekyll bundler
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6
+
+      - name: Install Jekyll
+        run: gem install jekyll
 
       - name: Build website
         run: bundle exec jekyll build
