@@ -1,139 +1,120 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <style>
-      body {
-        padding: 10px;
-        margin: 10px;
-        font-size: 0.8rem;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-        background-color: lightgray;
-      }
-      .items {
-        display: grid;
-        grid-row-gap: 10px;
-        grid-column-gap: 10px;
-      }
-      .item {
-        padding: 10px;
-        position: relative;
-        background-color: white;
-      }
-      .category {
-        float: right;
-        border: solid 1px;
-        border-radius: 4px;
-        font-size: 80%;
-        padding: 2px;
-        font-weight: bold;
-        color: white;
-        background-color: gray;
-      }
-      .filter-form {
-        float: right;
-      }
-      h1,
-      h2 {
-        margin-top: 0;
-      }
-      h2 {
-        font-size: 1rem;
-      }
-      i {
-        font-style: italic;
-        color: gray;
-      }
-      input{
-        padding: 8px;
-        border: none;
-      }
-    </style>
-    <script>
-      function filterItems(sender) {
-        const search = sender.value.toLowerCase();
 
-        const allElems = document.querySelectorAll(".item");
+<style>
+  #ilidata_index .items {
+    display: grid;
+    grid-row-gap: 10px;
+    grid-column-gap: 10px;
+  }
+  #ilidata_index .item {
+    padding: 10px;
+    position: relative;
+    background-color: white;
+  }
+  #ilidata_index .category {
+    float: right;
+    border: solid 1px;
+    border-radius: 4px;
+    font-size: 80%;
+    padding: 2px;
+    font-weight: bold;
+    color: white;
+    background-color: gray;
+  }
+  #ilidata_index .filter-form {
+    float: right;
+  }
+  #ilidata_index i {
+    font-style: italic;
+    color: gray;
+  }
+  #ilidata_index input{
+    padding: 8px;
+    border: none;
+  }
+</style>
+<script>
+  function filterItems(sender) {
+    const search = sender.value.toLowerCase();
 
-        if (search === "") {
-          // Show everything
+    const allElems = document.querySelectorAll(".item");
 
-          allElems.forEach((elem) => {
-            elem.style.display = "block";
-          });
-        } else {
-          // Hide everything then show filtered items
+    if (search === "") {
+      // Show everything
 
-          const words = search.split(" ");
+      allElems.forEach((elem) => {
+        elem.style.display = "block";
+      });
+    } else {
+      // Hide everything then show filtered items
 
-          allElems.forEach((elem) => {
-            elem.style.display = "none";
-          });
+      const words = search.split(" ");
 
-          const visible = [...allElems].filter((elem) =>
-            [...elem.querySelectorAll("h2, .description, .file")].some(
-              (child) => words.every(word => child.innerHTML.toLowerCase().indexOf(word) !== -1)
-            )
-          );
+      allElems.forEach((elem) => {
+        elem.style.display = "none";
+      });
 
-          visible.forEach((elem) => {
-            elem.style.display = "block";
-          });
-        }
-      }
-    </script>
-  </head>
-  <body>
-    <div class="filter-form">
-      <input
-        id="filter"
-        placeholder="Filter elements"
-        onkeyup="filterItems(this)"
-      />
-    </div>
+      const visible = [...allElems].filter((elem) =>
+        [...elem.querySelectorAll("h2, .description, .file")].some(
+          (child) => words.every(word => child.innerHTML.toLowerCase().indexOf(word) !== -1)
+        )
+      );
 
-    <h1>Usability Hub</h1>
+      visible.forEach((elem) => {
+        elem.style.display = "block";
+      });
+    }
+  }
+</script>
 
-    <div class="items">
-      {% for item in items %}
-      <!-- {{item.id}} -->
-      <div class="item">
-        {% for category in item.categories %}
-        {% if category.code_type == 'model' %}
-        <div class="category">
-          {{category.name}}
-          <!--category.value-->
-        </div>
+<section id="ilidata_index">
+  <div class="filter-form">
+    <input
+      id="filter"
+      placeholder="Filter elements"
+      onkeyup="filterItems(this)"
+    />
+  </div>
+
+  <div class="items">
+    {% for item in items %}
+    <!-- {{item.id}} -->
+    <div class="item">
+      {% for category in item.categories %}
+      {% if category.code_type == 'model' %}
+      <div class="category">
+        {{category.name}}
+        <!--category.value-->
+      </div>
+      {% endif %}
+      {% endfor %}
+
+      <h2>
+        {% if item.titles %} {% for lang, title in item.titles.items() %}
+        {{title}} [{{lang}}]{% if not loop.last %} / {% endif %} {% endfor %}
+        {% else %} {{item.id}} {% endif %}
+      </h2>
+
+      <p class="description">
+        {% if item.descs %} {% for lang, desc in item.descs.items() %}
+        {{desc}} [{{lang}}]{% if not loop.last %}
+      </p>
+      <p class="description">
+        {% endif %} {% endfor %} {% else %}
+        <i>No description</i>
         {% endif %}
-        {% endfor %}
+      </p>
 
-        <h2>
-          {% if item.titles %} {% for lang, title in item.titles.items() %}
-          {{title}} [{{lang}}]{% if not loop.last %} / {% endif %} {% endfor %}
-          {% else %} {{item.id}} {% endif %}
-        </h2>
-
-        <p class="description">
-          {% if item.descs %} {% for lang, desc in item.descs.items() %}
-          {{desc}} [{{lang}}]{% if not loop.last %}
-        </p>
-        <p class="description">
-          {% endif %} {% endfor %} {% else %}
-          <i>No description</i>
-          {% endif %}
-        </p>
-
-        {% for file in item.files %}
-        <div class="file">
-          Download : <a href="{{file.url}}">{{file.path}}</a
-          ><!--[{{file.format}}]-->
-        </div>
-        {% endfor %}
-
-        <div class="owner">
-          Owner : <a href="{{item.owner_url}}">{{item.owner_name}}</a>
-        </div>
+      {% for file in item.files %}
+      <div class="file">
+        Download : <a href="{{file.url}}">{{file.path}}</a
+        ><!--[{{file.format}}]-->
       </div>
       {% endfor %}
+
+      <div class="owner">
+        Owner : <a href="{{item.owner_url}}">{{item.owner_name}}</a>
+      </div>
     </div>
-  </body>
-</html>
+    {% endfor %}
+  </div>
+</section>

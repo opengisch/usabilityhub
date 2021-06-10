@@ -13,6 +13,12 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
+      - name: Install requirements
+        run: pip install -r ./generator/requirements.txt
+
+      - name: Build index
+        run: python ./generator/generator.py
+
       - name: Build website
         uses: helaili/jekyll-action@v2
         with:
@@ -21,12 +27,6 @@ jobs:
 
       - name: Copy website
         run: cp -r website/build build
-
-      - name: Install requirements
-        run: pip install -r ./generator/requirements.txt
-
-      - name: Build index
-        run: python ./generator/generator.py
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.3

@@ -8,7 +8,8 @@ from jinja2 import Environment, FileSystemLoader
 # CONFIG
 ILIDATA_XML_URL = 'https://models.opengis.ch/ilidata.xml'
 METADATA_XML_PATH = './ili:DATASECTION/ili:DatasetIdx16.DataIndex/ili:DatasetIdx16.DataIndex.DatasetMetadata'
-OUTPUT_PATH = 'build/ilidata_index.html'
+OUTPUT_PATH = 'website/_services/ilidata.md'
+OUTPUT_REPLACE_STRING = '__REPLACED_BY_GENERATOR__'
 
 # Interlis namespaces
 namespaces = {'ili': "http://www.interlis.ch/INTERLIS2.3"}
@@ -79,6 +80,11 @@ jinja_env = Environment(loader=jinja_loader)
 template = jinja_env.get_template('index.template.html')
 output = template.render(items=items)
 
-os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
+
+with open(OUTPUT_PATH, 'r', encoding='utf-8') as f:
+    contents = f.read()
+
+contents = contents.replace(OUTPUT_REPLACE_STRING, output)
+
 with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
-    f.write(output)
+    f.write(contents)

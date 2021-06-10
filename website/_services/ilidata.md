@@ -9,4 +9,4 @@ intro_image_absolute: false
 intro_image_hide_on_mobile: true
 ---
 
-<iframe src="/ilidata_index.html" title="ilidata.xml index"></iframe>
+__REPLACED_BY_GENERATOR__
