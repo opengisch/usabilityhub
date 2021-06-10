@@ -20,7 +20,7 @@ jobs:
           jekyll_src: website
 
       - name: Copy website
-        run: cp  website/_site build
+        run: mv website/build build
 
       - name: Install requirements
         run: pip install -r ./generator/requirements.txt
