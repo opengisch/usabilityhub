@@ -4,13 +4,10 @@ main:
     weight: 2
   - name: "Details"
     url: "/services/konzept"
-    weight: 3
+    weight: 2
   - name: "Umsetzung"
     url: "/services/umsetzung"
-    weight: 4
-  - name: "Kontakt"
-    url: "/contact/"
-    weight: 5
+    weight: 2
 
 footer:
   - name: "Home"

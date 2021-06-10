@@ -8,13 +8,9 @@ intro_image: null
 intro_image_absolute: false
 intro_image_hide_on_mobile: true
 ---
-UsabILIty Hub ist Geoinformationssystemübergreiffend. Unterschiedliche Tools können UsabILIty Hub integrieren.
+**UsabILIty Hub ist unabhängig von GIS Implementierungen. Unterschiedliche Tools können UsabILIty Hub nutzen. Aktuell besteht eine Implementierung für den QGIS Model Baker. Wenn weitere Tools eine Implementierung von UsabILIty Hub unterstützen, werden sie auf dieser Webseite aufgenommen.**
 
-Aktuell besteht eine Implementierung für den QGIS Model Baker. Weitere können hinzugefügt werden.
-
-# Umsetzung im QGIS Model Baker
-
-## Workflows:
+## Umsetzung im QGIS Model Baker
 Anhand eines Modellnamens werden im *ilidata.xml* Pfade zu *Metakonfigurationsfiles* gefunden. Diese *Metakonfigurationsfiles* enthalten, neben Konfigurationsparameter, *DatasetMetadata-Ids*. Anhand dieser *DatasetMetadata-Ids* werden im *ilidata.xml* die Pfade zu den *Toppingfiles* gefunden.
 
 > Andere Tools verwenden einen anderen Workflow. So wird beispielsweise dem *ili2db* das *Metakonfigurationsfile* übergeben. Dort ist in der *Metakonfiguration* dann auch das Modell definert. 

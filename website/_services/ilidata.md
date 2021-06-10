@@ -8,6 +8,6 @@ intro_image:
 intro_image_absolute: false
 intro_image_hide_on_mobile: true
 ---
-Liste der aktuell auf [https://models.opengis.ch](https://models.opengis.ch) verfügbaren Metakonfigurationen.
+**Liste der aktuell auf [https://models.opengis.ch](https://models.opengis.ch) verfügbaren Metakonfigurationen.**
 
 __REPLACED_BY_GENERATOR__

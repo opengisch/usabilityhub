@@ -8,9 +8,7 @@ intro_image: null
 intro_image_absolute: false
 intro_image_hide_on_mobile: true
 ---
-Informationen über die technische Konzeption des UsabILIty Hubs.
-
-
+**Informationen über die technische Konzeption des UsabILIty Hubs.**
 
 ## Abstract
 Die Idee des UsabILIty Hub ist es, für Implementierte INTERLIS Modelle Zusatzinformationen automatisch übers Web zu empfangen.
