@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Konzept und Technische Details</title>
+  <title>Technische Details</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/png" href="/images/logo/logo.svg">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
@@ -27,11 +27,11 @@
     </li>
     
     <li class="">
-      <a href="//">Projektbeteiligte</a>
+      <a href="/services/konzept">Details</a>
     </li>
     
     <li class="">
-      <a href="/about/">Konzept</a>
+      <a href="/services/umsetzung">Umsetzung</a>
     </li>
     
     <li class="">
@@ -59,11 +59,11 @@
     </li>
     
     <li class="">
-      <a href="//">Projektbeteiligte</a>
+      <a href="/services/konzept">Details</a>
     </li>
     
     <li class="">
-      <a href="/about/">Konzept</a>
+      <a href="/services/umsetzung">Umsetzung</a>
     </li>
     
     <li class="">
@@ -84,7 +84,216 @@
   <div class="container">
     <div class="row justify-content-start">
       <div class="col-12 col-md-7 col-lg-6 order-2 order-md-1">
-        <p>##</p>
+        <p>Informationen über die technische Konzeption des UsabILIty Hubs.</p>
+
+<h2 id="abstract">Abstract</h2>
+<p>Die Idee des UsabILIty Hub ist es, für Implementierte INTERLIS Modelle Zusatzinformationen automatisch übers Web zu empfangen.
+So wie wir jetzt Modelle durch die Anbindung der Datei <em>ilimodels.xml</em> von <a href="http://models.interlis.ch">http://models.interlis.ch</a> - und mit der Datei <em>ilisite.xml</em> die Modelle vieler anderen Repositories - erhalten können, können wir die Zusatzinformationen mit der Datei <em>ilidata.xml</em> auf dem UsabILIty Hub (derzeit <a href="https://models.opengis.ch">https://models.opengis.ch</a>)  - und mit der Datei <em>ilisite.xml</em> die Modelle vieler anderen Repositories - erhalten.</p>
+
+<p>Einstellungens für Tools werden in einer <em>Metakonfigurationsfiles (INI-Datei)</em> konfiguriert, ebenso wie Links (Ids oder Pfade) zu <em>Toppingfiles</em>, die Informationen zu GIS Projektes enthalten (wie zBs. Symbologien oder Legendensturkturen). Somit bestehen <em>Zusatzinformationen</em> meistens aus einer <em>Metakonfiguration</em> und beliebig vielen <em>Toppings</em>.</p>
+
+<p><img src="../images/uml_usabilityhub.png" alt="uml" /></p>
+
+<h2 id="das-ilidataxml">Das ilidata.xml</h2>
+<p>Ein <em>ilidata.xml</em> dient als Index für alle benötigten Zusatzinformationen. Das File basiert auf dem Modell <a href="http://models.interlis.ch/core/DatasetIdx16.ili"><code class="language-plaintext highlighter-rouge">DatasetIdx16</code></a>.</p>
+
+<p>Es enthält die Klasse bzw. die Elemente <code class="language-plaintext highlighter-rouge">DatasetMetadata</code>. Darin wird auf Files referenziert, die auf demselben Server/Repository liegen, wie das <em>ilidata.xml</em>.</p>
+
+<p>Weitere Server/Repositories können über das <code class="language-plaintext highlighter-rouge">ilisite.xml</code> verbunden werden. Die <code class="language-plaintext highlighter-rouge">DatasetMetadata</code> werden anhand einer systemübergreifenden (repositorien-übergreifenden) <em>DatasetMetadata-Id</em> identifiziert. Es ist dem Benutzer überlassen, wie diese Id lautet.</p>
+
+<h3 id="beispiel-datasetmetadata">Beispiel <code class="language-plaintext highlighter-rouge">DatasetMetadata</code></h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;DatasetIdx16.DataIndex.DatasetMetadata TID="be6623c1-aa64-4a07-931e-fc4f0745f025"&gt;
+  &lt;id&gt;ch.opengis.ili.config.KbS_LV95_V1_4_config_V1_0&lt;/id&gt;
+  &lt;version&gt;2021-01-06&lt;/version&gt;
+  &lt;owner&gt;mailto:david@opengis.ch&lt;/owner&gt;
+  &lt;title&gt;
+    &lt;DatasetIdx16.MultilingualMText&gt;
+      &lt;LocalisedText&gt;
+        &lt;DatasetIdx16.LocalisedMText&gt;
+          &lt;Language&gt;de&lt;/Language&gt;
+          &lt;Text&gt;Einfaches Styling und Tree (OPENGIS.ch)&lt;/Text&gt;
+        &lt;/DatasetIdx16.LocalisedMText&gt;
+      &lt;/LocalisedText&gt;
+    &lt;/DatasetIdx16.MultilingualMText&gt;
+  &lt;/title&gt;
+  &lt;categories&gt;
+    &lt;DatasetIdx16.Code_&gt;
+      &lt;!--  dieser Eintrag betrifft das Modell KbS_LV95_V1_4  --&gt;
+    	&lt;value&gt;http://codes.interlis.ch/model/KbS_LV95_V1_4&lt;/value&gt;
+      &lt;!--  Konvention: http://codes.interlis.ch/model/{MODELNAME}  --&gt;
+    &lt;/DatasetIdx16.Code_&gt;
+    &lt;DatasetIdx16.Code_&gt;
+      &lt;!--  dieser Eintrag betrifft eine Metakonfigurationsdatei --&gt;
+    	&lt;value&gt;http://codes.interlis.ch/type/metaconfig&lt;/value&gt;
+      &lt;!--  fix Wert fuer Metaconfigs  --&gt;
+    &lt;/DatasetIdx16.Code_&gt;
+    &lt;DatasetIdx16.Code_&gt;
+      &lt;!--  Codes können auch generisch sein  --&gt;
+    	&lt;value&gt;http://codes.opengis.ch/modelbaker&lt;/value&gt;
+      &lt;!--  müssen aber eine URL sein  --&gt;
+    &lt;/DatasetIdx16.Code_&gt;
+  &lt;/categories&gt;
+  &lt;files&gt;
+    &lt;DatasetIdx16.DataFile&gt;
+      &lt;fileFormat&gt;text/plain;version=2.3&lt;/fileFormat&gt;
+      &lt;file&gt;
+        &lt;DatasetIdx16.File&gt;
+          &lt;path&gt;metaconfig/opengisch_KbS_LV95_V1_4.ini&lt;/path&gt;
+          &lt;!--  realtiver Pfad (zu ilidata.xml) der Metaconfig Datei  --&gt;
+        &lt;/DatasetIdx16.File&gt;
+      &lt;/file&gt;
+    &lt;/DatasetIdx16.DataFile&gt;
+  &lt;/files&gt;
+&lt;/DatasetIdx16.DataIndex.DatasetMetadata&gt;
+</code></pre></div></div>
+
+<h3 id="filterung">Filterung</h3>
+<p>Das Element <code class="language-plaintext highlighter-rouge">categories</code> in den <code class="language-plaintext highlighter-rouge">DatasetMetadata</code> enthält eine Liste von <code class="language-plaintext highlighter-rouge">Code_</code> Elementen. Diese können zu deren Filterung dienen. Im Zusammenhang mit dem UsabILIty Hub werden primär folgende zwei Kategorien verwenden.</p>
+
+<h4 id="modell">Modell</h4>
+<p>Die Kategorie für das Modell wird mit dem Prefix http://codes.interlis.ch/model/ identifiziert und enthält den Modell-Namen.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;DatasetIdx16.Code_&gt;
+  &lt;value&gt;http://codes.interlis.ch/model/KbS_LV95_V1_4&lt;/value&gt;
+&lt;/DatasetIdx16.Code_&gt;
+</code></pre></div></div>
+
+<h4 id="type">Type</h4>
+<p>Die Kategorie für den File-Typ wird mit dem Prefix http://codes.interlis.ch/type/ identifiziert und enthält den betreffenden Typen.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;DatasetIdx16.Code_&gt;
+  &lt;value&gt;http://codes.interlis.ch/type/metaconfig&lt;/value&gt;
+&lt;/DatasetIdx16.Code_&gt;
+</code></pre></div></div>
+
+<p>Im Zusammenhang mit der UsabILIty Hub Implementierung des QGIS Model Baker werden folgende Typen verwendet:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">metaconfig</code>, um zu beschreiben, dass es sich um ein <em>Metakonfigurationsfile</em> handelt</li>
+  <li><code class="language-plaintext highlighter-rouge">toml</code>, um zu beschreiben, dass es ein Metaattributfile ist, das in TOML geschrieben ist</li>
+  <li><code class="language-plaintext highlighter-rouge">sql</code>, um zu beschreiben, dass es ein SQL Query File ist, das verwendet werden kann bei der Erstellung der Datenbank</li>
+  <li><code class="language-plaintext highlighter-rouge">layertree</code>, um zu beschreiben, dass es sich um ein <em>Toppingfile</em> handelt, das die Legendendarstellung definiert</li>
+  <li><code class="language-plaintext highlighter-rouge">qml</code>, um zu beschreiben, dass es sich um ein <em>Toppingfile</em> handelt, das für einen QGIS Layer Styling und Formularkonfigurationen enthalten kann</li>
+  <li><code class="language-plaintext highlighter-rouge">referenceData</code>, um zu beschreiben, dass es sich um ein Datenfile (zBs. ein Transferfile oder ein Katalog) handelt</li>
+</ul>
+
+<h4 id="generic">Generic</h4>
+<p>Allerdings ist der Inhalt des <code class="language-plaintext highlighter-rouge">Code_</code> Elements nicht definiert. Solange es sich um eine URL handelt, ist der Toolentwicklerin überlassen, wie sie es verwenden möchte.</p>
+
+<blockquote>
+  <p>Im moment verwendet der <em>QGIS Model Baker</em> keine generischen Kategorien</p>
+</blockquote>
+
+<h2 id="das-ilisitexml">Das ilisite.xml</h2>
+<p>Das <em>ilisite.xml</em> basiert auf dem Modell <code class="language-plaintext highlighter-rouge">IliSite09</code>. Es enthält die Klasse <code class="language-plaintext highlighter-rouge">SiteMetadata</code> wo URLs zu anderen Repositories definiert sind, Diese Repositorien bewirtschaften wiederum ein <em>ilimodel.xml</em>  oder - ebenso - ein <em>ilidata.xml</em>.</p>
+
+<p>Somit können Modelle über mehrere Repositories gefunden werden und genauso auch <em>Metakonfigurationsfiles</em> und/oder <em>Toppingfiles</em>.</p>
+
+<h3 id="beispiel-eines-ilisite09-elements">Beispiel eines <code class="language-plaintext highlighter-rouge">IliSite09</code> elements</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;IliSite09.SiteMetadata.Site TID="1"&gt;
+  &lt;Name&gt;usability.opengis.ch&lt;/Name&gt;
+  &lt;Title&gt;Allgemeine metadaten für ili-modelle&lt;/Title&gt;
+  &lt;shortDescription&gt;Weitere Sites des UsabILItyHubs&lt;/shortDescription&gt;
+  &lt;Owner&gt;http://models.opengis.ch&lt;/Owner&gt;
+  &lt;technicalContact&gt;mailto:david@opengis.ch&lt;/technicalContact&gt;
+  &lt;subsidiarySite&gt;
+    &lt;IliSite09.RepositoryLocation_&gt;
+      &lt;value&gt;usabilitydave.signdav.ch&lt;/value&gt;
+    &lt;/IliSite09.RepositoryLocation_&gt;
+  &lt;/subsidiarySite&gt;
+&lt;/IliSite09.SiteMetadata.Site&gt;
+</code></pre></div></div>
+
+<h2 id="das-metaconfigurationfile-ini">Das Metaconfigurationfile (INI)</h2>
+
+<p>Ein <em>Metakonfigurationsfile</em> ist eine INI-Datei, die Konfigurationen für ein oder mehrere Tools enthält. Ebenso kann im <em>Metakonfigurationsfile</em> auf <em>Toppingfiles</em> und andere zur Konfiguration gehörenden Files referenziert werden.</p>
+
+<h3 id="filereferenzen">Filereferenzen</h3>
+<p>Die Files werden entweder anhand der systemübergreifenden <em>DatasetMetadata-Id</em> referenziert oder sie können einen statischen Filepfad enthalten.</p>
+
+<h4 id="datasetmetadata-id">DatasetMetadata-Id</h4>
+<p>Wenn ein File über eine <em>DatasetMetadata-Id</em> referenziert wird, heisst das, dass die <code class="language-plaintext highlighter-rouge">ilidata.xml</code> repositoryübergreifend geparst werden, um das verlinkte File zu finden. Das bedeuted, dass die <em>Metakonfiguration</em> nicht nur auf Files auf demselben Repository/Server referenzieren kann. Prefix für <em>DatasetMetadata-Ids</em> ist <code class="language-plaintext highlighter-rouge">ilidata:</code></p>
+
+<p>Es wird grunsätzlich Empfohlen, die <em>DatasetMetadata-Id</em> für eine Referenz auf ein File zu verwenden (anstelle vom statischen Filepfad).</p>
+
+<h4 id="filepfad">Filepfad</h4>
+<p>Statische Filepfad-Links die mit <code class="language-plaintext highlighter-rouge">file:</code> referenziert werden, können sowohl absolut sein, als auch relativ. Es kann aber vom verwendeten Tool abhängig sein, zu was der Pfad relativ ist. Deshalb sollte das nur zu Testzwecken verwendet werden.</p>
+
+<blockquote>
+  <p>Der <em>QGIS Model Baker</em> behandelt relative Pfade relativ zu sich selbst. <em>ili2db</em> hingegen relativ zum Verzeichnis wo <em>ili2db</em> gestartet wird.</p>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[CONFIGURATION]
+baseConfig=ilidata:remoteBaseConfigBasketId;ilidata:otherRemoteBaseConfigBasketId;path/otherBaseConfigLocalFile
+org.interlis2.validator.config=ilidata:ilivalidatorConfigBasketId
+qgis.modelbaker.layertree=ilidata:ch.opengis.config.KbS_LV95_V1_4_layertree
+ch.interlis.referenceData=ilidata:ch.opengis.config.KbS_Codetexte_V1_4
+
+[ch.ehi.ili2db]
+defaultSrsCode = 2056
+smart2Inheritance = true
+strokeArcs = false
+importTid = true
+createTidCol = false
+models = KbS_Basis_V1_4
+preScript=ilidata:ch.opengis.config.KbS_LV95_V1_4_prescript
+iliMetaAttrs=ilidata:ch.opengis.config.KbS_LV95_V1_4_toml
+
+[qgis.modelbaker.ch]
+"Belasteter_Standort (Geo_Lage_Polygon)"=file:toppings_in_modelbakerdir/qml/opengisch_KbS_LV95_V1_4_001_belasteterstandort_polygon.qml
+"Belasteter_Standort (Geo_Lage_Punkt)"=ilidata:ch.opengis.topping.opengisch_KbS_LV95_V1_4_001
+ZustaendigkeitKataster=ilidata:ch.opengis.configs.KbS_LV95_V1_4_0032
+</code></pre></div></div>
+
+<p>Beispielsweise die Id <code class="language-plaintext highlighter-rouge">ch.opengis.configs.KbS_LV95_V1_4_layertree</code> referenziert auf ein <code class="language-plaintext highlighter-rouge">DatasetMetadata</code>, das ein Link auf eine YAML-Datei enthält, wo die Legenden-Struktur definiert ist. Die Id <code class="language-plaintext highlighter-rouge">ch.opengis.configs.KbS_LV95_V1_4_001</code> zeigt auf <code class="language-plaintext highlighter-rouge">DatasetMetadata</code> Element, das einen Link auf ein QML File für QGIS Style und Formularkonfigurationen enthält.</p>
+
+<p>Es können auch ganze Sections definiert werden. Die Section <code class="language-plaintext highlighter-rouge">qgis.modelbaker.qml</code> enthält neben der Verlinkung auch die Zuweisung von Layername zu QML-Files.</p>
+
+<h3 id="tool-prefix">Tool Prefix</h3>
+<p>Im <em>Metakonfigurationsfile</em> können Einträge mit einem Tool-Prefix markiert werden. <em>ili2db</em> zum Beispiel verwendet den Prefix <code class="language-plaintext highlighter-rouge">ch.ehi.ili2db</code> und <em>QGIS Model Baker</em> den Prefix <code class="language-plaintext highlighter-rouge">qgis.modelbaker</code>. Allerdings ist dem Tool überlassen, welche Konfigurationen es verwendet. Den Prefix <code class="language-plaintext highlighter-rouge">ch.interlis</code>, der mit <code class="language-plaintext highlighter-rouge">ch.interlis.referenceData</code> zum Beispiel für die Referenz auf <em>Datenfiles</em> wie Kataloge oder Transferdatenfiles verwendet wird, verwenden zBs. <em>ili2db</em> wie auch <em>QGIS Model Baker</em>.</p>
+
+<h3 id="referenzen-auf-andere-metakonfigurationsfiles">Referenzen auf andere Metakonfigurationsfiles</h3>
+<p>Es ist konzeptionell auch möglich (wenn auch von Tools wie <em>QGIS Model Baker</em> noch nicht umgesetzt), dass man von einen <em>Metakonfigurationsfile</em> mittels dem Eintrag <code class="language-plaintext highlighter-rouge">baseConfig</code> auf andere <em>Metakonfigurationsfiles</em> linken kann. Somit würde eine Art “Vererbung” der Konfiguration möglich sein.</p>
+
+<h2 id="toppingfiles">Toppingfiles</h2>
+<p><em>Toppingfiles</em> sind Files, auf welche von der <em>Metakonfiguration</em> referenziert wurde und die Konfigurationsinformation des GIS Projektes enthalten. Es können also Formularkonfigurationen, Style-Attribute, Legendendarstellung und Reihenfolge, sowie auch Kataloge, Transferfiles und andere Datenfiles sein. Für jedes Tool können individuelle Toppingfiles verwendet werden. Von einem einfachen Zip-File, welches das gesamte Projekt enthält, bis zu einem sorgfältigen Mapping von Layernamen zu QML-Style-Files.</p>
+
+<h3 id="beispiel-eines-yaml-files-für-die-layerstruktur-in-qgis">Beispiel eines YAML Files für die Layerstruktur in QGIS</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>legend:
+  - 'top-group':
+      group: true
+      checked: true
+      expanded: true
+      mutually-exclusive: true
+      mutually-exclusive-child: -1
+      child-nodes:
+        - 'geom punkt':
+            group: false
+            checked: true
+        - 'geom polygon':
+            group: false
+            checked: true
+        - 'subgroup':
+            group: true
+            child-nodes:
+              - 'subsubgroup':
+                  group: true
+                  checked: true
+                  child-nodes:
+                    - 'baum':
+                        group: false
+                        checked: true
+                    - 'subsubsubgroup':
+                        group: true
+                        checked: true
+                        child-nodes:
+                          - 'another layer':
+                              group: false
+                              visbile: false
+                    - 'layer in the subgroup':
+                        group: false
+                        visbile: false
+layer-order:
+  - 'geom punkt'
+  - 'geom polygon'
+</code></pre></div></div>
 
       </div>
       
@@ -103,10 +312,6 @@
             
             <li class="">
               <a href="/">Home</a>
-            </li>
-            
-            <li class="">
-              <a href="/contact/">Kontakt</a>
             </li>
             
           </ul>
@@ -131,7 +336,7 @@
 
           
           
-          <div class="copyright">Free Jekyll theme by <a class="zerostatic" href="https://www.zerostatic.io">www.zerostatic.io</a></div>
+          <div class="copyright">UsabILIty Hub Website uses a Jekyll theme by <a class="zerostatic" href="https://www.zerostatic.io">www.zerostatic.io</a></div>
           
         </div>
       </div>

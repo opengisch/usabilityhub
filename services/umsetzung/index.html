@@ -27,11 +27,11 @@
     </li>
     
     <li class="">
-      <a href="//">Projektbeteiligte</a>
+      <a href="/services/konzept">Details</a>
     </li>
     
     <li class="">
-      <a href="/about/">Konzept</a>
+      <a href="/services/umsetzung">Umsetzung</a>
     </li>
     
     <li class="">
@@ -59,11 +59,11 @@
     </li>
     
     <li class="">
-      <a href="//">Projektbeteiligte</a>
+      <a href="/services/konzept">Details</a>
     </li>
     
     <li class="">
-      <a href="/about/">Konzept</a>
+      <a href="/services/umsetzung">Umsetzung</a>
     </li>
     
     <li class="">
@@ -84,13 +84,214 @@
   <div class="container">
     <div class="row justify-content-start">
       <div class="col-12 col-md-7 col-lg-6 order-2 order-md-1">
-        <p>Für die verschiedene Geoinformationssysteme gibt es unterschiedliche Tools.</p>
+        <p>UsabILIty Hub ist Geoinformationssystemübergreiffend. Unterschiedliche Tools können UsabILIty Hub integrieren.</p>
 
-<p>Bereits auf Usabilityhub verfügbare Tools:</p>
+<p>Aktuell besteht eine Implementierung für den QGIS Model Baker. Weitere können hinzugefügt werden.</p>
 
-<h1 id="qgis-model-baker"><a href="https://app.stackbit.com/studio/609d87dfd488140017567639#/modelbaker">QGIS Model Baker</a></h1>
+<h1 id="umsetzung-im-qgis-model-baker">Umsetzung im QGIS Model Baker</h1>
 
-<h1 id="anders-tool">Anders Tool</h1>
+<h2 id="workflows">Workflows:</h2>
+<p>Anhand eines Modellnamens werden im <em>ilidata.xml</em> Pfade zu <em>Metakonfigurationsfiles</em> gefunden. Diese <em>Metakonfigurationsfiles</em> enthalten, neben Konfigurationsparameter, <em>DatasetMetadata-Ids</em>. Anhand dieser <em>DatasetMetadata-Ids</em> werden im <em>ilidata.xml</em> die Pfade zu den <em>Toppingfiles</em> gefunden.</p>
+
+<blockquote>
+  <p>Andere Tools verwenden einen anderen Workflow. So wird beispielsweise dem <em>ili2db</em> das <em>Metakonfigurationsfile</em> übergeben. Dort ist in der <em>Metakonfiguration</em> dann auch das Modell definert.</p>
+</blockquote>
+
+<p><img src="../images/uml_modelbaker.png" alt="uml" /></p>
+
+<h3 id="ablauf">Ablauf</h3>
+<ol>
+  <li>User gibt Modellname in der Maske ein</li>
+  <li>Das <em>ilidata.xml</em> wird anhand des Modellnamens nach Links zu <em>Metakonfigurationsfiles</em> geparst</li>
+  <li>Die Benutzerin wählt ein <em>Metakonfigurationsfile</em> aus, dieses wird heruntergeladen</li>
+  <li>Die Konfigurationen werden aus dem <em>Metakonfigurationsfile</em> gelesen</li>
+  <li>Die Konfigurationen werden in der Datenstrukturerstellung berücksichtigt</li>
+  <li>Die DatasetMetadata-Ids zu den <em>Toppingfiles</em> werden aus dem <em>Metakonfigurationsfile</em> gelesen</li>
+  <li>Das <em>ilidata.xml</em> wird anhand der DatasetMetadata-Ids nach Links zu <em>Toppingfiles</em> geparst</li>
+  <li>Die <em>Toppingfiles</em> werden heruntergeladen</li>
+  <li>Die Informationen werden aus den <em>Toppingfiles</em> gelesen und in die Projekt-Generierung miteinbezogen</li>
+</ol>
+
+<h2 id="ili2db-konfigurationen">ili2db Konfigurationen</h2>
+
+<h3 id="generelle-handhabung">Generelle Handhabung</h3>
+<p>Konfigurationen für <em>ili2db</em> werden im <em>Metakonfigurationsfile</em> definiert.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[ch.ehi.ili2db]
+defaultSrsCode = 2056
+smart2Inheritance = true
+strokeArcs = false
+importTid = true
+</code></pre></div></div>
+
+<p><em>ili2db</em> kann so aufgerufen werden:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ili2db --metaConfig ilidata:metconfigId --schemaimport --db....
+ili2db --metaConfig ilidata:metconfigId --import --db....
+ili2db --metaConfig ilidata:metconfigId --import --db....  data.xtf
+ili2db --metaConfig ilidata:metconfigId --export --db....  data.xtf
+</code></pre></div></div>
+
+<p>…oder mit lokalem <em>Metakonfigurationsfile</em>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ili2db --metaConfig localfile.ini --import --db....  data.xtf
+</code></pre></div></div>
+
+<h3 id="umsetzung-im-qgis-model-baker-1">Umsetzung im QGIS Model Baker</h3>
+
+<blockquote>
+  <p>Die Funktionalität, dass die Parameter in die Eingabemaske geladen werden, ist soweit implementiert (v6.5.0). Ansonsten beschreibt dieser Absatz den SOLL-Zustand. Denn die Übergabe der Metakonfiguration sowie das übergeben von false-Parametern ist von Seite <em>ili2db</em> noch nicht unterstützt.</p>
+</blockquote>
+
+<p>Einerseits werden beim Aufruf von <em>ili2db</em> durch den <em>QGIS Model Baker</em> Parameter automatisch im Hintergrund gesetzt und andererseits können in der Eingabemaske des <em>QGIS Model Baker</em> Parameter vom Benutzer konfiguriert werden. Zusätzlich soll nun die betreffende <em>Metakonfigurationsdatei</em> dem <em>ili2db</em> übergeben werden. Doch Parameter, die dem <em>ili2db</em> direkt übergeben werden, übersteuern die Konfigurationen des übergebenen <em>Metakonfigurationsfile</em>.</p>
+
+<p><em>QGIS Model Baker</em> liest die <em>ili2db</em> Parameter aus dem <em>Metakonfigurationsfile</em>. Die Parameter, die über die Eingabemaske des <em>QGIS Model Baker</em> gesetzt werden können (wie zBs. <code class="language-plaintext highlighter-rouge">--strokeArcs</code>, <code class="language-plaintext highlighter-rouge">--iliMetaAttrs</code> (für TOML) oder auch <code class="language-plaintext highlighter-rouge">--models</code>), werden vom <em>Metakonfigurationsfile</em> in die Eingabemaske geladen. Der Benutzer kann diese nun anpassen. Der <em>QGIS Model Baker</em> übergibt dem <em>ili2db</em> Aufruf nun die <em>Metakonfigurationsdatei</em> und die Parameter aus der Eingabemaske (ob angepasst oder nicht). Falls also die Parameter in der <em>Metakonfigurationsdatei</em> aufgeführt waren, dann aber in der Eingabemaske deaktiviert wurden, werden sie dem <em>ili2db</em> als “false” übergeben.</p>
+
+<p>Die Parameter, die der <em>QGIS Model Baker</em> im Hintergrund setzt (wie zBs. <code class="language-plaintext highlighter-rouge">--createFkIdx</code>, <code class="language-plaintext highlighter-rouge">--coalesceMultiPoint</code>), werden weiterhin gesetzt. Doch können sie vom <em>Metakonfigurationsfile</em> übersteuert werden. Wenn aber zum Beispiel im <em>Metakonfigurationsfile</em> solche Parameter nicht erwähnt sind (weil sie möglicherweise nicht gesetzt werden sollen), dann werden sie auch nicht mit “false” übersteuert.</p>
+
+<p>Ausnahme bietet im <em>Metakonfigurationsfile</em> ein Setting wie <code class="language-plaintext highlighter-rouge">onlyUseMetaConfigParams</code>. Wenn dies gesetzt ist, dann sollen nur die im <em>Metakonfigurationsfile</em> konfigurierten Parameter gesetzt werden und keine anderen.</p>
+
+<h3 id="referenzen-auf-andere-modelle">Referenzen auf andere Modelle</h3>
+
+<p>Anhand der <em>ili2db</em> kann von einem <em>Metakonfigurationsfile</em> auf andere Modelle referenziert werden. Wenn die <em>Metakonfigurationsfile</em> der Wert <code class="language-plaintext highlighter-rouge">models=KbS_LV95_v1_4;KbS_Basis</code> enthält, dann wird dies auch in der <em>QGIS Model Baker</em> Eingabemaske so angepasst. Natürlich wird daraufhin wieder eine Suche nach möglichen <em>Metakonfigurationsfiles</em> auf UsabILIty Hub gestartet, gemäss den aktuell gesetzten Modelle. Siehe dazu auch “Import mehrerer Models und ihre Toppings”</p>
+
+<h2 id="toppings-und-ihre-konfiguration">Toppings und ihre Konfiguration</h2>
+
+<p><em>Toppingfiles</em> sind Files, auf die in der <em>Metakonfiguration</em> referenziert wurde und die Konfigurationsinformation des GIS Projektes enthalten. Es können also Formularkonfigurationen, Style-Attribute, Legendendarstellung sowie Datenfiles sein. Für jedes Tool können individuelle Toppingfiles verwendet werden.</p>
+
+<p>Vom <em>QGIS Model Baker</em> unterstützte <em>Toppingfiles</em>:</p>
+<ul>
+  <li>QML Files für Layerkonfigurationen&lt;&gt;</li>
+  <li>YAML Files für Legendendarstellung und Layerreihenfolge</li>
+  <li>XTF/ITF Files für Datenimport</li>
+</ul>
+
+<h3 id="qml">QML</h3>
+<p>Für Layereigenschaften wie Formularkonfigurationen, Symbologie etc. werden QML Files als <em>Toppingfiles</em> geladen.</p>
+
+<p><img src="../images/style.png" alt="style" /></p>
+
+<p>Die <em>QML Toppingfiles</em> werden im <em>Metakonfigurationsfile</em> den Layern zugewiesen.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[qgis.modelbaker.ch]
+"Belasteter_Standort (Geo_Lage_Polygon)"=file:toppings_in_modelbakerdir/qml/opengisch_KbS_LV95_V1_4_001_belasteterstandort_polygon.qml
+"Belasteter_Standort (Geo_Lage_Punkt)"=ilidata:ch.opengis.topping.opengisch_KbS_LV95_V1_4_001
+ZustaendigkeitKataster=ilidata:ch.opengis.configs.KbS_LV95_V1_4_0032
+</code></pre></div></div>
+
+<h3 id="legende-und-darstellungsreihenfolge-yaml">Legende und Darstellungsreihenfolge (YAML)</h3>
+<p>Es können Informationen zur Legendengruppierung und Darstellungsreihenfolge in einem <em>Toppingfile</em> enthalten sein. Die <code class="language-plaintext highlighter-rouge">DatasetMetadata-Id</code> wird im <em>Metakonfigurationsfile</em> über den Parameter <code class="language-plaintext highlighter-rouge">qgis.modelbaker.layertree</code> definiert.</p>
+
+<p>Das File ist in <code class="language-plaintext highlighter-rouge">YAML</code> geschrieben:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>legend:
+  - "Belasteter Standort":
+      group: true
+      checked: true
+      expanded: true
+      mutually-exclusive: true
+      mutually-exclusive-child: 1
+      child-nodes:
+        - "Belasteter_Standort (Geo_Lage_Punkt)":
+            featurecount: true
+        - "Belasteter_Standort (Geo_Lage_Polygon)":
+            expanded: true
+  - "Informationen":
+      group: true
+      checked: true
+      expanded: true
+      child-nodes:
+        - "EGRID_":
+        - "Deponietyp_":
+        - "ZustaendigkeitKataster":
+            featurecount: true
+        - "Untersuchungsmassnahmen_Definition":
+            featurecount: false
+        - "StatusAltlV_Definition":
+        - "Standorttyp_Definition":
+        - "Deponietyp_Definition":
+        - "Parzellenidentifikation":
+        - "UntersMassn_":
+        - "Text Infos":
+            group: true
+            checked: false
+            expanded: true
+            child-nodes:
+              - "MultilingualMText":
+              - "LocalisedMText":
+              - "MultilingualText":
+              - "LocalisedText":
+        - "Other Infos":
+            group: true
+            checked: true
+            expanded: false
+            child-nodes:
+              - "StatusAltlV":
+              - "Standorttyp":
+              - "UntersMassn":
+              - "Deponietyp":
+              - "LanguageCode_ISO639_1":
+
+layer-order:
+  - "Belasteter_Standort (Geo_Lage_Polygon)"
+  - "Belasteter_Standort (Geo_Lage_Punkt)"
+</code></pre></div></div>
+
+<h4 id="legende">Legende</h4>
+<p>Die Legende wird anhand einer Baumstruktur im <code class="language-plaintext highlighter-rouge">YAML</code> Format beschrieben.</p>
+
+<p>Top-Level Eintrag ist <code class="language-plaintext highlighter-rouge">legend</code>. Dieser Eintrag wird nicht in der Legende angezeigt.</p>
+
+<p>Darauf können Gruppen oder auch Layer folgen. Es gelten folgende Parameter für beide Typen:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">checked = true/false</code> definiert, ob der Knoten sichtbar ist oder nicht</li>
+  <li><code class="language-plaintext highlighter-rouge">expanded = true/false</code> definiert, ob der Knoten ausgeklappt ist oder nicht</li>
+  <li><code class="language-plaintext highlighter-rouge">featurecount: true</code> definiert, ob die Anzahl Features angezeigt werden soll oder nicht</li>
+</ul>
+
+<p>Gruppen müssen als solche definiert werden mit dem Parameter <code class="language-plaintext highlighter-rouge">group: true</code>. Ansonsten wird angenommen, dass es ein Layer ist. Die Gruppen sollten den Parameter <code class="language-plaintext highlighter-rouge">child-nodes</code> enthalten, wo Untergruppen und Layer definiert werden können.</p>
+
+<p>Zusätzlich haben die Gruppen noch die “Mutually-Exclusive” Eigenschaft. Dies bedeutet, ob sich die Untergruppen und Layer gegenseitig ausschliessen. Das heisst, dass nur ein Kindelement auf einmal sichtbar sein kann.</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">mutually-exclusive: true</code> wenn nur ein Kindelement auf einmal angezeigt werden soll.</li>
+  <li><code class="language-plaintext highlighter-rouge">mutually-exclusive-child: 0</code> das Kindelement, das angezeigt werden soll.</li>
+</ul>
+
+<p>Das oben abgebildete <code class="language-plaintext highlighter-rouge">YAML</code> File resultiert in eine Legendenstruktur in <em>QGIS</em></p>
+
+<p><img src="../images/qgis_legend.png" alt="uml" /></p>
+
+<h4 id="darstellungsreihenfolge">Darstellungsreihenfolge</h4>
+<p>Die Darstellungsreihenfolge wird als einfache Liste definiert.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>layer-order:
+  - "Belasteter_Standort (Geo_Lage_Polygon)"
+  - "Belasteter_Standort (Geo_Lage_Punkt)"
+</code></pre></div></div>
+
+<h4 id="laden-mehrerer-models-mit-mehreren-legendenstrukturen">Laden mehrerer Models mit mehreren Legendenstrukturen</h4>
+<p>Layer mit der gleichen Datenquelle werden bei erneutem Generieren des Projektes nicht doppelt hinzugefügt. Neue Layer und Untergruppen werden - sofern möglich - in bereits existierende Gruppen geladen. Ansonsten werden Geometrielayer oberhalb und die Gruppen “tables” und “domains” unterhalb hinzugefügt. Legendenstrukturen aus mehreren <em>Toppingfiles</em> werden also zusammengefügt.</p>
+
+<h3 id="kataloge-und-transferfiles">Kataloge und Transferfiles</h3>
+<p>Kataloge und Transferfiles (und andere ITF/XTF) können ebenfalls als <em>Toppingfiles</em> geladen werden. Die <code class="language-plaintext highlighter-rouge">DatasetMetadata-Ids</code> werden im <em>Metakonfigurationsfile</em> über den globalen Parameter <code class="language-plaintext highlighter-rouge">ch.interlis.referenceData</code> definiert. Es können mehrere Ids und Filepfade angegeben werden (separiert durch <code class="language-plaintext highlighter-rouge">;</code>).</p>
+
+<p>Diese Datenfiles werden anschliessend an den Schemaimport mittels einzelner <code class="language-plaintext highlighter-rouge">ili2db</code> Kommandos importiert.</p>
+<blockquote>
+  <p>Aufgrund der Einhaltung der Best Practice werden die Datenfiles <em>nicht</em> mit einem <code class="language-plaintext highlighter-rouge">import</code> und dem Parameter <code class="language-plaintext highlighter-rouge">--doschemaimport</code> geladen, sondern eines nach dem andern.</p>
+</blockquote>
+
+<h2 id="import-mehrerer-models-und-ihre-toppings">Import mehrerer Models und ihre Toppings</h2>
+<p>Momentan werden bei einer Liste von “LegendeEintrag_PlanGewaesserschutz_V1_1;KbS_LV95_V1_4;KbS_Basis_V1_4” die <em>Metakonfigurationsfiles</em> für all diese Modelle aufgelistet. 
+<img src="../images/multimodels.png" alt="multimodels" />
+Es kann dann aber nur eines ausgewählt werden. Möchte man mehrere <em>Metakonfigurationsfiles</em> auswählen, muss man die Models nacheinander importieren.</p>
+
+<h3 id="best-practice">Best Practice</h3>
+<p>Am besten macht man ein <em>Metakonfigurationsfile</em>, das für den Import aller Modelle gilt. Und um das ganze noch angenehmer zu gestalten, kann man auch das zusätzliche Model im <em>Metakonfigurationsfile</em> konfigurieren.
+Gilt ein <em>Metakonfigurationsfile</em> für den Import beider Modelle “KbS_LV95_V1_4;KbS_Basis_V1_4”, kann man auch beide Modelle darin konfigurieren:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[ch.ehi.ili2db]
+models = KbS_Basis_V1_4;KbS_Basis_V1_4
+</code></pre></div></div>
+<p>Somit wird das <em>Metakonfigurationen</em> anhand beider Modellnamen gefunden und beim einlesen wird “KbS_LV95_V1_4;KbS_Basis_V1_4” in die Eingabemaske von <em>QGIS Model Baker</em> geladen.</p>
+
+<h2 id="lokales-repo-verwenden">Lokales Repo verwenden</h2>
+<p>Es kann für Testzwecken nützlich sein, wenn man ein lokales Repository verwenden kann. Dies wird genauso wie immer konfiguriert. <code class="language-plaintext highlighter-rouge">ilidata.xml</code> und <code class="language-plaintext highlighter-rouge">ilimodels.xml</code> werden darin gesucht und geparst.
+<img src="../images/localrepo.png" alt="localrepo" /></p>
 
       </div>
       
@@ -109,10 +310,6 @@
             
             <li class="">
               <a href="/">Home</a>
-            </li>
-            
-            <li class="">
-              <a href="/contact/">Kontakt</a>
             </li>
             
           </ul>
@@ -137,7 +334,7 @@
 
           
           
-          <div class="copyright">Free Jekyll theme by <a class="zerostatic" href="https://www.zerostatic.io">www.zerostatic.io</a></div>
+          <div class="copyright">UsabILIty Hub Website uses a Jekyll theme by <a class="zerostatic" href="https://www.zerostatic.io">www.zerostatic.io</a></div>
           
         </div>
       </div>
