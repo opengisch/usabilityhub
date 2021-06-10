@@ -2,11 +2,11 @@ main:
   - name: "ilidata.xml"
     url: "/services/ilidata"
     weight: 2
-  - name: "Projektbeteiligte"
-    url: "//"
+  - name: "Details"
+    url: "/services/konzept"
     weight: 3
-  - name: "Konzept"
-    url: "/about/"
+  - name: "Umsetzung"
+    url: "/services/umsetzung"
     weight: 4
   - name: "Kontakt"
     url: "/contact/"
@@ -16,6 +16,3 @@ footer:
   - name: "Home"
     url: "/"
     weight: 1
-  - name: "Kontakt"
-    url: "/contact/"
-    weight: 2
