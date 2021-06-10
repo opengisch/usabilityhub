@@ -20,8 +20,8 @@ jobs:
         run: python ./generator/generator.py
 
       - name: Install Jekyll Bundle
-        run: bundle install
-        
+        run: gem install jekyll bundler
+
       - name: Build website
         run: bundle exec jekyll build
 
