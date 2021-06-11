@@ -1,3 +1,6 @@
+__pycache__
+build
+
 # NPM
 node_modules
 npm-debug.log
