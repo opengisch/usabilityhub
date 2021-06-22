@@ -6,7 +6,7 @@ homepage:
   show_call_box: true
 logo:
   mobile: "images/logo/logo-mobile.svg"
-  desktop_height: 62px
+  desktop_height: 28px
   desktop: "images/logo/logo.svg"
 footer:
   copyright_text: 'UsabILIty Hub uses a Jekyll theme by <a class="zerostatic" href="https://www.zerostatic.io">www.zerostatic.io</a>'
