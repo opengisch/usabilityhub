@@ -3,7 +3,7 @@ title: Technische Details
 date: '2018-11-28T15:14:39+10:00'
 featured: true
 weight: 2
-layout: service
+layout: default_5
 intro_image: null
 intro_image_absolute: false
 intro_image_hide_on_mobile: true
@@ -16,7 +16,7 @@ So wie wir jetzt Modelle durch die Anbindung der Datei *ilimodels.xml* von [http
 
 Einstellungens für Tools werden in einer *Metakonfigurationsfiles (INI-Datei)* konfiguriert, ebenso wie Links (Ids oder Pfade) zu *Toppingfiles*, die Informationen zu GIS Projektes enthalten (wie zBs. Symbologien oder Legendensturkturen). Somit bestehen *Zusatzinformationen* meistens aus einer *Metakonfiguration* und beliebig vielen *Toppings*.
 
-![uml](../images/uml_usabilityhub.png)
+![uml](/images/uml_usabilityhub.png)
 
 ## Das ilidata.xml
 Ein *ilidata.xml* dient als Index für alle benötigten Zusatzinformationen. Das File basiert auf dem Modell [`DatasetIdx16`](http://models.interlis.ch/core/DatasetIdx16.ili). 

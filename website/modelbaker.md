@@ -2,7 +2,7 @@
 layout: default_3
 title: Fabrik
 intro_image: images/illustrations/fabrik.svg
-intro_image_absolute: true
+intro_image_relative: true
 intro_image_hide_on_mobile: false
 ---
 ## QGIS Model Baker

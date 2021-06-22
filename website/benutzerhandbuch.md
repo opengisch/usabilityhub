@@ -36,7 +36,7 @@ Es ist empfehlenswert, die Dateien in einem Verzeichnis abzulegen und folgende U
 #### Lokale Projektgenerierung
 Dieser Ordner kann dann lokal im QGIS Model Baker getestet werden. `ilidata.xml` und `ilimodels.xml` werden darin gesucht und geparst.
 
-![localrepo](../images/localrepo.png)
+![localrepo](/images/localrepo.png)
 
 Um auch die ILI Models lokal zu testen, soll man diese ebenfalls in den lokalen Ordner ablegen:
 ```
@@ -53,15 +53,15 @@ Um auch die ILI Models lokal zu testen, soll man diese ebenfalls in den lokalen 
 
 Nun kann man das Projekt bereits lokal generieren:
 
-![raw_import](images/raw_import.png)
+![raw_import](../images/raw_import.png)
 
 Oder mit dem Metaattributfile für's *ili2db*:
 
-![raw_import_toml](images/raw_import_toml.png)
+![raw_import_toml](../images/raw_import_toml.png)
 
 Das Metaatributfile (TOML) wurde für das Projekt Nutzungsplan Luzern bereitserstellt. Dieses File wird im QGIS Model Baker unter “Advanced Options” und “Extra Model Information File” angegeben und wird zukünftig auch über den UsabILIty Hub eingebunden:
 
-![toml_config](images/toml_config.png)
+![toml_config](../images/toml_config.png)
 
 #### Projektkonfiguration
 
@@ -69,7 +69,7 @@ Im erstellten Projekt können nun Styles, Formulare, Layerstrukturen etc. konfig
 
 Besteht schon eine Umsetzung dieses Projekts, können diese Informationen aber auch daraus genommen werden.
 
-![original_project](images/original_project.png)
+![original_project](../images/original_project.png)
 
 ### 2. Toppingfiles erstellen
 
@@ -78,7 +78,7 @@ Vom QGIS Projekt, mit bereits definierten Layereigenschaften werden zuerst die Q
 
 "Layereigenschaften" > "Stil" > "Layerstil speichern"
 
-![save_qml](images/save_qml.png)
+![save_qml](../images/save_qml.png)
 
 In diesem Beispiel wurden die qml-Files so benannt, wie die Layers heissen mit prefix "lu_".
 
@@ -131,7 +131,7 @@ Definitionsmöglichkeiten sind:
 
 Jeder Eintrag kann weitere “Childs” haben, so kann der “Layertree” beliebig viele Ebenen haben.
 
-![legend_entry](images/legend_entry.png)
+![legend_entry](../images/legend_entry.png)
 
 ```
   - "SEMP_NP_PUNKTE":
