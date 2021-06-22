@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Benutzerhandbuch</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/svg" href="/images/logo/logo.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link href="/assets/css/style.css" rel="stylesheet">
+  
+  <meta property="og:title" content="" />
+  <meta property="og:type" content="" />
+  <meta property="og:url" content="" />
+  <meta property="og:image" content="" />
+  <meta property="og:description" content="" />
+  <meta name="twitter:card" content="" />
+  <meta name="twitter:site" content="" />
+  <meta name="twitter:creator" content="" />
+</head>
+<body class='page '>
+  <div id="main-menu-mobile" class="main-menu-mobile">
+  
+  <ul>
+    
+    <li class="">
+      <a href="/services/ilidata">ilidata.xml</a>
+    </li>
+    
+    <li class="">
+      <a href="/services/konzept">Details</a>
+    </li>
+    
+    <li class="">
+      <a href="/services/umsetzung">Umsetzung</a>
+    </li>
+    
+  </ul>
+</div>
+
+  <div id="wrapper" class="wrapper">
+    <div class='header'>
+  <div class="container">
+    <div class="logo">
+      <a href="/"><img height="28px" alt="UsabilityHub" src="/images/logo/logo.svg" /></a>
+    </div>
+    <div class="logo-mobile">
+      <a href="/"><img alt="UsabilityHub" src="/images/logo/logo-mobile.svg" /></a>
+    </div>
+    <div id="main-menu" class="main-menu">
+  
+  <ul>
+    
+    <li class="">
+      <a href="/services/ilidata">ilidata.xml</a>
+    </li>
+    
+    <li class="">
+      <a href="/services/konzept">Details</a>
+    </li>
+    
+    <li class="">
+      <a href="/services/umsetzung">Umsetzung</a>
+    </li>
+    
+  </ul>
+</div>
+
+    <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" type="button" aria-label="Mobile Menu">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+  </div>
+</div>
+    <div class="intro">
+  <div class="container">
+    <div class="row justify-content-start">
+      <div class="container">
+        <p><strong>Um eigene Toppings zu publizieren, muss man sie lokal erstellen und testen. Zukünftig sollen auch Tools einige Arbeitsschritte (wie zum Beispiel Layertree Export) übernehmen. Bis dahin sollen die folgenden Punkte ausgeführt werden, wie am Beispiel des Models Nutzungsplan Luzern</strong></p>
+
+<h2 id="realisierung-toppings-für-nutzungsplanung_v310">Realisierung Toppings für Nutzungsplanung_v310</h2>
+<p>Folgende Toppingfiles werden erstellt bzw. angepasst</p>
+
+<ul>
+  <li>ilidata.xml (wird manuell angepasst)</li>
+  <li>Metakonfigurationsfile (wird manuell erstellt)</li>
+  <li>Layerkonfigurationen QML-Files (werden mit QGIS generiert)</li>
+  <li>Layerreihenfolge und Legende YAML-File (wird manuell erstellt)</li>
+  <li>Zur Projketerstellung benötigtes ili2db Metaattributfile TOML-File (wird manuell erstellt)</li>
+</ul>
+
+<h3 id="1-vorbreitung">1. Vorbreitung</h3>
+<p>Es ist empfehlenswert, die Dateien in einem Verzeichnis abzulegen und folgende Unterverzeichnisse zu benennen:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── ilidata.xml
+├── layertree
+├── metaconfig
+├── qml
+├── referencedata
+├── sql
+└── toml
+</code></pre></div></div>
+
+<h4 id="lokale-projektgenerierung">Lokale Projektgenerierung</h4>
+<p>Dieser Ordner kann dann lokal im QGIS Model Baker getestet werden. <code class="language-plaintext highlighter-rouge">ilidata.xml</code> und <code class="language-plaintext highlighter-rouge">ilimodels.xml</code> werden darin gesucht und geparst.</p>
+
+<p><img src="/images/localrepo.png" alt="localrepo" /></p>
+
+<p>Um auch die ILI Models lokal zu testen, soll man diese ebenfalls in den lokalen Ordner ablegen:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── additional_local_ini_files
+│   ├── CHBase_Part1_GEOMETRY_20110830.ili
+│   ├── CHBase_Part2_LOCALISATION_20110830.ili
+│   ├── CHBase_Part3_CATALOGUEOBJECTS_20110830.ili
+│   ├── CHBase_Part4_ADMINISTRATIVEUNITS_20110830.ili
+│   ├── CoordSys-20151124.ili
+│   ├── Nutzungsplanung_V310.ili
+│   └── Units-20120220.ili
+</code></pre></div></div>
+
+<p>Nun kann man das Projekt bereits lokal generieren:</p>
+
+<p><img src="../images/raw_import.png" alt="raw_import" /></p>
+
+<p>Oder mit dem Metaattributfile für’s <em>ili2db</em>:</p>
+
+<p><img src="../images/raw_import_toml.png" alt="raw_import_toml" /></p>
+
+<p>Das Metaatributfile (TOML) wurde für das Projekt Nutzungsplan Luzern bereitserstellt. Dieses File wird im QGIS Model Baker unter “Advanced Options” und “Extra Model Information File” angegeben und wird zukünftig auch über den UsabILIty Hub eingebunden:</p>
+
+<p><img src="../images/toml_config.png" alt="toml_config" /></p>
+
+<h4 id="projektkonfiguration">Projektkonfiguration</h4>
+
+<p>Im erstellten Projekt können nun Styles, Formulare, Layerstrukturen etc. konfiguriert werden, um diese Daten als Quelle für die Erstellung der Toppingfiles zu verwenden.</p>
+
+<p>Besteht schon eine Umsetzung dieses Projekts, können diese Informationen aber auch daraus genommen werden.</p>
+
+<p><img src="../images/original_project.png" alt="original_project" /></p>
+
+<h3 id="2-toppingfiles-erstellen">2. Toppingfiles erstellen</h3>
+
+<h4 id="2-a-layereigenschaften-qml-files">2. a. Layereigenschaften (QML Files)</h4>
+<p>Vom QGIS Projekt, mit bereits definierten Layereigenschaften werden zuerst die QML-Dateien gespeichert</p>
+
+<p>“Layereigenschaften” &gt; “Stil” &gt; “Layerstil speichern”</p>
+
+<p><img src="../images/save_qml.png" alt="save_qml" /></p>
+
+<p>In diesem Beispiel wurden die qml-Files so benannt, wie die Layers heissen mit prefix “lu_”.</p>
+
+<h5 id="problem-mit-formularen-im-falle-nutzungsplanung_v310-originalprojekt">Problem mit Formularen im Falle Nutzungsplanung_V310 Originalprojekt</h5>
+
+<p>Das Originalprojekt beinhaltet nicht diesselbe Layernamen, wie das neu generierte Projekt. Dies kann einerseits der Fall sein, da es mit einer alten Model Baker Version erstellt worden ist oder weil die Layer später umbenannt worden sind. 
+Bei den Formularkonfigurationen wurde so auf Layers referenziert, die nicht mehr existieren. Wenn diese Konfiguration nun über ein QML-File geladen wird, merkt das QGIS und lädt den benötigten Layer anhand dieser Information. Und dies führt dazu, dass Layer mehrfach ins Projekt geladen werden.</p>
+
+<p>Um dem Vorzubeugen ist empfohlen, die QML Files testweise in das lokal generierte (neue) Projekt zu laden. Falls dieses (oder auch andere) Problem auftaucht, können nur einzelne Kategorien vom Originalprojekt verwendet werden. Im Falle Nutzungsplanung_V310, wurde so für gewisse Layer die Kategorie “Formulare” nicht aus dem Originalprojekt genommen, sondern im Layer des lokal generierten Projekts (der dem Originallayer bis auf die Formularkonfiguration enspricht), die Formulare manuell konfiguriert, und der Style erneut als QML abgespeichert.</p>
+
+<h4 id="2-b-layerreihenfolge-und-legendenanordnung-yaml-file">2. b. Layerreihenfolge und Legendenanordnung (YAML File)</h4>
+
+<p>In einem YAML File wird die Layerreihenfolge bzw. Legendenanordnung definiert.</p>
+
+<p>Unter Haupteintrag <code class="language-plaintext highlighter-rouge">legend</code> wird die Legendenanordnung definiert und unter <code class="language-plaintext highlighter-rouge">layer-order</code> die Reihenfolge.</p>
+
+<p>So sieht kann der Inhalt eines YAML-Files so aussehen:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>legend:
+  - "Geometrie-Layer":
+      group: true
+      expanded: true
+      child-nodes:
+        - "Punkt":
+            featurecount: true
+        - "Fläche":
+        - "Linie":
+            checked: true
+  - "Informationen":
+      group: true
+      checked: true
+      child-nodes:
+        - "Unterhalt":
+        - "Deponietypen":
+
+layer-order:
+  - "Punkt"
+  - "Linie"
+  - "Fläche"
+</code></pre></div></div>
+<p>Hierzu muss die korrekte Einrückugn und Struktur von <a href="https://de.wikipedia.org/wiki/YAML">YAML</a> beachtet werden.</p>
+
+<p>Definitionsmöglichkeiten sind:</p>
+<ul>
+  <li>Layer/Gruppe sichtbar oder nicht: <code class="language-plaintext highlighter-rouge">checked: true</code>, wenn nicht: <code class="language-plaintext highlighter-rouge">checked: fals</code>.</li>
+  <li>Legendeneintrag gilt als eine Gruppe, d.h. er hat weitere Einträge (child-nodes): <code class="language-plaintext highlighter-rouge">group: true</code>.</li>
+  <li>Die Legendeneinträge in der Gruppe sind unter <code class="language-plaintext highlighter-rouge">child-nodes</code> aufgelistet.</li>
+  <li>Untere Legendeneinträge (Children oder Symbolisierungskategorien) sichtbar/aufgeklappt sind: <code class="language-plaintext highlighter-rouge">expanded: true</code>.</li>
+  <li>Die Sichtbarkeit der Layer in einer Gruppe schliessen sich gegenseitig aus <code class="language-plaintext highlighter-rouge">mutually-exclusive: true</code> (das heisst, nur ein Child ist sichtbar auf einmal)</li>
+  <li>Die Anzahl der Features innerhalb eines Layers kann mit:<code class="language-plaintext highlighter-rouge">featurecount: true</code> angezeigt werden.</li>
+</ul>
+
+<p>Jeder Eintrag kann weitere “Childs” haben, so kann der “Layertree” beliebig viele Ebenen haben.</p>
+
+<p><img src="../images/legend_entry.png" alt="legend_entry" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  - "SEMP_NP_PUNKTE":
+      group: true
+      checked: true
+      expanded: true
+      child-nodes:
+        - "BZR_Verweis_Pos":
+            checked: true
+        - "Beschriftung_Pos":
+            checked: true
+        - "Bemassung (BemassungPos)":
+            checked: true
+            featurecount: true
+        - "Ueberlagerung_Punkte":
+            checked: true
+            expanded: true
+</code></pre></div></div>
+
+<h4 id="2-c-metaattributfile-für-ili2db-toml">2. c. Metaattributfile für ili2db (TOML)</h4>
+
+<p>Auch das TOML File kann als Topping verwendet werden. Dies ist im INI Format geschrieben und besteht bereits für das Nutzungsplanung_V310 Projekt:</p>
+
+<p>Inhalt von <code class="language-plaintext highlighter-rouge">Nutzungsplanung_V310.toml</code>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>["Nutzungsplanung_V310.MultiPoint"]
+ili2db.mapping=MultiPoint
+
+["Nutzungsplanung_V310.MultiSurface"]
+ili2db.mapping=MultiSurface
+</code></pre></div></div>
+
+<h4 id="2-d-transferdateien-zbs-kataloge-xtfitfxml">2. d. Transferdateien (zBs. Kataloge) (XTF/ITF/XML)</h4>
+
+<p>Transferdateien wie zBs. Kataloge können ebenfalls als Topping verwendet werden. Im Projekt Nutzungsplanung_V310 wurden aber keine vorgegeben.
+Für Infos über die Referenzierung der Transferdateien kann die Technische Dokumentation der Umsetzung im QGIS Model Baker eingesehen werden.</p>
+
+<h3 id="3-ablage-und-eintragen-der-toppings-im-ilidataxml">3. Ablage und Eintragen der Toppings im ilidata.xml</h3>
+
+<h4 id="ablage">Ablage</h4>
+<p>Die Toppingfiles können nun in die für sie vorgesehenen Ordner abgelegt werden:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── layertree
+│   ├── layertree_Nutzungsplanung_V310.yaml
+├── metaconfig
+│   ├── lu_nutzungsplanung_v310.ini
+├── qml
+│   ├── lu_baulinien.qml
+│   ├── lu_bemassung_geometrie.qml
+│   ├── lu_bemassung_hlinie.qml
+│   ├── lu_bemassung_pos.qml
+│   ├── lu_beschriftung_pos.qml
+│   ├── lu_beschriftung_text.qml
+│   ├── lu_bzr_verweis_pos.qml
+│   ├── lu_grundnutzung.qml
+│   ├── lu_ueberlagerung_flaechen.qml
+│   ├── lu_ueberlagerung_linien.qml
+│   ├── lu_ueberlagerung_punkte.qml
+└── toml
+    ├── Nutzungsplanung_V310.toml
+
+</code></pre></div></div>
+
+<h4 id="eintragen-ins-ilidataxml">Eintragen ins ilidata.xml</h4>
+
+<p>Das <em>ilidata.xml</em> ist das “Register” über das die Toppingfiles gefunden werden.</p>
+
+<p>Zur Struktur des auf dem <a href="http://models.interlis.ch/core/DatasetIdx16.ili"><code class="language-plaintext highlighter-rouge">DatasetIdx16</code></a> basierenden File, können die “Informationen über die technische Konzeption des UsabILIty Hubs” eingesehen werden.</p>
+
+<p>Grundsätzlich muss eine Repository-übergreiffend eindeutige <code class="language-plaintext highlighter-rouge">id</code> vergeben werden. Sie muss nicht zwingend beschreibend für den Inhalt sein. Weiter muss der Typ des Toppings in den <code class="language-plaintext highlighter-rouge">categories</code> eingetragen werden, sowie der relative <code class="language-plaintext highlighter-rouge">path</code> zum betreffenden File.</p>
+
+<p>Also wär der Eintrag für das Toppingfile “qml/lu_grundnutzung.qml” des Typs “qml” mit der Id “ch.lu.topping.Nutzungsplanung_V310_grundnutzung” der folgende:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      &lt;DatasetIdx16.DataIndex.DatasetMetadata TID="3dcc47e5-1dd5-4f05-9fc8-756125705a2c"&gt;
+        &lt;id&gt;ch.lu.topping.Nutzungsplanung_V310_grundnutzung&lt;/id&gt;
+        &lt;version&gt;2021-01-20&lt;/version&gt;
+        &lt;owner&gt;mailto:zsanett@opengis.ch&lt;/owner&gt;
+        &lt;categories&gt;
+          &lt;DatasetIdx16.Code_&gt;
+            &lt;value&gt;http://codes.interlis.ch/type/qml&lt;/value&gt;
+          &lt;/DatasetIdx16.Code_&gt;
+        &lt;/categories&gt;
+        &lt;files&gt;
+          &lt;DatasetIdx16.DataFile&gt;
+            &lt;fileFormat&gt;text/plain;version=2.3&lt;/fileFormat&gt;
+            &lt;file&gt;
+              &lt;DatasetIdx16.File&gt;
+                &lt;path&gt;qml/lu_grundnutzung.qml&lt;/path&gt;
+              &lt;/DatasetIdx16.File&gt;
+            &lt;/file&gt;
+          &lt;/DatasetIdx16.DataFile&gt;
+        &lt;/files&gt;
+      &lt;/DatasetIdx16.DataIndex.DatasetMetadata&gt;
+</code></pre></div></div>
+
+<h3 id="4-die-metakonfiguration-ini">4. Die Metakonfiguration (INI)</h3>
+
+<p>Die Metakonfiguration ist das File, das alles zusammenhält. Mehr Informationen dazu gibt es ebenfalls im Dokument “Umsetzung im QGIS Model Baker”.</p>
+
+<p>Für die Implementierung von Nutzungsplanung_V310 müssen nun die in den vorgängingen Steps erstellten Toppingfiles über ihre in <em>ilidata.xml</em> vergebene Id im Metakonfigurationsfile verlinkt sein. Die QML Toppigns, die Layerkonfigurationen enthalten, müssen den korrekten Namen der entsprechenden Layer zugewiesen werden.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[CONFIGURATION]
+qgis.modelbaker.layertree=ilidata:ch.lu.topping.layertree_Nutzungsplanung_V310
+
+[ch.ehi.ili2db]
+iliMetaAttrs=ilidata:ch.lu.topping.npluzern_toml
+
+[qgis.modelbaker.qml]
+"BZR_Verweis_Pos"=ilidata:ch.lu.topping.Nutzungsplanung_V310_bzr_verweis_pos
+"Beschriftung_Pos"=ilidata:ch.lu.topping.Nutzungsplanung_V310_beschriftung_pos
+"Bemassung (BemassungPos)"=ilidata:ch.lu.topping.Nutzungsplanung_V310_bemassung_pos
+"Ueberlagerung_Punkte"=ilidata:ch.lu.topping.Nutzungsplanung_V310_ueberlagerung_punkte
+"Bemassung_HLinie"=ilidata:ch.lu.topping.Nutzungsplanung_V310_bemassung_hlinie
+"Baulinien"=ilidata:ch.lu.topping.Nutzungsplanung_V310_baulinien
+"Ueberlagerung_Linien"=ilidata:ch.lu.topping.Nutzungsplanung_V310_ueberlagerung_linien
+"Grundnutzung"=ilidata:ch.lu.topping.Nutzungsplanung_V310_grundnutzung
+"Bemassung (Geometrie)"=ilidata:ch.lu.topping.Nutzungsplanung_V310_bemassung_geometrie
+"Ueberlagerung_Flaechen"=ilidata:ch.lu.topping.Nutzungsplanung_V310_ueberlagerung_flaechen
+"Beschriftung_Text"=ilidata:ch.lu.topping.Nutzungsplanung_V310_beschriftung_text
+</code></pre></div></div>
+
+<h4 id="eintragen-ins-ilidataxml-1">Eintragen ins ilidata.xml</h4>
+
+<p>Auch die Metakonfigurationsdatei muss ins <em>ilidata.xml</em> eingetragen werden. Nur so kann sie von Tools wie dem Model Baker gefunden werden.</p>
+
+<p>Grundsätzlich genau gleich wie ein Toppingfile. Eine Repository-übergreiffend eindeutige <code class="language-plaintext highlighter-rouge">id</code>, der Typ in den <code class="language-plaintext highlighter-rouge">categories</code> sowie der relative <code class="language-plaintext highlighter-rouge">path</code> zum betreffenden File.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      &lt;DatasetIdx16.DataIndex.DatasetMetadata TID="a2acb2f5-38bd-4d1a-8af0-c2463dcb5b66"&gt;
+        &lt;id&gt;ch.opengis.ili.config.Nutzungsplanung_V310&lt;/id&gt;
+        &lt;version&gt;2021-03-12&lt;/version&gt;
+        &lt;owner&gt;mailto:zsanett@opengis.ch&lt;/owner&gt;
+        &lt;categories&gt;
+          &lt;DatasetIdx16.Code_&gt;
+          	&lt;value&gt;http://codes.interlis.ch/type/metaconfig&lt;/value&gt;
+          &lt;/DatasetIdx16.Code_&gt;
+        &lt;/categories&gt;
+        &lt;files&gt;
+          &lt;DatasetIdx16.DataFile&gt;
+            &lt;fileFormat&gt;text/plain;version=2.3&lt;/fileFormat&gt;
+            &lt;file&gt;
+              &lt;DatasetIdx16.File&gt;
+                &lt;path&gt;metaconfig/lu_nutzungsplanung_v310.ini&lt;/path&gt;
+              &lt;/DatasetIdx16.File&gt;
+            &lt;/file&gt;
+          &lt;/DatasetIdx16.DataFile&gt;
+        &lt;/files&gt;
+      &lt;/DatasetIdx16.DataIndex.DatasetMetadata&gt;
+</code></pre></div></div>
+
+<p>Damit das Metakonfigurationsfile aber aufgrund eines Modellnamens (hier “Nutzungsplanung_V310”) gefunden wird, muss dieser ebenfalls in den <code class="language-plaintext highlighter-rouge">categories</code> eingetragen werden. Zusätzlich braucht es einen <code class="language-plaintext highlighter-rouge">title</code>, damit es im GUI des Model Bakers zu erkennen ist. Die <code class="language-plaintext highlighter-rouge">shortDescription</code> ist optional und dient zur weiteren Beschreibung des Inhalts der Metaknofiguration. So sieht der Eintrag schlussendlich so aus:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      &lt;DatasetIdx16.DataIndex.DatasetMetadata TID="a2acb2f5-38bd-4d1a-8af0-c2463dcb5b66"&gt;
+        &lt;id&gt;ch.opengis.ili.config.Nutzungsplanung_V310&lt;/id&gt;
+        &lt;version&gt;2021-03-12&lt;/version&gt;
+        &lt;owner&gt;mailto:zsanett@opengis.ch&lt;/owner&gt;
+        &lt;title&gt;
+          &lt;DatasetIdx16.MultilingualMText&gt;
+            &lt;LocalisedText&gt;
+              &lt;DatasetIdx16.LocalisedMText&gt;
+                &lt;Language&gt;de&lt;/Language&gt;
+                &lt;Text&gt;Styling und Tree für PostgreSQL Projekt für den Kanton Luzern (lu.ch)&lt;/Text&gt;
+              &lt;/DatasetIdx16.LocalisedMText&gt;
+            &lt;/LocalisedText&gt;
+          &lt;/DatasetIdx16.MultilingualMText&gt;
+        &lt;/title&gt;
+        &lt;shortDescription&gt;
+          &lt;DatasetIdx16.MultilingualMText&gt;
+            &lt;LocalisedText&gt;
+              &lt;DatasetIdx16.LocalisedMText&gt;
+                &lt;Language&gt;de&lt;/Language&gt;
+                &lt;Text&gt;Die Metakonfiguration für ein PostgreSQL Projekt generiert mit dem Model Nutzungsplan_V310 enthält Links zu Layertree Struktur, TOML und QML Files.&lt;/Text&gt;
+              &lt;/DatasetIdx16.LocalisedMText&gt;
+            &lt;/LocalisedText&gt;
+          &lt;/DatasetIdx16.MultilingualMText&gt;
+        &lt;/shortDescription&gt;
+        &lt;categories&gt;
+          &lt;DatasetIdx16.Code_&gt;
+          	&lt;value&gt;http://codes.interlis.ch/model/Nutzungsplanung_V310&lt;/value&gt;
+          &lt;/DatasetIdx16.Code_&gt;
+          &lt;DatasetIdx16.Code_&gt;
+          	&lt;value&gt;http://codes.interlis.ch/type/metaconfig&lt;/value&gt;
+          &lt;/DatasetIdx16.Code_&gt;
+        &lt;/categories&gt;
+        &lt;files&gt;
+          &lt;DatasetIdx16.DataFile&gt;
+            &lt;fileFormat&gt;text/plain;version=2.3&lt;/fileFormat&gt;
+            &lt;file&gt;
+              &lt;DatasetIdx16.File&gt;
+                &lt;path&gt;metaconfig/lu_nutzungsplanung_v310.ini&lt;/path&gt;
+              &lt;/DatasetIdx16.File&gt;
+            &lt;/file&gt;
+          &lt;/DatasetIdx16.DataFile&gt;
+        &lt;/files&gt;
+      &lt;/DatasetIdx16.DataIndex.DatasetMetadata&gt;
+</code></pre></div></div>
+
+
+      </div>     
+    </div>
+  </div>
+</div>
+
+
+  </div>
+  <div class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="footer-inner">
+          <h3 class="footer-title">UsabilityHub</h3>
+          <ul>
+            
+            
+            <li class="">
+              <a href="/">Home</a>
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="sub-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="sub-footer-inner">
+          
+            <div class="social">
+  
+    <a href="https://github.com/zerostaticthemes/jekyll-serif-theme" target="blank"><img src="/images/social/github.svg" title="Github" alt="Github" /></a>
+  
+    <a href="https://twitter.com/zerostaticio" target="blank"><img src="/images/social/twitter.svg" title="Twitter" alt="Twitter" /></a>
+  
+</div>
+
+          
+          
+          <div class="copyright">UsabILIty Hub uses a Jekyll theme by <a class="zerostatic" href="https://www.zerostatic.io">www.zerostatic.io</a></div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <script type="text/javascript" src="/assets/js/scripts.js"></script>
+  
+    
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', '');
+    </script>
+    
+
+</body>
+</html>
