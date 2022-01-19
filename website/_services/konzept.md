@@ -32,14 +32,14 @@ Weitere Server/Repositories können über das `ilisite.xml` verbunden werden. Di
   <version>2021-01-06</version>
   <owner>mailto:david@opengis.ch</owner>
   <title>
-    <DatasetIdx16.MultilingualMText>
+    <DatasetIdx16.MultilingualText>
       <LocalisedText>
-        <DatasetIdx16.LocalisedMText>
+        <DatasetIdx16.LocalisedText>
           <Language>de</Language>
           <Text>Einfaches Styling und Tree (OPENGIS.ch)</Text>
-        </DatasetIdx16.LocalisedMText>
+        </DatasetIdx16.LocalisedText>
       </LocalisedText>
-    </DatasetIdx16.MultilingualMText>
+    </DatasetIdx16.MultilingualText>
   </title>
   <categories>
     <DatasetIdx16.Code_>

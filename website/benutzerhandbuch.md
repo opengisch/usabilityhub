@@ -291,14 +291,14 @@ Damit das Metakonfigurationsfile aber aufgrund eines Modellnamens (hier "Nutzung
         <version>2021-03-12</version>
         <owner>mailto:zsanett@opengis.ch</owner>
         <title>
-          <DatasetIdx16.MultilingualMText>
+          <DatasetIdx16.MultilingualText>
             <LocalisedText>
-              <DatasetIdx16.LocalisedMText>
+              <DatasetIdx16.LocalisedText>
                 <Language>de</Language>
                 <Text>Styling und Tree für PostgreSQL Projekt für den Kanton Luzern (lu.ch)</Text>
-              </DatasetIdx16.LocalisedMText>
+              </DatasetIdx16.LocalisedText>
             </LocalisedText>
-          </DatasetIdx16.MultilingualMText>
+          </DatasetIdx16.MultilingualText>
         </title>
         <shortDescription>
           <DatasetIdx16.MultilingualMText>

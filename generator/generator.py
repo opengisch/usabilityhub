@@ -42,7 +42,7 @@ for xmlitem in document.findall(METADATA_XML_PATH, namespaces=namespaces):
 
     # Title (multilingual)
     item['titles'] = {}
-    titles_xmlitems = xmlitem.findall('./ili:title/ili:DatasetIdx16.MultilingualMText/ili:LocalisedText/ili:DatasetIdx16.LocalisedMText', namespaces=namespaces)
+    titles_xmlitems = xmlitem.findall('./ili:title/ili:DatasetIdx16.MultilingualText/ili:LocalisedText/ili:DatasetIdx16.LocalisedText', namespaces=namespaces)
     for title_xmlitem in titles_xmlitems:
         language = title_xmlitem.find('./ili:Language', namespaces=namespaces).text
         title = title_xmlitem.find('./ili:Text', namespaces=namespaces).text
