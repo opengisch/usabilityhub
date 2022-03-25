@@ -93,10 +93,11 @@ Die Kategorie für den File-Typ wird mit dem Prefix http://codes.interlis.ch/typ
 
 Im Zusammenhang mit der UsabILIty Hub Implementierung des QGIS Model Baker werden folgende Typen verwendet:
 - `metaconfig`, um zu beschreiben, dass es sich um ein *Metakonfigurationsfile* handelt
-- `toml`, um zu beschreiben, dass es ein Metaattributfile ist, das in TOML geschrieben ist
+- `metaattributes`, um zu beschreiben, dass es ein Metaattributfile ist, das in TOML geschrieben ist
 - `sql`, um zu beschreiben, dass es ein SQL Query File ist, das verwendet werden kann bei der Erstellung der Datenbank
-- `layertree`, um zu beschreiben, dass es sich um ein *Toppingfile* handelt, das die Legendendarstellung definiert
-- `qml`, um zu beschreiben, dass es sich um ein *Toppingfile* handelt, das für einen QGIS Layer Styling und Formularkonfigurationen enthalten kann
+- `projecttopping`, um zu beschreiben, dass es sich um ein *Toppingfile* handelt, das Projektdefinitionen inklusive die Legendendarstellung definiert
+- `layerstyle`, um zu beschreiben, dass es sich um ein *Toppingfile* handelt, das für einen QGIS Layer Styling und Formularkonfigurationen enthalten kann (QML)
+- `layerdefinition`, um zu beschreiben, dass es sich um ein *Toppingfile* handelt, das für eine komplette QGIS Layer Definition enthalten kann (QLR)
 - `referenceData`, um zu beschreiben, dass es sich um ein Datenfile (zBs. ein Transferfile oder ein Katalog) handelt
 
 #### Generic
@@ -147,7 +148,7 @@ Statische Filepfad-Links die mit `file:` referenziert werden, können sowohl abs
 [CONFIGURATION]
 baseConfig=ilidata:remoteBaseConfigBasketId;ilidata:otherRemoteBaseConfigBasketId;path/otherBaseConfigLocalFile
 org.interlis2.validator.config=ilidata:ilivalidatorConfigBasketId
-qgis.modelbaker.layertree=ilidata:ch.opengis.config.KbS_LV95_V1_4_layertree
+qgis.modelbaker.projecttopping=ilidata:ch.opengis.config.KbS_LV95_V1_4_projecttopping
 ch.interlis.referenceData=ilidata:ch.opengis.config.KbS_Codetexte_V1_4
 
 [ch.ehi.ili2db]
@@ -161,14 +162,14 @@ preScript=ilidata:ch.opengis.config.KbS_LV95_V1_4_prescript
 iliMetaAttrs=ilidata:ch.opengis.config.KbS_LV95_V1_4_toml
 
 [qgis.modelbaker.ch]
-"Belasteter_Standort (Geo_Lage_Polygon)"=file:toppings_in_modelbakerdir/qml/opengisch_KbS_LV95_V1_4_001_belasteterstandort_polygon.qml
+"Belasteter_Standort (Geo_Lage_Polygon)"=file:toppings_in_modelbakerdir/layerstyle/opengisch_KbS_LV95_V1_4_001_belasteterstandort_polygon.qml
 "Belasteter_Standort (Geo_Lage_Punkt)"=ilidata:ch.opengis.topping.opengisch_KbS_LV95_V1_4_001
 ZustaendigkeitKataster=ilidata:ch.opengis.configs.KbS_LV95_V1_4_0032
 ```
 
-Beispielsweise die Id `ch.opengis.configs.KbS_LV95_V1_4_layertree` referenziert auf ein `DatasetMetadata`, das ein Link auf eine YAML-Datei enthält, wo die Legenden-Struktur definiert ist. Die Id `ch.opengis.configs.KbS_LV95_V1_4_001` zeigt auf `DatasetMetadata` Element, das einen Link auf ein QML File für QGIS Style und Formularkonfigurationen enthält.
+Beispielsweise die Id `ch.opengis.configs.KbS_LV95_V1_4_projecttopping` referenziert auf ein `DatasetMetadata`, das ein Link auf eine YAML-Projekttopping-Datei enthält, wo die Projekteigenschaften wie die Legenden-Struktur definiert ist. Die Id `ch.opengis.configs.KbS_LV95_V1_4_001` zeigt auf `DatasetMetadata` Element, das einen Link auf ein QML File für QGIS Style und Formularkonfigurationen enthält.
 
-Es können auch ganze Sections definiert werden. Die Section `qgis.modelbaker.qml` enthält neben der Verlinkung auch die Zuweisung von Layername zu QML-Files.
+Es können auch ganze Sections definiert werden. Die Section `qgis.modelbaker.qml` enthält neben der Verlinkung auch die Zuweisung von Layername zu QML-Layerstyle-Dateien. Diese Weise der Verlinkung wird aber nicht mehr empfohlen. Die Verlinkung zu QML-Layerstyle-Dateien soll nun direkt im Layertree der YAML-Projekttopping-Datei gemacht werden.
 
 ### Tool Prefix
 Im *Metakonfigurationsfile* können Einträge mit einem Tool-Prefix markiert werden. *ili2db* zum Beispiel verwendet den Prefix `ch.ehi.ili2db` und *QGIS Model Baker* den Prefix `qgis.modelbaker`. Allerdings ist dem Tool überlassen, welche Konfigurationen es verwendet. Den Prefix `ch.interlis`, der mit `ch.interlis.referenceData` zum Beispiel für die Referenz auf *Datenfiles* wie Kataloge oder Transferdatenfiles verwendet wird, verwenden zBs. *ili2db* wie auch *QGIS Model Baker*.
@@ -179,9 +180,9 @@ Es ist konzeptionell auch möglich (wenn auch von Tools wie *QGIS Model Baker* n
 ## Toppingfiles
 *Toppingfiles* sind Files, auf welche von der *Metakonfiguration* referenziert wurde und die Konfigurationsinformation des GIS Projektes enthalten. Es können also Formularkonfigurationen, Style-Attribute, Legendendarstellung und Reihenfolge, sowie auch Kataloge, Transferfiles und andere Datenfiles sein. Für jedes Tool können individuelle Toppingfiles verwendet werden. Von einem einfachen Zip-File, welches das gesamte Projekt enthält, bis zu einem sorgfältigen Mapping von Layernamen zu QML-Style-Files.
 
-### Beispiel eines YAML Files für die Layerstruktur in QGIS
+### Beispiel eines Projekttopping YAML Files für die Layerstruktur in QGIS
 ```
-legend:
+layertree:
   - 'top-group':
       group: true
       checked: true
@@ -192,9 +193,11 @@ legend:
         - 'geom punkt':
             group: false
             checked: true
+            definitionfile: "ilidata:ch.opengis.topping.opengisch_KbS_LV95_V1_4_005"
         - 'geom polygon':
             group: false
             checked: true
+            qmlstylefile: "ilidata:ch.opengis.topping.opengisch_KbS_LV95_V1_4_005"
         - 'subgroup':
             group: true
             child-nodes:
@@ -211,10 +214,10 @@ legend:
                         child-nodes:
                           - 'another layer':
                               group: false
-                              visbile: false
+                              checked: false
                     - 'layer in the subgroup':
                         group: false
-                        visbile: false
+                        checked: false
 layer-order:
   - 'geom punkt'
   - 'geom polygon'
