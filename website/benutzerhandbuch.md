@@ -19,7 +19,7 @@ Folgende Toppingfiles werden erstellt bzw. angepasst
 - Zur Projketerstellung benötigtes ili2db Metaattributfile TOML-File (wird manuell erstellt)
 
 
-### 1. Vorbreitung
+### 1. Vorbereitung
 Es ist empfehlenswert, die Dateien in einem Verzeichnis abzulegen und folgende Unterverzeichnisse zu benennen:
 
 ```
