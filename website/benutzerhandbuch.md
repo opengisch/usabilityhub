@@ -25,12 +25,13 @@ Es ist empfehlenswert, die Dateien in einem Verzeichnis abzulegen und folgende U
 ```
 .
 ├── ilidata.xml
-├── layertree
+├── projecttopping
 ├── metaconfig
-├── qml
+├── layerstyle
+├── layerdefinition
 ├── referencedata
 ├── sql
-└── toml
+└── metaattributes
 ```
 
 #### Lokale Projektgenerierung
@@ -76,7 +77,7 @@ Besteht schon eine Umsetzung dieses Projekts, können diese Informationen aber a
 #### 2. a. Layereigenschaften (QML Files)
 Vom QGIS Projekt, mit bereits definierten Layereigenschaften werden zuerst die QML-Dateien gespeichert
 
-"Layereigenschaften" > "Stil" > "Layerstil speichern"
+*Layereigenschaften > Stil > Layerstil speichern*
 
 ![save_qml](../images/save_qml.png)
 
@@ -89,15 +90,15 @@ Bei den Formularkonfigurationen wurde so auf Layers referenziert, die nicht mehr
 
 Um dem Vorzubeugen ist empfohlen, die QML Files testweise in das lokal generierte (neue) Projekt zu laden. Falls dieses (oder auch andere) Problem auftaucht, können nur einzelne Kategorien vom Originalprojekt verwendet werden. Im Falle Nutzungsplanung_V310, wurde so für gewisse Layer die Kategorie "Formulare" nicht aus dem Originalprojekt genommen, sondern im Layer des lokal generierten Projekts (der dem Originallayer bis auf die Formularkonfiguration enspricht), die Formulare manuell konfiguriert, und der Style erneut als QML abgespeichert.
 
-#### 2. b. Layerreihenfolge und Legendenanordnung (YAML File)
+#### 2. b. Layerreihenfolge und Legendenanordnung im Projekttopping (YAML File)
 
 In einem YAML File wird die Layerreihenfolge bzw. Legendenanordnung definiert.
 
-Unter Haupteintrag `legend` wird die Legendenanordnung definiert und unter `layer-order` die Reihenfolge.
+Unter Haupteintrag `layertree` wird die Legendenanordnung definiert und unter `layer-order` die Reihenfolge.
 
 So sieht kann der Inhalt eines YAML-Files so aussehen:
 ```
-legend:
+layertree:
   - "Geometrie-Layer":
       group: true
       expanded: true
@@ -175,11 +176,11 @@ Für Infos über die Referenzierung der Transferdateien kann die Technische Doku
 Die Toppingfiles können nun in die für sie vorgesehenen Ordner abgelegt werden:
 ```
 .
-├── layertree
+├── projecttopping
 │   ├── layertree_Nutzungsplanung_V310.yaml
 ├── metaconfig
 │   ├── lu_nutzungsplanung_v310.ini
-├── qml
+├── qmlayerstylel
 │   ├── lu_baulinien.qml
 │   ├── lu_bemassung_geometrie.qml
 │   ├── lu_bemassung_hlinie.qml
@@ -191,7 +192,7 @@ Die Toppingfiles können nun in die für sie vorgesehenen Ordner abgelegt werden
 │   ├── lu_ueberlagerung_flaechen.qml
 │   ├── lu_ueberlagerung_linien.qml
 │   ├── lu_ueberlagerung_punkte.qml
-└── toml
+└── metaattributes
     ├── Nutzungsplanung_V310.toml
 
 ```
@@ -204,7 +205,7 @@ Zur Struktur des auf dem [`DatasetIdx16`](http://models.interlis.ch/core/Dataset
 
 Grundsätzlich muss eine Repository-übergreiffend eindeutige `id` vergeben werden. Sie muss nicht zwingend beschreibend für den Inhalt sein. Weiter muss der Typ des Toppings in den `categories` eingetragen werden, sowie der relative `path` zum betreffenden File.
 
-Also wär der Eintrag für das Toppingfile "qml/lu_grundnutzung.qml" des Typs "qml" mit der Id "ch.lu.topping.Nutzungsplanung_V310_grundnutzung" der folgende:
+Also wär der Eintrag für das Toppingfile "layerstyle/lu_grundnutzung.qml" des Typs "layerstyle" mit der Id "ch.lu.topping.Nutzungsplanung_V310_grundnutzung" der folgende:
 ```
       <DatasetIdx16.DataIndex.DatasetMetadata TID="3dcc47e5-1dd5-4f05-9fc8-756125705a2c">
         <id>ch.lu.topping.Nutzungsplanung_V310_grundnutzung</id>
@@ -212,7 +213,7 @@ Also wär der Eintrag für das Toppingfile "qml/lu_grundnutzung.qml" des Typs "q
         <owner>mailto:zsanett@opengis.ch</owner>
         <categories>
           <DatasetIdx16.Code_>
-            <value>http://codes.interlis.ch/type/qml</value>
+            <value>http://codes.interlis.ch/type/layerstyle</value>
           </DatasetIdx16.Code_>
         </categories>
         <files>
@@ -220,7 +221,7 @@ Also wär der Eintrag für das Toppingfile "qml/lu_grundnutzung.qml" des Typs "q
             <fileFormat>text/plain;version=2.3</fileFormat>
             <file>
               <DatasetIdx16.File>
-                <path>qml/lu_grundnutzung.qml</path>
+                <path>layerstyle/lu_grundnutzung.qml</path>
               </DatasetIdx16.File>
             </file>
           </DatasetIdx16.DataFile>
@@ -236,11 +237,15 @@ Für die Implementierung von Nutzungsplanung_V310 müssen nun die in den vorgän
 
 ```
 [CONFIGURATION]
-qgis.modelbaker.layertree=ilidata:ch.lu.topping.layertree_Nutzungsplanung_V310
+qgis.modelbaker.projecttopping=ilidata:ch.lu.topping.layertree_Nutzungsplanung_V310
 
 [ch.ehi.ili2db]
 iliMetaAttrs=ilidata:ch.lu.topping.npluzern_toml
+```
 
+In der Metakonfiguration kann man auch die QML Layerstyle Files den Layern zuordnen. Bessere Practice wäre aber, dies direkt im Projekttopping File (YAML) zu machen.
+
+```
 [qgis.modelbaker.qml]
 "BZR_Verweis_Pos"=ilidata:ch.lu.topping.Nutzungsplanung_V310_bzr_verweis_pos
 "Beschriftung_Pos"=ilidata:ch.lu.topping.Nutzungsplanung_V310_beschriftung_pos
